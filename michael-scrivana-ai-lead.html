@@ -592,6 +592,212 @@
     text-transform: uppercase;
   }
 
+  /* Agent demo animation */
+  .agent-demo {
+    width: 100%;
+    background: #0D0D0F;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    font-family: var(--font-mono);
+    position: relative;
+  }
+
+  .agent-demo-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .agent-demo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .agent-demo-bar-title {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+
+  .agent-demo-body {
+    padding: 20px;
+    min-height: 260px;
+  }
+
+  .agent-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .agent-line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .agent-line-icon {
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .agent-line-text {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .agent-line-text .highlight {
+    color: #4D8FE8;
+  }
+
+  .agent-line-text .success {
+    color: #4ADE80;
+  }
+
+  .agent-line-text .warn {
+    color: #FBBF24;
+  }
+
+  .agent-line-text .file {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .agent-checks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+    margin: 8px 0 8px 26px;
+  }
+
+  .agent-check {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .agent-check.visible {
+    opacity: 1;
+  }
+
+  .agent-check.pass { color: #4ADE80; }
+  .agent-check.flag { color: #FBBF24; }
+
+  .agent-check-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .agent-check.pass .agent-check-dot { background: #4ADE80; }
+  .agent-check.flag .agent-check-dot { background: #FBBF24; }
+
+  .agent-score {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-left: 26px;
+    margin-top: 4px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .agent-score.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .agent-score-number {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #4ADE80;
+    letter-spacing: -0.02em;
+  }
+
+  .agent-score-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+  }
+
+  .agent-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 12px;
+    background: var(--accent);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .agent-screenshots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .agent-screenshot {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.1);
+    aspect-ratio: 16/10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .agent-replay {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.2);
+    background: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 3px 10px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s;
+    display: none;
+  }
+
+  .agent-replay:hover {
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .agent-replay.show { display: block; }
+
   .tech-tags {
     display: flex;
     flex-wrap: wrap;
@@ -620,50 +826,38 @@
 
   .fit-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-top: 64px;
-    border-top: 1px solid var(--border-color);
-  }
-
-  .fit-row {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    padding: 36px 0;
-    border-bottom: 1px solid var(--border-color);
-    align-items: start;
+    gap: 2px;
+    margin-top: 48px;
+    background: var(--border-color);
+    border: 1px solid var(--border-color);
   }
 
-  .fit-need {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    padding-right: 24px;
+  .fit-card {
+    background: var(--bg-primary);
+    padding: 28px 28px 24px;
   }
 
-  .fit-have {
-    font-size: 0.95rem;
-    line-height: 1.6;
+  .fit-card-need {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .fit-card-have {
+    font-size: 0.9rem;
+    line-height: 1.55;
     color: var(--text-primary);
   }
 
-  .fit-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 64px;
-    padding-bottom: 16px;
-  }
-
-  .fit-header-label {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
+  @media (max-width: 600px) {
+    .fit-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ============================================
@@ -762,6 +956,121 @@
   .mirafast-images .portfolio-thumb {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
+  }
+
+  /* Chart within featured section */
+  .growth-chart-wrap {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .growth-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .growth-chart-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .growth-legend {
+    display: flex;
+    gap: 16px;
+  }
+
+  .growth-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+  }
+
+  .growth-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  canvas#growthChart {
+    width: 100%;
+    display: block;
+  }
+
+  .growth-chart-source {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .mira-product-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+
+  .mira-tab {
+    flex: 1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 20px 24px;
+  }
+
+  .mira-tab-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .mira-tab-label.fiber { color: var(--accent); }
+  .mira-tab-label.fast { color: #E85D4D; }
+  .mira-tab-label.combined { color: var(--text-muted); }
+
+  .mira-tab-number {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .mira-tab-number.fiber { color: var(--accent); }
+  .mira-tab-number.fast { color: #E85D4D; }
+  .mira-tab-number.combined {
+    background: linear-gradient(135deg, var(--accent), #E85D4D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .mira-tab-detail {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 600px) {
+    .mira-product-tabs {
+      flex-direction: column;
+    }
+    .growth-chart-wrap {
+      padding: 20px 16px;
+    }
   }
 
   @media (max-width: 900px) {
@@ -1353,20 +1662,6 @@
       direction: ltr;
     }
 
-    .fit-row {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .fit-header {
-      display: none;
-    }
-
-    .fit-need {
-      padding-right: 0;
-      font-style: italic;
-    }
-
     .portfolio-item {
       min-width: calc((100% - 16px) / 2);
       max-width: calc((100% - 16px) / 2);
@@ -1427,8 +1722,8 @@
     <ul class="nav-links">
       <li><a href="#about-me">About</a></li>
       <li><a href="#ai">AI Projects</a></li>
-      <li><a href="#fit">Role Fit</a></li>
       <li><a href="#portfolio">Design Work</a></li>
+      <li><a href="#fit">Role Fit</a></li>
       <li><a href="#career">Career</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -1477,20 +1772,20 @@
       </div>
       <div class="hero-stats fade-in">
         <div class="stat">
-          <span class="stat-number">6+</span>
+          <span class="stat-number" data-count="6" data-suffix="+">0</span>
           <span class="stat-label">Years at Bayer</span>
         </div>
         <div class="stat">
-          <span class="stat-number">20+</span>
-          <span class="stat-label">Brands managed</span>
+          <span class="stat-number" data-count="100" data-suffix="M+">$0</span>
+          <span class="stat-label">In revenue from products I designed</span>
         </div>
         <div class="stat">
-          <span class="stat-number">700+</span>
-          <span class="stat-label">Renders delivered</span>
+          <span class="stat-number" data-count="1000" data-suffix="+" data-prefix="">0</span>
+          <span class="stat-label">Creative assets delivered</span>
         </div>
         <div class="stat">
-          <span class="stat-number">1 of 5</span>
-          <span class="stat-label">AI Team Reps</span>
+          <span class="stat-number" data-count="100" data-suffix="+">0</span>
+          <span class="stat-label">Pack designs & concepts</span>
         </div>
       </div>
     </div>
@@ -1571,8 +1866,54 @@
             View on GitHub
           </a>
         </div>
-        <div class="project-image-placeholder">
-          [ One A Day Agent Screenshot / Demo ]
+        <div>
+          <div class="agent-demo" id="agentDemo">
+            <div class="agent-demo-bar">
+              <div class="agent-demo-dot"></div>
+              <div class="agent-demo-dot"></div>
+              <div class="agent-demo-dot"></div>
+              <span class="agent-demo-bar-title">One A Day — Design Review Agent</span>
+            </div>
+            <div class="agent-demo-body" id="agentBody">
+              <div class="agent-line" data-step="1">
+                <span class="agent-line-icon" style="color: var(--accent);">→</span>
+                <span class="agent-line-text">Agency submits <span class="file">OAD_Womens_Base_v3.ai</span></span>
+              </div>
+              <div class="agent-line" data-step="2">
+                <span class="agent-line-icon" style="color: rgba(255,255,255,0.3);">⟳</span>
+                <span class="agent-line-text">Loading brand guidelines... <span class="highlight">OAD Women's Base</span></span>
+              </div>
+              <div class="agent-line" data-step="3">
+                <span class="agent-line-icon" style="color: rgba(255,255,255,0.3);">◎</span>
+                <span class="agent-line-text">Scanning against brand system<span class="agent-cursor"></span></span>
+              </div>
+              <div class="agent-checks" data-step="4">
+                <div class="agent-check pass"><span class="agent-check-dot"></span> Typography</div>
+                <div class="agent-check pass"><span class="agent-check-dot"></span> Color System</div>
+                <div class="agent-check pass"><span class="agent-check-dot"></span> Logo Placement</div>
+                <div class="agent-check pass"><span class="agent-check-dot"></span> Visual Hierarchy</div>
+                <div class="agent-check pass"><span class="agent-check-dot"></span> Claim Compliance</div>
+                <div class="agent-check flag"><span class="agent-check-dot"></span> Bleed Margins</div>
+              </div>
+              <div class="agent-line" data-step="5">
+                <span class="agent-line-icon" style="color: #FBBF24;">!</span>
+                <span class="agent-line-text"><span class="warn">1 flag:</span> Right bleed margin 2px below spec</span>
+              </div>
+              <div class="agent-line" data-step="6">
+                <span class="agent-line-icon" style="color: #4ADE80;">✓</span>
+                <span class="agent-line-text"><span class="success">Review complete</span> — Brand compliance score:</span>
+              </div>
+              <div class="agent-score" data-step="7">
+                <span class="agent-score-number">94</span>
+                <span class="agent-score-label">/ 100 — APPROVED</span>
+              </div>
+            </div>
+            <button class="agent-replay" id="agentReplay" onclick="runAgentDemo()">↻ Replay</button>
+          </div>
+          <div class="agent-screenshots">
+            <div class="agent-screenshot">[ Upload Interface ]</div>
+            <div class="agent-screenshot">[ Review Dashboard ]</div>
+          </div>
         </div>
       </div>
 
@@ -1639,76 +1980,24 @@
 </section>
 
 <!-- ============================================
-     ROLE FIT
-     ============================================ -->
-<section class="role-fit" id="fit">
-  <div class="container">
-    <span class="section-label fade-in">02 — Role Fit</span>
-    <h2 class="section-title fade-in">What the role needs.<br>What I bring.</h2>
-    <p class="section-subtitle fade-in">
-      Mapping the AI Proficiency &amp; Learning Lead requirements to my experience at Bayer Consumer Health.
-    </p>
-
-    <div class="fit-header fade-in">
-      <span class="fit-header-label">The Role Requires</span>
-      <span class="fit-header-label">My Experience</span>
-    </div>
-
-    <div class="fit-grid stagger">
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Build a practical AI proficiency program people love to use</div>
-        <div class="fit-have">Helped launch a Design Training Module across Consumer Health — evangelizing what PX does and teaching non-design departments how to engage with our work. That's the same muscle this role needs: making a complex discipline accessible, practical, and exciting for diverse teams. I also created the <a href="https://www.michaelscrivana.com/marketingexcellence" target="_blank" style="color: var(--accent);">Bold Breakthrough Tour</a> marketing identity, a keynote-style internal event built to inspire colleagues and shift how teams think. Ready to bring that same energy to AI proficiency.</div>
-      </div>
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Enable peer-to-peer learning at scale</div>
-        <div class="fit-have">Grew from informal coaching to trusted AI advisor in PX — through hands-on demos and real tools, not slide decks. That trust is the foundation peer learning scales on.</div>
-      </div>
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Embed safety and compliance — practical guardrails, not blockers</div>
-        <div class="fit-have">Built brand compliance scoring directly into the One A Day agent. 6 years managing standards across 20+ SKU families — I understand compliance as an enabler.</div>
-      </div>
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Partner with Focus Area Leads, Product, Governance, and BU leaders</div>
-        <div class="fit-have">1 of 5 cross-functional AI team reps alongside Product Development, Regulatory, and Medical. Regularly consult PX leadership on AI strategy.</div>
-      </div>
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Track adoption with simple dashboards</div>
-        <div class="fit-have">One A Day agent generates quantifiable brand compliance scores. 6 years making complex project data visual and actionable for leadership.</div>
-      </div>
-
-      <div class="fit-row fade-in">
-        <div class="fit-need">Share wins and stories that inspire</div>
-        <div class="fit-have">This website — built with Claude as a working demo. Pioneered GenAI in DPX. Every project I've built has been shared and used to pull others in.</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
      PORTFOLIO
      ============================================ -->
 <section class="portfolio" id="portfolio">
   <div class="container">
-    <span class="section-label fade-in">03 — Design Portfolio</span>
+    <span class="section-label fade-in">02 — Design Portfolio</span>
     <h2 class="section-title fade-in">6 years of brand work<br>across Consumer Health</h2>
     <p class="section-subtitle fade-in">
       The domain expertise behind the AI vision. Deep knowledge of BCH brands, 
       packaging systems, ecommerce, and cross-functional delivery.
     </p>
 
-    <!-- MIRAFAST HERO FEATURE -->
+    <!-- MIRAFIBER + MIRAFAST HERO FEATURE -->
     <div class="mirafast-hero fade-in">
       <div class="mirafast-header">
         <div>
           <span class="section-label" style="color: var(--accent);">Featured Project</span>
-          <h3 class="mirafast-title">MiraFAST: New Product Launch</h3>
-          <p class="mirafast-desc">Led the brand identity, packaging innovation, and brand world development for MiraLAX's new magnesium-based soft chew line — from inception to design lock in just 3 weeks.</p>
+          <h3 class="mirafast-title">Two brands I designed.<br>$48M in sales. $67M projected.</h3>
+          <p class="mirafast-desc">I designed the brand identity and packaging for both MiraFIBER and MiraFAST — the two products driving essentially all of MiraLAX's brand growth. Built a modular design system with MiraFIBER, then replicated it at speed for MiraFAST — inception to design lock in 3 weeks.</p>
         </div>
         <div class="mirafast-role">
           <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Core Team</div>
@@ -1718,11 +2007,39 @@
         </div>
       </div>
 
-      <div class="mirafast-stats-grid">
-        <div class="mirafast-stat">
-          <div class="mirafast-stat-number">$14M+</div>
-          <div class="mirafast-stat-label">Retail sales YTD<br><span style="color: var(--text-muted);">9 months into launch</span></div>
+      <!-- Product performance tabs -->
+      <div class="mira-product-tabs">
+        <div class="mira-tab">
+          <div class="mira-tab-label fiber">MiraFIBER</div>
+          <div class="mira-tab-number fiber">$19M</div>
+          <div class="mira-tab-detail">2025 · projected $25M in 2026</div>
         </div>
+        <div class="mira-tab">
+          <div class="mira-tab-label fast">MiraFAST</div>
+          <div class="mira-tab-number fast">$18M</div>
+          <div class="mira-tab-detail">2025 · projected $42M in 2026</div>
+        </div>
+        <div class="mira-tab">
+          <div class="mira-tab-label combined">2026 Combined</div>
+          <div class="mira-tab-number combined">$67M</div>
+          <div class="mira-tab-detail">projected · up from $37M in 2025</div>
+        </div>
+      </div>
+
+      <!-- Growth chart -->
+      <div class="growth-chart-wrap">
+        <div class="growth-chart-header">
+          <div class="growth-chart-title">Dollar Sales — 4-Week Periods (2023–2026 Projected)</div>
+          <div class="growth-legend">
+            <div class="growth-legend-item"><div class="growth-legend-dot" style="background: var(--accent);"></div> MiraFIBER</div>
+            <div class="growth-legend-item"><div class="growth-legend-dot" style="background: #E85D4D;"></div> MiraFAST</div>
+          </div>
+        </div>
+        <canvas id="growthChart" height="300"></canvas>
+        <div class="growth-chart-source">Hover for detail · Internal sales data · 2026 projections from brand team</div>
+      </div>
+
+      <div class="mirafast-stats-grid">
         <div class="mirafast-stat">
           <div class="mirafast-stat-number">3rd</div>
           <div class="mirafast-stat-label">Fastest scaling launch<br><span style="color: var(--text-muted);">in Digestive Health, past 5 years</span></div>
@@ -1732,8 +2049,12 @@
           <div class="mirafast-stat-label">Of total MiraLAX brand<br><span style="color: var(--text-muted);">retail sales growth YTD 2025</span></div>
         </div>
         <div class="mirafast-stat">
+          <div class="mirafast-stat-number">81%</div>
+          <div class="mirafast-stat-label">YoY combined growth<br><span style="color: var(--text-muted);">$37M in '25 → $67M projected '26</span></div>
+        </div>
+        <div class="mirafast-stat">
           <div class="mirafast-stat-number">3 wks</div>
-          <div class="mirafast-stat-label">Inception to design lock<br><span style="color: var(--text-muted);">developed internally</span></div>
+          <div class="mirafast-stat-label">MiraFAST design sprint<br><span style="color: var(--text-muted);">inception to design lock</span></div>
         </div>
       </div>
 
@@ -1851,6 +2172,51 @@
 </div>
   </div>
 </section>
+
+<!-- ============================================
+     ROLE FIT
+     ============================================ -->
+<section class="role-fit" id="fit">
+  <div class="container">
+    <span class="section-label fade-in">03 — Role Fit</span>
+    <h2 class="section-title fade-in">What the role needs.<br>What I bring.</h2>
+
+    <div class="fit-grid stagger">
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Build AI proficiency program</div>
+        <div class="fit-card-have">Built a Design Training Module across Consumer Health, making a complex discipline practical for non-design teams. Same muscle, different domain.</div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Enable peer learning at scale</div>
+        <div class="fit-card-have">Grew from informal coaching to PX's go-to AI resource — through demos and working tools, not slide decks.</div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Embed compliance as guardrails</div>
+        <div class="fit-card-have">Brand compliance scoring built into the One A Day agent. 6 years managing standards across 20+ SKU families.</div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Partner cross-functionally</div>
+        <div class="fit-card-have">1 of 5 AI team reps alongside Product Dev, Regulatory, and Medical. Regular AI strategy consulting with PX leadership.</div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Track adoption & impact</div>
+        <div class="fit-card-have">One A Day generates quantifiable compliance scores. 6 years making complex data visual and actionable for leadership.</div>
+      </div>
+
+      <div class="fit-card fade-in">
+        <div class="fit-card-need">Share wins that inspire</div>
+        <div class="fit-card-have">This website — built with Claude. Pioneered GenAI in DPX. Every tool I've built has been shared to pull others in.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <!-- ============================================
      TIMELINE
@@ -2014,6 +2380,423 @@
   });
 
   // ==========================================
+  // AGENT DEMO ANIMATION
+  // ==========================================
+  function runAgentDemo() {
+    var body = document.getElementById('agentBody');
+    var replay = document.getElementById('agentReplay');
+    if (!body) return;
+    replay.classList.remove('show');
+
+    // Reset all elements
+    var lines = body.querySelectorAll('.agent-line');
+    var checks = body.querySelectorAll('.agent-check');
+    var score = body.querySelector('.agent-score');
+    lines.forEach(function(l) { l.classList.remove('visible'); });
+    checks.forEach(function(c) { c.classList.remove('visible'); });
+    if (score) score.classList.remove('visible');
+
+    // Hide cursor initially, show on step 3
+    var cursor = body.querySelector('.agent-cursor');
+    if (cursor) cursor.style.display = '';
+
+    var timeline = [
+      { delay: 400, fn: function() { lines[0].classList.add('visible'); } },
+      { delay: 1200, fn: function() { lines[1].classList.add('visible'); } },
+      { delay: 2200, fn: function() { lines[2].classList.add('visible'); } },
+      // Checks appear one by one
+      { delay: 3000, fn: function() { checks[0].classList.add('visible'); } },
+      { delay: 3250, fn: function() { checks[1].classList.add('visible'); } },
+      { delay: 3500, fn: function() { checks[2].classList.add('visible'); } },
+      { delay: 3750, fn: function() { checks[3].classList.add('visible'); } },
+      { delay: 4000, fn: function() { checks[4].classList.add('visible'); } },
+      { delay: 4400, fn: function() { checks[5].classList.add('visible'); } },
+      // Hide cursor, show flag
+      { delay: 4800, fn: function() { if (cursor) cursor.style.display = 'none'; lines[3].classList.add('visible'); } },
+      // Complete
+      { delay: 5800, fn: function() { lines[4].classList.add('visible'); } },
+      // Score
+      { delay: 6500, fn: function() { score.classList.add('visible'); } },
+      // Show replay
+      { delay: 7500, fn: function() { replay.classList.add('show'); } }
+    ];
+
+    timeline.forEach(function(step) {
+      setTimeout(step.fn, step.delay);
+    });
+  }
+
+  // Auto-play when scrolled into view
+  (function() {
+    var demo = document.getElementById('agentDemo');
+    if (!demo) return;
+    var played = false;
+
+    var demoObserver = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !played) {
+            played = true;
+            setTimeout(runAgentDemo, 300);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    demoObserver.observe(demo);
+  })();
+
+  // ==========================================
+  // STAT COUNT-UP ANIMATION
+  // ==========================================
+  (function() {
+    const statEls = document.querySelectorAll('.stat-number[data-count]');
+    if (!statEls.length) return;
+
+    function easeOutExpo(t) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function animateCount(el) {
+      if (el._counted) return;
+      el._counted = true;
+
+      const target = parseInt(el.getAttribute('data-count'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      const prefix = el.getAttribute('data-prefix');
+      // Default prefix is '$' for the $100M stat, '' for others
+      const pre = prefix !== null ? prefix : (suffix.includes('M') ? '$' : '');
+      const duration = 2000;
+      const start = performance.now();
+      const useCommas = target >= 1000;
+
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutExpo(progress);
+        const current = Math.round(eased * target);
+        const formatted = useCommas ? current.toLocaleString() : current;
+        el.textContent = pre + formatted + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    const statObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger each stat slightly
+            const stats = entry.target.querySelectorAll('.stat-number[data-count]');
+            stats.forEach((el, i) => {
+              setTimeout(() => animateCount(el), i * 150);
+            });
+            statObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const statsContainer = document.querySelector('.hero-stats');
+    if (statsContainer) statObserver.observe(statsContainer);
+  })();
+
+  // ==========================================
+  // ==========================================
+  // GROWTH CHART
+  // ==========================================
+  (function() {
+    const fiberData = [
+      { date: '05-21-23', val: 15320 }, { date: '06-18-23', val: 135267 },
+      { date: '07-16-23', val: 268018 }, { date: '08-13-23', val: 442377 },
+      { date: '09-10-23', val: 478074 }, { date: '10-08-23', val: 543687 },
+      { date: '11-05-23', val: 661266 }, { date: '12-03-23', val: 692155 },
+      { date: '12-31-23', val: 756039 }, { date: '01-28-24', val: 1113236 },
+      { date: '02-25-24', val: 1146367 }, { date: '03-24-24', val: 1264538 },
+      { date: '04-21-24', val: 1365280 }, { date: '05-19-24', val: 1382461 },
+      { date: '06-16-24', val: 1170677 }, { date: '07-14-24', val: 1267702 },
+      { date: '08-11-24', val: 1216875 }, { date: '09-08-24', val: 944667 },
+      { date: '10-06-24', val: 1246371 }, { date: '11-03-24', val: 1264824 },
+      { date: '12-01-24', val: 1336884 }, { date: '12-29-24', val: 1128902 },
+      { date: '01-26-25', val: 1478747 }, { date: '02-23-25', val: 1452112 },
+      { date: '03-23-25', val: 1590318 }, { date: '04-20-25', val: 1628045 },
+      { date: '05-18-25', val: 1561164 }, { date: '06-15-25', val: 1398059 },
+      { date: '07-13-25', val: 1480766 }, { date: '08-10-25', val: 1488892 },
+      { date: '09-07-25', val: 1449451 }, { date: '10-05-25', val: 1380192 },
+      { date: '11-02-25', val: 1481809 }, { date: '11-30-25', val: 1467951 },
+      { date: '12-28-25', val: 1517605 }, { date: '01-25-26', val: 1758418 }
+    ];
+    const fastData = [
+      { date: '03-23-25', val: 660 }, { date: '04-20-25', val: 252896 },
+      { date: '05-18-25', val: 845582 }, { date: '06-15-25', val: 1522664 },
+      { date: '07-13-25', val: 1899110 }, { date: '08-10-25', val: 2126934 },
+      { date: '09-07-25', val: 2308453 }, { date: '10-05-25', val: 2385283 },
+      { date: '11-02-25', val: 2252483 }, { date: '11-30-25', val: 2199846 },
+      { date: '12-28-25', val: 2215333 }, { date: '01-25-26', val: 2649231 }
+    ];
+
+    // 2026 projections — quarterly (brand team: FIBER $25M, FAST $42M)
+    const projDates = ['04-26', '07-26', '10-26', '12-26'];
+    const fiberProj = [
+      { date: '04-26', val: 1850000 }, { date: '07-26', val: 1950000 },
+      { date: '10-26', val: 1950000 }, { date: '12-26', val: 2000000 }
+    ];
+    const fastProj = [
+      { date: '04-26', val: 2900000 }, { date: '07-26', val: 3300000 },
+      { date: '10-26', val: 3500000 }, { date: '12-26', val: 3600000 }
+    ];
+
+    const allDates = fiberData.map(function(d) { return d.date; }).concat(projDates);
+    const projStartIdx = allDates.indexOf('04-26');
+
+    const gc = document.getElementById('growthChart');
+    if (!gc) return;
+    const gctx = gc.getContext('2d');
+    const gdpr = Math.min(window.devicePixelRatio || 1, 2);
+    const maxVal = 3500000;
+    const gpad = { top: 20, right: 16, bottom: 44, left: 58 };
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    function resizeGC() {
+      var rect = gc.parentElement.getBoundingClientRect();
+      var w = rect.width - 56;
+      var h = 300;
+      gc.style.width = w + 'px';
+      gc.style.height = h + 'px';
+      gc.width = w * gdpr;
+      gc.height = h * gdpr;
+      gc._w = w;
+      gc._h = h;
+      gctx.setTransform(gdpr, 0, 0, gdpr, 0, 0);
+    }
+
+    function gX(i) { return gpad.left + (i / (allDates.length - 1)) * (gc._w - gpad.left - gpad.right); }
+    function gY(v) { return gpad.top + (1 - v / maxVal) * (gc._h - gpad.top - gpad.bottom); }
+
+    function drawGLine(data, color) {
+      gctx.save();
+      gctx.globalAlpha = 0.08;
+      gctx.fillStyle = color;
+      gctx.beginPath();
+      var started = false, lastX;
+      for (var i = 0; i < data.length; i++) {
+        var idx = allDates.indexOf(data[i].date);
+        if (idx === -1) continue;
+        var x = gX(idx), y = gY(data[i].val);
+        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+        lastX = x;
+      }
+      gctx.lineTo(lastX, gY(0));
+      gctx.lineTo(gX(allDates.indexOf(data[0].date)), gY(0));
+      gctx.closePath();
+      gctx.fill();
+      gctx.restore();
+
+      gctx.beginPath();
+      gctx.strokeStyle = color;
+      gctx.lineWidth = 2.5;
+      gctx.lineJoin = 'round';
+      gctx.lineCap = 'round';
+      started = false;
+      for (var i = 0; i < data.length; i++) {
+        var idx = allDates.indexOf(data[i].date);
+        if (idx === -1) continue;
+        var x = gX(idx), y = gY(data[i].val);
+        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+      }
+      gctx.stroke();
+
+      var last = data[data.length - 1];
+      var li = allDates.indexOf(last.date);
+      var lx = gX(li), ly = gY(last.val);
+      gctx.beginPath();
+      gctx.arc(lx, ly, 4, 0, Math.PI * 2);
+      gctx.fillStyle = color;
+      gctx.fill();
+      gctx.save();
+      gctx.beginPath();
+      gctx.arc(lx, ly, 7, 0, Math.PI * 2);
+      gctx.strokeStyle = color;
+      gctx.globalAlpha = 0.3;
+      gctx.lineWidth = 2;
+      gctx.stroke();
+      gctx.restore();
+    }
+
+    function drawProjection(actualData, projData, color) {
+      var lastActual = actualData[actualData.length - 1];
+      var points = [lastActual].concat(projData);
+      gctx.save();
+      gctx.setLineDash([6, 4]);
+      gctx.strokeStyle = color;
+      gctx.globalAlpha = 0.5;
+      gctx.lineWidth = 2;
+      gctx.lineJoin = 'round';
+      gctx.beginPath();
+      var started = false;
+      for (var i = 0; i < points.length; i++) {
+        var idx = allDates.indexOf(points[i].date);
+        if (idx === -1) continue;
+        var x = gX(idx), y = gY(points[i].val);
+        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+      }
+      gctx.stroke();
+      gctx.setLineDash([]);
+      gctx.globalAlpha = 0.04;
+      gctx.fillStyle = color;
+      gctx.beginPath();
+      started = false;
+      var lastX;
+      for (var i = 0; i < points.length; i++) {
+        var idx = allDates.indexOf(points[i].date);
+        if (idx === -1) continue;
+        var x = gX(idx), y = gY(points[i].val);
+        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+        lastX = x;
+      }
+      gctx.lineTo(lastX, gY(0));
+      gctx.lineTo(gX(allDates.indexOf(points[0].date)), gY(0));
+      gctx.closePath();
+      gctx.fill();
+
+      var last = projData[projData.length - 1];
+      var li = allDates.indexOf(last.date);
+      var lx = gX(li), ly = gY(last.val);
+      gctx.globalAlpha = 0.5;
+      gctx.beginPath();
+      gctx.arc(lx, ly, 4, 0, Math.PI * 2);
+      gctx.strokeStyle = color;
+      gctx.lineWidth = 2;
+      gctx.stroke();
+      gctx.restore();
+    }
+
+    function drawGChart() {
+      gctx.clearRect(0, 0, gc._w, gc._h);
+
+      // Projection zone
+      if (projStartIdx !== -1) {
+        var px = gX(projStartIdx) - 20;
+        gctx.fillStyle = 'rgba(255,255,255,0.015)';
+        gctx.fillRect(px, gpad.top, gc._w - gpad.right - px, gc._h - gpad.top - gpad.bottom);
+        gctx.fillStyle = 'rgba(255,255,255,0.2)';
+        gctx.font = '600 8px "IBM Plex Mono", monospace';
+        gctx.textAlign = 'left';
+        gctx.fillText('2026 PROJECTION', px + 8, gpad.top + 14);
+        gctx.save();
+        gctx.setLineDash([3, 3]);
+        gctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        gctx.lineWidth = 1;
+        gctx.beginPath();
+        gctx.moveTo(px, gpad.top);
+        gctx.lineTo(px, gc._h - gpad.bottom);
+        gctx.stroke();
+        gctx.setLineDash([]);
+        gctx.restore();
+      }
+
+      // Grid
+      var gridVals = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000];
+      for (var g = 0; g < gridVals.length; g++) {
+        var y = gY(gridVals[g]);
+        gctx.strokeStyle = 'rgba(255,255,255,0.05)';
+        gctx.lineWidth = 1;
+        gctx.beginPath();
+        gctx.moveTo(gpad.left, y);
+        gctx.lineTo(gc._w - gpad.right, y);
+        gctx.stroke();
+        gctx.fillStyle = 'rgba(255,255,255,0.25)';
+        gctx.font = '9px "IBM Plex Mono", monospace';
+        gctx.textAlign = 'right';
+        gctx.fillText('$' + (gridVals[g] / 1000000).toFixed(1) + 'M', gpad.left - 6, y + 3);
+      }
+
+      // X labels
+      gctx.fillStyle = 'rgba(255,255,255,0.25)';
+      gctx.font = '8px "IBM Plex Mono", monospace';
+      gctx.textAlign = 'center';
+      for (var i = 0; i < allDates.length; i++) {
+        if (i % 5 === 0 || i === allDates.length - 1 || projDates.indexOf(allDates[i]) !== -1) {
+          var parts = allDates[i].split('-');
+          var m = parseInt(parts[0]) - 1;
+          gctx.fillText(months[m] + " '" + parts[1], gX(i), gc._h - gpad.bottom + 16);
+        }
+      }
+
+      // MiraFAST launch line
+      var fli = allDates.indexOf('03-23-25');
+      if (fli !== -1) {
+        var ax = gX(fli);
+        gctx.save();
+        gctx.setLineDash([3, 3]);
+        gctx.strokeStyle = 'rgba(232, 93, 77, 0.35)';
+        gctx.lineWidth = 1;
+        gctx.beginPath();
+        gctx.moveTo(ax, gpad.top);
+        gctx.lineTo(ax, gc._h - gpad.bottom);
+        gctx.stroke();
+        gctx.setLineDash([]);
+        gctx.fillStyle = 'rgba(232, 93, 77, 0.6)';
+        gctx.font = '600 8px "IBM Plex Mono", monospace';
+        gctx.textAlign = 'center';
+        gctx.fillText('MIRAFAST LAUNCH', ax, gpad.top - 3);
+        gctx.restore();
+      }
+
+      drawGLine(fiberData, '#4D8FE8');
+      drawGLine(fastData, '#E85D4D');
+      drawProjection(fiberData, fiberProj, '#4D8FE8');
+      drawProjection(fastData, fastProj, '#E85D4D');
+    }
+
+    // Tooltip
+    var tip = document.createElement('div');
+    tip.style.cssText = 'position:absolute;pointer-events:none;background:var(--bg-primary);border:1px solid var(--border-color);padding:8px 12px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;color:var(--text-primary);opacity:0;transition:opacity 0.15s;z-index:10;white-space:nowrap;';
+    gc.parentElement.style.position = 'relative';
+    gc.parentElement.appendChild(tip);
+
+    gc.addEventListener('mousemove', function(e) {
+      var rect = gc.getBoundingClientRect();
+      var mx = e.clientX - rect.left;
+      var ci = 0, cd = Infinity;
+      for (var i = 0; i < allDates.length; i++) {
+        var d = Math.abs(mx - gX(i));
+        if (d < cd) { cd = d; ci = i; }
+      }
+      if (cd > 30) { tip.style.opacity = '0'; return; }
+      var date = allDates[ci];
+      var isProj = projDates.indexOf(date) !== -1;
+      var fp = null, sp = null;
+      for (var i = 0; i < fiberData.length; i++) { if (fiberData[i].date === date) fp = fiberData[i]; }
+      if (!fp) { for (var i = 0; i < fiberProj.length; i++) { if (fiberProj[i].date === date) fp = fiberProj[i]; } }
+      for (var i = 0; i < fastData.length; i++) { if (fastData[i].date === date) sp = fastData[i]; }
+      if (!sp) { for (var i = 0; i < fastProj.length; i++) { if (fastProj[i].date === date) sp = fastProj[i]; } }
+      var parts = date.split('-');
+      var m = parseInt(parts[0]) - 1;
+      var label = months[m] + " '" + parts[1] + (isProj ? ' (projected)' : '');
+      var html = '<div style="color:var(--text-muted);margin-bottom:4px;">' + label + '</div>';
+      if (fp) html += '<div style="color:#4D8FE8;">MiraFIBER: ' + (isProj ? '~' : '') + '$' + fp.val.toLocaleString() + '</div>';
+      if (sp) html += '<div style="color:#E85D4D;">MiraFAST: ' + (isProj ? '~' : '') + '$' + sp.val.toLocaleString() + '</div>';
+      if (fp && sp) html += '<div style="color:var(--text-primary);margin-top:4px;border-top:1px solid var(--border-color);padding-top:4px;">Combined: ' + (isProj ? '~' : '') + '$' + (fp.val + sp.val).toLocaleString() + '</div>';
+      tip.innerHTML = html;
+      tip.style.opacity = '1';
+      tip.style.left = Math.min(mx + 12, gc._w - 200) + 'px';
+      tip.style.top = (e.clientY - rect.top - 20) + 'px';
+    });
+
+    gc.addEventListener('mouseleave', function() { tip.style.opacity = '0'; });
+
+    resizeGC();
+    drawGChart();
+    window.addEventListener('resize', function() { resizeGC(); drawGChart(); });
+  })();
+
   // BRAND RUNNER GAME
   // ==========================================
   const canvas = document.getElementById('gameCanvas');
@@ -2048,9 +2831,9 @@
     const h = canvas._displayHeight || canvas.height;
     groundY = h - 50;
     playerSize = Math.max(24, Math.min(36, h * 0.1));
-    gravity = 0.55;
-    jumpForce = -13;
-    speed = Math.max(8, w * 0.012);
+    gravity = 0.5;
+    jumpForce = -12.5;
+    speed = Math.max(6, w * 0.009);
 
     player = {
       x: w * 0.12,
@@ -2153,7 +2936,7 @@
     frameCount++;
 
     // Speed up over time
-    speed = Math.max(8, w * 0.012) + Math.floor(score / 5) * 0.6;
+    speed = Math.max(6, w * 0.009) + Math.floor(score / 5) * 0.5;
 
     // Player physics
     player.vy += gravity;
@@ -2174,7 +2957,7 @@
     }
 
     // Spawn obstacles
-    const spawnRate = Math.max(40, 80 - score * 2);
+    const spawnRate = Math.max(50, 90 - score * 2);
     if (frameCount % spawnRate === 0) spawnObstacle();
 
     // Update obstacles

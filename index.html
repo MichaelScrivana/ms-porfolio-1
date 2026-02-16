@@ -1,0 +1,2568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0E0E10">
+<title>Michael Scrivana — AI + Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     CSS VARIABLES & RESET
+     ============================================ */
+  :root {
+    --black: #0A0A0A;
+    --white: #FAFAF8;
+    --gray-100: #F0F0EC;
+    --gray-200: #E0E0DC;
+    --gray-300: #C8C8C4;
+    --gray-500: #888884;
+    --gray-700: #555552;
+    --accent: #4D8FE8;
+    --accent-light: rgba(77, 143, 232, 0.12);
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --max-width: 1120px;
+    --section-gap: 140px;
+
+    /* Dark by default */
+    --bg-primary: #0E0E10;
+    --bg-secondary: #18181B;
+    --bg-inverted: #FAFAF8;
+    --text-primary: #ECECEC;
+    --text-secondary: #A0A0A0;
+    --text-muted: #707070;
+    --border-color: #2A2A2E;
+    --border-light: #3A3A3E;
+    --nav-bg: rgba(14, 14, 16, 0.92);
+    --nav-border: #2A2A2E;
+  }
+
+  [data-theme="light"] {
+    --accent: #0047AB;
+    --accent-light: #E8EFF8;
+    --bg-primary: #FAFAF8;
+    --bg-secondary: #F0F0EC;
+    --bg-inverted: #0A0A0A;
+    --text-primary: #0A0A0A;
+    --text-secondary: #555552;
+    --text-muted: #888884;
+    --border-color: #E0E0DC;
+    --border-light: #C8C8C4;
+    --nav-bg: rgba(250, 250, 248, 0.9);
+    --nav-border: #E0E0DC;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Smooth transitions for theme switching */
+  section, .portfolio-item, .mirafast-hero, .mirafast-stat,
+  .fit-row, .timeline-item, .divider, .about-me, nav,
+  .portfolio-caption, .portfolio-thumb, .photo-placeholder {
+    transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ============================================
+     UTILITY
+     ============================================ */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section {
+    padding: var(--section-gap) 0;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    transition: background 0.4s ease;
+  }
+
+  /* ============================================
+     NAV
+     ============================================ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--nav-border);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    gap: 24px;
+  }
+
+  .nav-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    padding: 160px 0 var(--section-gap);
+    position: relative;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6.5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 800px;
+  }
+
+  .hero-headline .accent-line {
+    color: var(--accent);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .hero-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 71, 171, 0.15);
+    white-space: nowrap;
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    padding-top: 24px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ============================================
+     DARK/LIGHT OVERRIDES (dark is default)
+     ============================================ */
+  .ai-projects {
+    background: #141418;
+  }
+
+  .ai-projects .project-card {
+    background: #141418;
+  }
+
+  .hero-badge {
+    background: var(--accent-light);
+    border-color: rgba(77, 143, 232, 0.2);
+  }
+
+  .mirafast-hero {
+    border-color: var(--border-light);
+  }
+
+  .mirafast-role .project-detail-label,
+  .timeline-content strong[style] {
+    color: var(--text-muted) !important;
+  }
+
+  .mirafast-role p,
+  .mirafast-stat-label span {
+    color: var(--text-muted) !important;
+  }
+
+  [data-theme="light"] .ai-projects {
+    background: var(--black);
+  }
+
+  [data-theme="light"] .ai-projects .project-card {
+    background: var(--black);
+  }
+
+  [data-theme="light"] .hero-badge {
+    background: #E8EFF8;
+    border-color: rgba(0, 71, 171, 0.15);
+  }
+
+  [data-theme="light"] footer {
+    background: var(--bg-inverted);
+  }
+
+  [data-theme="light"] .mirafast-hero {
+    border-color: var(--border-color);
+  }
+
+  /* ============================================
+     THEME TOGGLE
+     ============================================ */
+  .theme-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #3A3A3E;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--border-light);
+  }
+
+  .toggle-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #0E0E10;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(20px);
+  }
+
+  [data-theme="light"] .theme-toggle {
+    background: var(--border-color);
+  }
+
+  [data-theme="light"] .toggle-thumb {
+    transform: translateX(0);
+    background: var(--bg-primary);
+  }
+
+  .toggle-icon {
+    width: 12px;
+    height: 12px;
+    transition: opacity 0.2s ease, transform 0.3s ease;
+  }
+
+  .icon-sun,
+  .icon-moon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease, transform 0.3s ease;
+  }
+
+  .icon-sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    color: #E8A000;
+  }
+
+  .icon-moon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+    color: #8BB4E8;
+  }
+
+  [data-theme="light"] .icon-sun {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  [data-theme="light"] .icon-moon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  /* ============================================
+     ABOUT ME
+     ============================================ */
+  .about-me {
+    padding: var(--section-gap) 0;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .about-headline {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 16px;
+    max-width: 580px;
+  }
+
+  .about-text:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .photo-placeholder {
+      max-width: 240px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  /* ============================================
+     AI PROJECTS
+     ============================================ */
+  .ai-projects {
+    background: var(--black);
+    color: var(--white);
+    padding: var(--section-gap) 0;
+  }
+
+  .ai-projects .section-label {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .ai-projects .section-title {
+    color: var(--white);
+  }
+
+  .ai-projects .section-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-top: 64px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .project-card {
+    background: var(--black);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .project-card:nth-child(even) {
+    direction: rtl;
+  }
+
+  .project-card:nth-child(even) > * {
+    direction: ltr;
+  }
+
+  .project-number {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .project-detail {
+    margin-bottom: 20px;
+  }
+
+  .project-detail-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 8px;
+  }
+
+  .project-detail p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.65;
+  }
+
+  .project-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    padding: 4px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+  }
+
+  /* ============================================
+     ROLE FIT
+     ============================================ */
+  .role-fit {
+    padding: var(--section-gap) 0;
+    background: var(--bg-primary);
+    transition: background 0.4s ease;
+  }
+
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 64px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .fit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border-color);
+    align-items: start;
+  }
+
+  .fit-need {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-right: 24px;
+  }
+
+  .fit-have {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .fit-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 64px;
+    padding-bottom: 16px;
+  }
+
+  .fit-header-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ============================================
+     MIRAFAST HERO
+     ============================================ */
+  .mirafast-hero {
+    margin-top: 64px;
+    background: var(--bg-primary);
+    border: 2px solid var(--text-primary);
+    padding: 48px;
+  }
+
+  .mirafast-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .mirafast-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .mirafast-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+  }
+
+  .mirafast-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--border-color);
+    border: 1px solid var(--border-color);
+    margin-bottom: 32px;
+  }
+
+  .mirafast-stat {
+    background: var(--bg-primary);
+    padding: 28px 24px;
+  }
+
+  .mirafast-stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+
+  .mirafast-stat-label {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.45;
+  }
+
+  .mirafast-highlights {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .mirafast-highlight {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .mirafast-highlight strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .mirafast-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .mirafast-images .portfolio-thumb {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  @media (max-width: 900px) {
+    .mirafast-hero {
+      padding: 32px 24px;
+    }
+
+    .mirafast-header {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .mirafast-stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .mirafast-highlights {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .mirafast-images {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mirafast-stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mirafast-highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ============================================
+     PORTFOLIO
+     ============================================ */
+  .portfolio {
+    background: var(--bg-secondary);
+    padding: var(--section-gap) 0;
+  }
+
+  /* ============================================
+     PORTFOLIO CAROUSEL
+     ============================================ */
+  .carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .portfolio-item {
+    min-width: calc((100% - 32px) / 3);
+    max-width: calc((100% - 32px) / 3);
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .portfolio-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 24px;
+    line-height: 1.5;
+  }
+
+  .portfolio-caption {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .portfolio-caption h3 {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .portfolio-caption p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     TIMELINE (brief career summary)
+     ============================================ */
+  .timeline {
+    padding: var(--section-gap) 0;
+  }
+
+  .timeline-items {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 2px solid var(--text-primary);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 48px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .timeline-year {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding-top: 4px;
+  }
+
+  .timeline-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .timeline-content .role {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  footer {
+    background: #18181B;
+    color: #ECECEC;
+    padding: 80px 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: end;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .footer-built {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+
+  [data-theme="light"] .footer-links a {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  [data-theme="light"] .footer-links a:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  [data-theme="light"] .footer-built {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* ============================================
+     PORTFOLIO MODAL
+     ============================================ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 40px;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 16px 0 0;
+    transition: background 0.2s ease;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .modal-close:hover {
+    background: var(--bg-secondary);
+  }
+
+  .modal-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .modal-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-body {
+    padding: 40px 48px 48px;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .modal-role {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    max-width: 640px;
+  }
+
+  .modal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .modal-detail-block h4 {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .modal-detail-block p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .modal-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .modal-gallery-item {
+    aspect-ratio: 4 / 3;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .modal-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portfolio-item {
+    cursor: pointer;
+  }
+
+  .portfolio-item:hover .portfolio-thumb {
+    opacity: 0.85;
+  }
+
+  .portfolio-item:hover .portfolio-caption h3 {
+    color: var(--accent);
+    transition: color 0.2s ease;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .carousel-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    border-color: var(--border-color);
+    background: var(--bg-primary);
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-light);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.25);
+  }
+
+  @media (max-width: 600px) {
+    .modal-overlay {
+      padding: 16px;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .modal-detail-grid {
+      grid-template-columns: 1fr;
+    }
+    .modal-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ============================================
+     BRAND RUNNER GAME
+     ============================================ */
+  .game-section {
+    padding: 80px 0;
+  }
+
+  .game-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    min-height: 240px;
+    max-height: 360px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .game-wrapper canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .game-intro,
+  .game-over-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    z-index: 2;
+    transition: opacity 0.5s ease;
+  }
+
+  .game-intro.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .game-over-overlay {
+    background: rgba(14, 14, 16, 0.85);
+  }
+
+  [data-theme="light"] .game-over-overlay {
+    background: rgba(250, 250, 248, 0.88);
+  }
+
+  .game-intro-text {
+    text-align: center;
+  }
+
+  .game-hud {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    text-align: right;
+    z-index: 1;
+  }
+
+  .game-score {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--text-primary);
+  }
+
+  .game-score-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ============================================
+     SCROLL ANIMATIONS
+     ============================================ */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* stagger children */
+  .stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
+  .stagger > .fade-in:nth-child(2) { transition-delay: 80ms; }
+  .stagger > .fade-in:nth-child(3) { transition-delay: 160ms; }
+  .stagger > .fade-in:nth-child(4) { transition-delay: 240ms; }
+  .stagger > .fade-in:nth-child(5) { transition-delay: 320ms; }
+  .stagger > .fade-in:nth-child(6) { transition-delay: 400ms; }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 900px) {
+    :root {
+      --section-gap: 96px;
+    }
+
+    .container {
+      padding: 0 24px;
+    }
+
+    .project-card {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+    }
+
+    .project-card:nth-child(even) {
+      direction: ltr;
+    }
+
+    .fit-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .fit-header {
+      display: none;
+    }
+
+    .fit-need {
+      padding-right: 0;
+      font-style: italic;
+    }
+
+    .portfolio-item {
+      min-width: calc((100% - 16px) / 2);
+      max-width: calc((100% - 16px) / 2);
+    }
+
+    .hero-stats {
+      gap: 32px;
+    }
+
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .footer-built {
+      text-align: left;
+    }
+
+    .nav-links {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .portfolio-item {
+      min-width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-stats {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .theme-toggle {
+      margin-left: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav>
+  <div class="container">
+    <a href="#" class="nav-name" style="text-decoration: none; color: inherit;">Michael Scrivana</a>
+    <ul class="nav-links">
+      <li><a href="#about-me">About</a></li>
+      <li><a href="#ai">AI Projects</a></li>
+      <li><a href="#fit">Role Fit</a></li>
+      <li><a href="#portfolio">Design Work</a></li>
+      <li><a href="#career">Career</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <div class="toggle-track">
+        <div class="toggle-thumb">
+          <svg class="icon-sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="fade-in">
+        <div class="hero-badge">Built with Claude — AI in action</div>
+      </div>
+      <h1 class="hero-headline fade-in">
+        Where brand design<br>
+        meets <span class="accent-line">AI innovation</span>
+      </h1>
+      <div class="hero-meta fade-in">
+        <p class="hero-description">
+          I'm a Brand Designer at Bayer Consumer Health applying for the 
+          <strong>AI Proficiency &amp; Learning Lead</strong> role. After 6 years 
+          directing design across 20+ brands, I'm building real AI systems that solve 
+          real business problems — and teaching others to do the same.
+        </p>
+      </div>
+      <div class="hero-stats fade-in">
+        <div class="stat">
+          <span class="stat-number">6+</span>
+          <span class="stat-label">Years at Bayer</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">20+</span>
+          <span class="stat-label">Brands managed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">700+</span>
+          <span class="stat-label">Renders delivered</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">1 of 5</span>
+          <span class="stat-label">AI Team Reps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ============================================
+     ABOUT ME
+     ============================================ -->
+<section class="about-me" id="about-me">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo fade-in">
+        <div class="photo-placeholder">[ Profile Photo ]</div>
+      </div>
+      <div class="about-content fade-in">
+        <span class="section-label">About Me</span>
+        <h2 class="about-headline">I design brands for a living.<br>I build AI tools to make them better.</h2>
+        <!-- ALTERNATIVE A: "I design brands for a living. Now I'm building the AI to scale them." -->
+        <!-- ALTERNATIVE B: "I design brands for a living. AI is how I'll multiply the impact." -->
+        <p class="about-text">
+          For the past 6 years at Bayer Consumer Health, I've directed creative across 20+ brands — from packaging and ecommerce to motion and brand systems. I know the work, the teams, and the constraints inside out.
+        </p>
+        <p class="about-text">
+          On nights and weekends, I taught myself to code. I built local LLM deployments, experimented with APIs, and started shipping real AI tools that solve problems I see every day on the job. That curiosity turned into something bigger — I'm now 1 of 5 cross-functional AI representatives at Bayer, consulting Product Experience leadership on how AI can transform the way we work.
+        </p>
+        <p class="about-text" style="color: var(--accent); font-weight: 500;">
+          This role is the convergence of everything I've been building toward.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     AI PROJECTS
+     ============================================ -->
+<section class="ai-projects" id="ai">
+  <div class="container">
+    <span class="section-label fade-in">01 — AI at Bayer</span>
+    <h2 class="section-title fade-in">Building AI that works<br>for Consumer Health</h2>
+    <p class="section-subtitle fade-in">
+      Not just experimenting — shipping real tools, training real teams, and proving 
+      AI's value to leadership with measurable results.
+    </p>
+
+    <div class="project-grid stagger">
+
+      <!-- PROJECT 1: One A Day Agent -->
+      <div class="project-card fade-in">
+        <div>
+          <span class="project-number">01</span>
+          <h3 class="project-title">One A Day — Orchestrated Design Review Agent</h3>
+          <div class="project-detail">
+            <div class="project-detail-label">Challenge</div>
+            <p>Design managers review hundreds of agency submissions for brand compliance — a manual, time-intensive process that limits strategic focus and creates bottlenecks across the portfolio.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Solution</div>
+            <p>Built an orchestrated AI agent on Azure with Claude. Agencies submit designs to a web app where the review agent scores submissions against brand guidelines with built-in compliance guardrails. The system is modular and designed to scale across all BCH brands.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Automation Vision</div>
+            <p>The endgame is full automation of executional volume — digital banners, social templates, ecommerce tiles — generated by AI with brand compliance baked in. Next phase: a generative design agent that pulls brand assets and creates compliant designs, freeing design managers from reviewing hundreds of executions so they can focus on strategic brand vision.</p>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">Claude API</span>
+            <span class="tech-tag">VS Code</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Brand Guardrails</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <a href="#" class="github-link" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+        <div class="project-image-placeholder">
+          [ One A Day Agent Screenshot / Demo ]
+        </div>
+      </div>
+
+      <!-- PROJECT 2: AI Consulting & Strategy -->
+      <div class="project-card fade-in">
+        <div>
+          <span class="project-number">02</span>
+          <h3 class="project-title">AI Strategy Consulting for Product Experience</h3>
+          <div class="project-detail">
+            <div class="project-detail-label">Context</div>
+            <p>As AI tools emerged, Product Experience leadership needed a grounded perspective — not hype, but an honest read on where AI is today, where it's heading, and how BCH can activate it. There was no formal role for this; the need surfaced organically.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">My Role</div>
+            <p>I became the informal AI advisor within PX — sharing what I was learning through hands-on building, presenting to leadership on practical AI applications, and helping the team separate signal from noise. Selected as 1 of 5 cross-functional representatives on Bayer's AI team, representing the entire Product Experience organization alongside Product Development, Regulatory, and Medical.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Approach</div>
+            <p>Lead by building, not by presenting slide decks. Shared AI efficiency techniques with colleagues through informal coaching and working sessions. Consulted leadership on where AI can realistically enhance design and other services — always grounded in what I'd actually tested and shipped.</p>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">AI Strategy</span>
+            <span class="tech-tag">Leadership Consulting</span>
+            <span class="tech-tag">Cross-functional</span>
+            <span class="tech-tag">Change Management</span>
+          </div>
+        </div>
+        <div class="project-image-placeholder">
+          [ AI Team / Presentation Photo ]
+        </div>
+      </div>
+
+      <!-- PROJECT 3: GenAI in Creative -->
+      <div class="project-card fade-in">
+        <div>
+          <span class="project-number">03</span>
+          <h3 class="project-title">GenAI in Creative Workflows</h3>
+          <div class="project-detail">
+            <div class="project-detail-label">Challenge</div>
+            <p>Traditional creative development cycles — from concept exploration to photography direction to asset production — are time-intensive and limit the volume of ideas a team can explore.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Solution</div>
+            <p>Pioneered MidJourney as a production tool across BCH brands. Used it to develop photography style guides that aligned agency partners on creative direction, generated packaging concepts, key visuals, and ecommerce assets — both hands-on and directing agency partners to adopt AI into their workflows.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Impact</div>
+            <p>Dramatically accelerated creative ideation. Shortened the gap between vision and execution. Proved that GenAI can enhance — not replace — the creative process.</p>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">MidJourney</span>
+            <span class="tech-tag">Prompt Engineering</span>
+            <span class="tech-tag">Photography Direction</span>
+            <span class="tech-tag">Agency Management</span>
+          </div>
+        </div>
+        <div class="project-image-placeholder">
+          [ MidJourney Outputs / Style Guide Examples ]
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     ROLE FIT
+     ============================================ -->
+<section class="role-fit" id="fit">
+  <div class="container">
+    <span class="section-label fade-in">02 — Role Fit</span>
+    <h2 class="section-title fade-in">What the role needs.<br>What I bring.</h2>
+    <p class="section-subtitle fade-in">
+      Mapping the AI Proficiency &amp; Learning Lead requirements to my experience at Bayer Consumer Health.
+    </p>
+
+    <div class="fit-header fade-in">
+      <span class="fit-header-label">The Role Requires</span>
+      <span class="fit-header-label">My Experience</span>
+    </div>
+
+    <div class="fit-grid stagger">
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Build a practical AI proficiency program people love to use</div>
+        <div class="fit-have">Helped launch a Design Training Module across Consumer Health — evangelizing what PX does and teaching non-design departments how to engage with our work. That's the same muscle this role needs: making a complex discipline accessible, practical, and exciting for diverse teams. I also created the <a href="https://www.michaelscrivana.com/marketingexcellence" target="_blank" style="color: var(--accent);">Bold Breakthrough Tour</a> marketing identity, a keynote-style internal event built to inspire colleagues and shift how teams think. Ready to bring that same energy to AI proficiency.</div>
+      </div>
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Enable peer-to-peer learning at scale</div>
+        <div class="fit-have">Grew from informal coaching to trusted AI advisor in PX — through hands-on demos and real tools, not slide decks. That trust is the foundation peer learning scales on.</div>
+      </div>
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Embed safety and compliance — practical guardrails, not blockers</div>
+        <div class="fit-have">Built brand compliance scoring directly into the One A Day agent. 6 years managing standards across 20+ SKU families — I understand compliance as an enabler.</div>
+      </div>
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Partner with Focus Area Leads, Product, Governance, and BU leaders</div>
+        <div class="fit-have">1 of 5 cross-functional AI team reps alongside Product Development, Regulatory, and Medical. Regularly consult PX leadership on AI strategy.</div>
+      </div>
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Track adoption with simple dashboards</div>
+        <div class="fit-have">One A Day agent generates quantifiable brand compliance scores. 6 years making complex project data visual and actionable for leadership.</div>
+      </div>
+
+      <div class="fit-row fade-in">
+        <div class="fit-need">Share wins and stories that inspire</div>
+        <div class="fit-have">This website — built with Claude as a working demo. Pioneered GenAI in DPX. Every project I've built has been shared and used to pull others in.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PORTFOLIO
+     ============================================ -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <span class="section-label fade-in">03 — Design Portfolio</span>
+    <h2 class="section-title fade-in">6 years of brand work<br>across Consumer Health</h2>
+    <p class="section-subtitle fade-in">
+      The domain expertise behind the AI vision. Deep knowledge of BCH brands, 
+      packaging systems, ecommerce, and cross-functional delivery.
+    </p>
+
+    <!-- MIRAFAST HERO FEATURE -->
+    <div class="mirafast-hero fade-in">
+      <div class="mirafast-header">
+        <div>
+          <span class="section-label" style="color: var(--accent);">Featured Project</span>
+          <h3 class="mirafast-title">MiraFAST: New Product Launch</h3>
+          <p class="mirafast-desc">Led the brand identity, packaging innovation, and brand world development for MiraLAX's new magnesium-based soft chew line — from inception to design lock in just 3 weeks.</p>
+        </div>
+        <div class="mirafast-role">
+          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Core Team</div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Michael Scrivana, Monica O'Malley, JD English</p>
+          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; margin-top: 16px;">Services</div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Brand Identity, Brand World, Packaging Innovation, Graphic Innovation, Graphic Business Protection</p>
+        </div>
+      </div>
+
+      <div class="mirafast-stats-grid">
+        <div class="mirafast-stat">
+          <div class="mirafast-stat-number">$14M+</div>
+          <div class="mirafast-stat-label">Retail sales YTD<br><span style="color: var(--text-muted);">9 months into launch</span></div>
+        </div>
+        <div class="mirafast-stat">
+          <div class="mirafast-stat-number">3rd</div>
+          <div class="mirafast-stat-label">Fastest scaling launch<br><span style="color: var(--text-muted);">in Digestive Health, past 5 years</span></div>
+        </div>
+        <div class="mirafast-stat">
+          <div class="mirafast-stat-number">54%</div>
+          <div class="mirafast-stat-label">Of total MiraLAX brand<br><span style="color: var(--text-muted);">retail sales growth YTD 2025</span></div>
+        </div>
+        <div class="mirafast-stat">
+          <div class="mirafast-stat-number">3 wks</div>
+          <div class="mirafast-stat-label">Inception to design lock<br><span style="color: var(--text-muted);">developed internally</span></div>
+        </div>
+      </div>
+
+      <div class="mirafast-highlights">
+        <div class="mirafast-highlight">
+          <strong>#1</strong> Laxative Soft Chew SKU (30 Count)
+        </div>
+        <div class="mirafast-highlight">
+          <strong>#2</strong> Overnight Laxative SKU (30 Count)
+        </div>
+        <div class="mirafast-highlight">
+          <strong>Above</strong> category benchmark repeat rates
+        </div>
+        <div class="mirafast-highlight">
+          <strong>2026</strong> expanded distribution — Kids, Club, count sizes
+        </div>
+      </div>
+
+      <div class="mirafast-images">
+        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ MiraFAST Pack Design ]</div>
+        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ MiraFAST Brand World ]</div>
+      </div>
+    </div>
+
+    <!-- PX PLATFORM FEATURE -->
+    <div class="mirafast-hero fade-in" style="margin-top: 48px;">
+      <div class="mirafast-header">
+        <div>
+          <span class="section-label" style="color: var(--accent);">Featured Project</span>
+          <h3 class="mirafast-title">PX Platform: Department Website</h3>
+          <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-top: 12px; max-width: 640px;">
+            Designed and developed a digital platform for the Product Experience department, showcasing the full breadth of PX's work — from packaging and brand identity to ecommerce and innovation. Built to improve internal visibility, streamline stakeholder engagement, and give PX a cohesive digital presence.
+          </p>
+        </div>
+        <div class="mirafast-role">
+          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Role</div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Design & Development Lead</p>
+          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; margin-top: 16px;">Services</div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">Web Design, UI/UX, Content Architecture, Frontend Development</p>
+        </div>
+      </div>
+
+      <div class="mirafast-images">
+        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ PX Platform — Homepage ]</div>
+        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ PX Platform — Project Detail ]</div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO CAROUSEL -->
+    <div class="carousel-wrapper fade-in" style="margin-top: 48px;">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="portfolio-item" data-project="oad">
+          <div class="portfolio-thumb">[ OAD Brand Platform ]</div>
+          <div class="portfolio-caption">
+            <h3>OAD Brand Platform</h3>
+            <p>Led interim platform rollout across all channels. Digital brandbook, 700+ renders, animations.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-project="agefactor">
+          <div class="portfolio-thumb">[ Age Factor Launch ]</div>
+          <div class="portfolio-caption">
+            <h3>Age Factor</h3>
+            <p>End-to-end brand launch — social, ecomm, photoshoot direction, app assets.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-project="iberogast">
+          <div class="portfolio-thumb">[ Iberogast ]</div>
+          <div class="portfolio-caption">
+            <h3>Iberogast</h3>
+            <p>Web direction, MOA animation, social playbook, ecommerce management.</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-project="bold">
+          <div class="portfolio-thumb">[ Bold Activation ]</div>
+          <div class="portfolio-caption">
+            <h3>Bold Breakthrough Tour</h3>
+            <p>Marketing identity for an internal keynote/workshop series to engage colleagues and drive innovation.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 32px;">
+      <a href="https://www.michaelscrivana.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">View All Projects ↗</a>
+    </div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-hero-image" id="modalHero">[ Project Hero Image ]</div>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modalTitle">Project Title</h2>
+      <div class="modal-role" id="modalRole">Role</div>
+      <p class="modal-description" id="modalDesc">Description</p>
+      <div class="modal-detail-grid" id="modalDetails"></div>
+      <div class="modal-gallery" id="modalGallery"></div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- ============================================
+     TIMELINE
+     ============================================ -->
+<section class="timeline" id="career">
+  <div class="container">
+    <span class="section-label fade-in">04 — Career</span>
+    <h2 class="section-title fade-in">Experience &amp; Education</h2>
+
+    <div class="timeline-items stagger">
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">May 2019 — Present</div>
+        <div class="timeline-content">
+          <h3>Bayer Consumer Health</h3>
+          <div class="role">Brand Designer & AI Strategy Lead — Whippany, NJ</div>
+          <p><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">AI Leadership & Enablement</strong></p>
+          <p style="margin-top: 8px;">Selected as 1 of 5 cross-functional AI team representatives, advising Product Experience leadership on AI strategy. Architecting a modular design review agent on Azure with Claude that automates agency submission scoring against brand guidelines. Coaching peers on practical AI adoption — from MidJourney-driven photography direction to generative ecommerce workflows. Embedding brand compliance guardrails directly into AI-powered tools. Self-taught through local LLM deployments, Azure infrastructure, and AI/ML courses.</p>
+          <p style="margin-top: 16px;"><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">Brand Design & Creative Leadership</strong></p>
+          <p style="margin-top: 8px;">Developed brand identity systems across digital and physical channels for 20+ consumer health brands. Led end-to-end package design — collaborating with printers and production teams on printability, color integrity, and visual consistency. Designed the MiraFAST identity in a 3-week sprint, contributing to $14M+ in retail sales. Produced 700+ product renders for GS1 syndication. Directed photoshoots, mentored design teams and external agencies, and led design thinking workshops.</p>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">Dec 2017 — May 2019</div>
+        <div class="timeline-content">
+          <h3>William Paterson University — Research Technology</h3>
+          <div class="role">Design Lab Manager — Wayne, NJ</div>
+          <p>Managed lab technology stack including 3D printers, scanners, and VR/AR systems — calibrating hardware, troubleshooting firmware, and training faculty and students on emerging tools. Developed interdisciplinary research prototypes with the Psychology department, managing the full digital-to-physical fabrication pipeline.</p>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">Dec 2014 — May 2016</div>
+        <div class="timeline-content">
+          <h3>Siemens Healthcare</h3>
+          <div class="role">Electromechanical Technician — Flanders, NJ</div>
+          <p>Assembled and tested electronic and mechanical subsystems for healthcare diagnostic equipment. Performed circuit calibration and troubleshooting to meet strict quality control standards. Beta tested new software and hardware solutions, documenting defects and providing structured feedback that drove product improvements.</p>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2017 — 2019</div>
+        <div class="timeline-content">
+          <h3>William Paterson University</h3>
+          <div class="role">BFA, Graphic Design — Summa Cum Laude</div>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2016 — 2017</div>
+        <div class="timeline-content">
+          <h3>County College of Morris</h3>
+          <div class="role">AFA, Visual Arts — Summa Cum Laude</div>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-year">2011 — 2015</div>
+        <div class="timeline-content">
+          <h3>Art Students League of New York</h3>
+          <div class="role">Drawing & Painting</div>
+          <p>Classical training in observation, composition, and visual storytelling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border-color);">
+      <span class="section-label" style="margin-bottom: 16px;">References</span>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px;">
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px;">Chris Padain</h3>
+          <a href="mailto:christopher.padain@bayer.com" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--accent); text-decoration: none;">christopher.padain@bayer.com</a>
+        </div>
+        <div>
+          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px;">Beth Harlor</h3>
+          <a href="mailto:beth.harlor@bayer.com" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--accent); text-decoration: none;">beth.harlor@bayer.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     BRAND RUNNER GAME
+     ============================================ -->
+<section class="game-section" id="game">
+  <div class="container">
+    <div class="game-wrapper fade-in">
+      <div class="game-intro" id="gameIntro">
+        <div class="game-intro-text">
+          <span class="section-label" style="color: var(--accent); margin-bottom: 8px;">Bonus Round</span>
+          <h2 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1;">THINK FAST</h2>
+          <p style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 12px;">Press Space or Tap to jump</p>
+        </div>
+      </div>
+      <canvas id="gameCanvas"></canvas>
+      <div class="game-hud">
+        <div class="game-score" id="gameScore">0</div>
+        <div class="game-score-label">BRANDS CLEARED</div>
+      </div>
+      <div class="game-over-overlay" id="gameOver" style="display: none;">
+        <div class="game-intro-text">
+          <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1;" id="gameOverTitle">NICE RUN</h2>
+          <p style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.06em; color: var(--text-muted); margin-top: 12px;"><span id="finalScore">0</span> brands cleared</p>
+          <p style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 16px; cursor: pointer;" onclick="restartGame()">Press Space or Tap to play again</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-name">Michael Scrivana</div>
+        <div class="footer-links">
+          <a href="mailto:michael.scrivana@bayer.com">michael.scrivana@bayer.com</a>
+          <a href="tel:9739197414">973.919.7414</a>
+          <a href="https://www.michaelscrivana.com" target="_blank">michaelscrivana.com</a>
+        </div>
+      </div>
+      <div class="footer-built">
+        Designed &amp; built with Claude<br>
+        by the candidate, for the role.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     SCROLL ANIMATION SCRIPT
+     ============================================ -->
+<script>
+  // ==========================================
+  // THEME TOGGLE
+  // ==========================================
+  const toggle = document.getElementById('themeToggle');
+
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isLight = html.getAttribute('data-theme') === 'light';
+    html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  });
+
+  // ==========================================
+  // SCROLL ANIMATIONS
+  // ==========================================
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.08 }
+  );
+
+  document.querySelectorAll('.fade-in').forEach((el) => {
+    observer.observe(el);
+  });
+
+  // ==========================================
+  // BRAND RUNNER GAME
+  // ==========================================
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const introEl = document.getElementById('gameIntro');
+  const gameOverEl = document.getElementById('gameOver');
+  const scoreEl = document.getElementById('gameScore');
+  const finalScoreEl = document.getElementById('finalScore');
+  const gameOverTitle = document.getElementById('gameOverTitle');
+
+  // Bayer brands as obstacles
+  const brandNames = [
+    'OAD', 'MiraLAX', 'Claritin', 'Aleve', 'Afrin',
+    'Citracal', 'Flintstones', 'Phillips\'', 'Midol', 'Coricidin',
+    'Astepro', 'Iberogast', 'Berocca', 'MiraFAST', 'MiraFiber',
+    'Age Factor', 'Aspirin', 'Prenatal', 'Bayer'
+  ];
+
+  let gameState = 'intro'; // intro, playing, over
+  let gameStarted = false;
+  let score = 0;
+  let groundY, playerSize, gravity, jumpForce;
+  let player = {};
+  let obstacles = [];
+  let particles = [];
+  let frameCount = 0;
+  let speed = 4;
+  let groundDashes = [];
+
+  function initGame() {
+    const w = canvas._displayWidth || canvas.width;
+    const h = canvas._displayHeight || canvas.height;
+    groundY = h - 50;
+    playerSize = Math.max(24, Math.min(36, h * 0.1));
+    gravity = 0.55;
+    jumpForce = -13;
+    speed = Math.max(8, w * 0.012);
+
+    player = {
+      x: w * 0.12,
+      y: groundY - playerSize,
+      w: playerSize,
+      h: playerSize,
+      vy: 0,
+      grounded: true,
+      squash: 1
+    };
+
+    obstacles = [];
+    particles = [];
+    score = 0;
+    frameCount = 0;
+    scoreEl.textContent = '0';
+
+    // Init ground dashes
+    groundDashes = [];
+    for (let i = 0; i < w + 40; i += 20) {
+      groundDashes.push(i);
+    }
+  }
+
+  function resizeCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    // Cap pixel ratio to prevent retina canvas from being too large on mobile
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.innerWidth < 600;
+    const ratio = isMobile ? 1 : dpr;
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.scale(ratio, ratio);
+    // Store display size for game logic
+    canvas._displayWidth = rect.width;
+    canvas._displayHeight = rect.height;
+    if (gameState !== 'playing') initGame();
+  }
+
+  function getColors() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    return {
+      bg: isLight ? '#F0F0EC' : '#18181B',
+      ground: isLight ? '#E0E0DC' : '#2A2A2E',
+      groundLine: isLight ? '#C8C8C4' : '#3A3A3E',
+      player: isLight ? '#0047AB' : '#4D8FE8',
+      playerGlow: isLight ? 'rgba(0,71,171,0.1)' : 'rgba(77,143,232,0.15)',
+      obstacle: isLight ? '#0A0A0A' : '#ECECEC',
+      obstacleBg: isLight ? '#E0E0DC' : '#2A2A2E',
+      text: isLight ? '#888884' : '#707070',
+      particle: isLight ? '#0047AB' : '#4D8FE8',
+      accent: isLight ? '#0047AB' : '#4D8FE8'
+    };
+  }
+
+  function spawnObstacle() {
+    const w = canvas._displayWidth || canvas.width;
+    const h = canvas._displayHeight || canvas.height;
+    const brand = brandNames[Math.floor(Math.random() * brandNames.length)];
+    const boxW = Math.max(50, ctx.measureText(brand).width + 24);
+    const boxH = 30 + Math.random() * 20;
+
+    obstacles.push({
+      x: w + 20,
+      y: groundY - boxH,
+      w: boxW,
+      h: boxH,
+      brand: brand,
+      passed: false
+    });
+  }
+
+  function spawnParticles(x, y, color) {
+    const count = window.innerWidth < 600 ? 3 : 6;
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x, y,
+        vx: (Math.random() - 0.5) * 4,
+        vy: -Math.random() * 3 - 1,
+        life: 1,
+        size: 2 + Math.random() * 3,
+        color
+      });
+    }
+  }
+
+  function jump() {
+    if (player.grounded) {
+      player.vy = jumpForce;
+      player.grounded = false;
+      player.squash = 0.7;
+    }
+  }
+
+  function update() {
+    const w = canvas._displayWidth || canvas.width;
+    const h = canvas._displayHeight || canvas.height;
+    frameCount++;
+
+    // Speed up over time
+    speed = Math.max(8, w * 0.012) + Math.floor(score / 5) * 0.6;
+
+    // Player physics
+    player.vy += gravity;
+    player.y += player.vy;
+    player.squash += (1 - player.squash) * 0.15;
+
+    if (player.y >= groundY - player.h) {
+      player.y = groundY - player.h;
+      player.vy = 0;
+      if (!player.grounded) player.squash = 1.2;
+      player.grounded = true;
+    }
+
+    // Ground dashes
+    for (let i = 0; i < groundDashes.length; i++) {
+      groundDashes[i] -= speed;
+      if (groundDashes[i] < -20) groundDashes[i] = w + 20;
+    }
+
+    // Spawn obstacles
+    const spawnRate = Math.max(40, 80 - score * 2);
+    if (frameCount % spawnRate === 0) spawnObstacle();
+
+    // Update obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      const o = obstacles[i];
+      o.x -= speed;
+
+      // Score
+      if (!o.passed && o.x + o.w < player.x) {
+        o.passed = true;
+        score++;
+        scoreEl.textContent = score;
+        const colors = getColors();
+        spawnParticles(player.x + player.w / 2, player.y, colors.particle);
+      }
+
+      // Collision
+      const px = player.x + 3;
+      const py = player.y + 3;
+      const pw = player.w - 6;
+      const ph = player.h - 6;
+      if (px < o.x + o.w && px + pw > o.x && py < o.y + o.h && py + ph > o.y) {
+        gameState = 'over';
+        finalScoreEl.textContent = score;
+        if (score >= 15) gameOverTitle.textContent = 'BRAND MASTER';
+        else if (score >= 10) gameOverTitle.textContent = 'IMPRESSIVE';
+        else if (score >= 5) gameOverTitle.textContent = 'NICE RUN';
+        else gameOverTitle.textContent = 'TRY AGAIN';
+        gameOverEl.style.display = 'flex';
+        return;
+      }
+
+      // Cleanup
+      if (o.x + o.w < -20) obstacles.splice(i, 1);
+    }
+
+    // Update particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.1;
+      p.life -= 0.025;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    const w = canvas._displayWidth || canvas.width;
+    const h = canvas._displayHeight || canvas.height;
+    const c = getColors();
+
+    // Clear
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, w, h);
+
+    // Ground
+    ctx.fillStyle = c.ground;
+    ctx.fillRect(0, groundY, w, h - groundY);
+    ctx.strokeStyle = c.groundLine;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([8, 12]);
+    ctx.beginPath();
+    ctx.moveTo(0, groundY);
+    ctx.lineTo(w, groundY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Obstacles
+    ctx.font = `500 ${Math.max(9, playerSize * 0.32)}px 'IBM Plex Mono', monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (const o of obstacles) {
+      // Box
+      ctx.fillStyle = c.obstacleBg;
+      ctx.fillRect(o.x, o.y, o.w, o.h);
+      ctx.strokeStyle = c.obstacle;
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(o.x, o.y, o.w, o.h);
+      // Brand name
+      ctx.fillStyle = c.obstacle;
+      ctx.fillText(o.brand, o.x + o.w / 2, o.y + o.h / 2);
+    }
+
+    // Player (the Bayer cross inspired shape)
+    ctx.save();
+    ctx.translate(player.x + player.w / 2, player.y + player.h / 2);
+    ctx.scale(1, player.squash);
+
+    // Glow (skip on mobile for performance)
+    if (window.innerWidth >= 600) {
+      ctx.fillStyle = c.playerGlow;
+      ctx.beginPath();
+      ctx.arc(0, 0, player.w * 0.7, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Cross shape
+    const s = player.w * 0.4;
+    const t = player.w * 0.16;
+    ctx.fillStyle = c.player;
+    ctx.beginPath();
+    ctx.rect(-t, -s, t * 2, s * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.rect(-s, -t, s * 2, t * 2);
+    ctx.fill();
+
+    // Small circle in center
+    ctx.fillStyle = c.bg;
+    ctx.beginPath();
+    ctx.arc(0, 0, t * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+
+    // Particles
+    for (const p of particles) {
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function gameLoop() {
+    if (gameState === 'playing') {
+      update();
+      draw();
+    }
+    requestAnimationFrame(gameLoop);
+  }
+
+  function startGame() {
+    if (gameState === 'intro') {
+      introEl.classList.add('hidden');
+      gameState = 'playing';
+      initGame();
+      gameLoop();
+    }
+  }
+
+  function restartGame() {
+    gameOverEl.style.display = 'none';
+    gameState = 'playing';
+    initGame();
+  }
+
+  // Input handlers
+  function handleGameInput(e) {
+    if (gameState === 'intro') {
+      startGame();
+    } else if (gameState === 'playing') {
+      jump();
+    } else if (gameState === 'over') {
+      restartGame();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+      // Only handle if game section is in view
+      const gameSection = document.getElementById('game');
+      const rect = gameSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        e.preventDefault();
+        handleGameInput(e);
+      }
+    }
+  });
+
+  canvas.addEventListener('click', handleGameInput);
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    handleGameInput(e);
+  }, { passive: false });
+
+  // Auto-start when scrolled into view
+  const gameObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !gameStarted) {
+          gameStarted = true;
+          resizeCanvas();
+          // Brief pause then auto-start
+          setTimeout(() => {
+            startGame();
+          }, 1200);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  gameObserver.observe(document.getElementById('game'));
+
+  // Handle resize
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  // ==========================================
+  // PORTFOLIO MODALS
+  // ==========================================
+  const projectData = {
+    oad: {
+      title: 'OAD Brand Platform',
+      role: 'Design Manager & Lead Designer',
+      desc: 'Led the interim One A Day brand platform rollout across all channels, creating a cohesive visual system for the entire OAD portfolio. This initiative unified the look across Men\'s, Women\'s, 50+, Non-Gender, and specialty lines before the full OAD mission work launched. Managed the production of 700+ product renders for GS1 syndication, directed animations, and led the digital brandbook launch with agency partner Assembly.',
+      details: [
+        { label: 'Scope', text: '50+ SKUs across all OAD product lines. Digital brandbook, animations, GS1-ready renders, ecommerce assets.' },
+        { label: 'Channels', text: 'Amazon, Walmart, Target, retail, digital, social. Full omnichannel activation.' },
+        { label: 'Team', text: 'Directed Mertz and Assembly agency partners. Collaborated with Amy Miller and brand team.' },
+        { label: 'Timeline', text: '2023–2025. Phased rollout starting with renders, expanding to animations and digital brandbook.' }
+      ],
+      gallery: ['[ OAD Brandbook Spread ]', '[ OAD Render Lineup ]', '[ OAD Animation Still ]', '[ OAD Ecommerce Tiles ]']
+    },
+    agefactor: {
+      title: 'Age Factor',
+      role: 'Design Manager — End-to-End Launch',
+      desc: 'Managed the complete design lifecycle for Age Factor, a new brand entering the consumer health space. From initial concept development through social assets, ecommerce content, photoshoot direction, and app asset creation — led both hands-on design and agency direction to bring this brand to market.',
+      details: [
+        { label: 'Scope', text: 'Full brand launch — social assets, ecommerce content, product photography, app design, product comp creation.' },
+        { label: 'Channels', text: 'Social, ecommerce (Amazon, Walmart, Target), app, retail.' },
+        { label: 'My Role', text: 'Design management and hands-on creative. Directed photoshoots and managed agency execution.' },
+        { label: 'Key Deliverables', text: 'Social playbook, ecommerce tiles, product comp creation for qualitative testing, creative development of app assets.' }
+      ],
+      gallery: ['[ Age Factor Social Assets ]', '[ Age Factor Ecommerce ]', '[ Age Factor Product Comps ]', '[ Age Factor App Screens ]']
+    },
+    iberogast: {
+      title: 'Iberogast',
+      role: 'Design Manager — U.S. Market Launch',
+      desc: 'Played a key role in bringing Iberogast to the U.S. market, directing the design strategy across web, social, ecommerce, and motion. Created the MOA (Mechanism of Action) animation, developed the social playbook, and managed ecommerce design execution — establishing the visual language for this established European brand\'s entry into North America.',
+      details: [
+        { label: 'Scope', text: 'Web design direction, MOA animation, social playbook, ecommerce management, lifestyle photography selection.' },
+        { label: 'Channels', text: 'Brand website, social, ecommerce, retail.' },
+        { label: 'My Role', text: 'Design direction and management. Led creative vision while managing agency partners on execution.' },
+        { label: 'Key Deliverables', text: 'Website design direction, animated MOA explainer, social content playbook, product renders, ecommerce assets.' }
+      ],
+      gallery: ['[ Iberogast Web Design ]', '[ Iberogast MOA Animation ]', '[ Iberogast Social Playbook ]', '[ Iberogast Ecommerce ]']
+    },
+    bold: {
+      title: 'Bold Breakthrough Tour',
+      role: 'Creative Lead — Campaign Identity',
+      desc: 'Developed the complete visual identity for the Bold Breakthrough Tour — a multi-year internal keynote and workshop series designed to engage colleagues and drive a culture of innovation across Consumer Health. Created the branding system, animated sizzlers, printed collateral, and directed venue setup. This work directly parallels the AI Proficiency Lead role: designing engaging experiences that shift how teams think and work.',
+      details: [
+        { label: 'Scope', text: 'Full campaign identity — logos, PPT templates, animated sizzlers, pop-up banners, decals, agenda design, nametags, sponsor posters, manifesto design.' },
+        { label: 'Events', text: 'Bold Activation Tour, Bold Breakthrough Tour (first in-person), Be Curious sessions. Three annual conferences.' },
+        { label: 'My Role', text: 'Creative lead. Designed identity system, directed 3 animated sizzlers, coordinated with printers, scoped venue and directed event setup.' },
+        { label: 'Why It Matters', text: 'Proved I can design programs that excite and engage diverse internal audiences — the exact skill set the AI Learning Lead role requires.' }
+      ],
+      gallery: ['[ Bold Tour Logo System ]', '[ Bold Event Photography ]', '[ Bold Venue Setup ]', '[ Bold Animated Sizzler ]'],
+      externalLink: 'https://www.michaelscrivana.com/marketingexcellence'
+    }
+  };
+
+  const modal = document.getElementById('projectModal');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(projectKey) {
+    const data = projectData[projectKey];
+    if (!data) return;
+
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalRole').textContent = data.role;
+    document.getElementById('modalDesc').textContent = data.desc;
+    document.getElementById('modalHero').textContent = '[ ' + data.title + ' — Hero Image ]';
+
+    // Details
+    const detailsEl = document.getElementById('modalDetails');
+    detailsEl.innerHTML = data.details.map(d =>
+      '<div class="modal-detail-block"><h4>' + d.label + '</h4><p>' + d.text + '</p></div>'
+    ).join('');
+
+    // External link
+    if (data.externalLink) {
+      detailsEl.innerHTML += '<div class="modal-detail-block" style="grid-column: span 2;"><a href="' + data.externalLink + '" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none;">View Full Project ↗</a></div>';
+    }
+
+    // Gallery
+    const galleryEl = document.getElementById('modalGallery');
+    galleryEl.innerHTML = data.gallery.map(g =>
+      '<div class="modal-gallery-item">' + g + '</div>'
+    ).join('');
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Click handlers
+  document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
+    item.addEventListener('click', (e) => {
+      // Don't open modal if clicking external link
+      if (e.target.closest('a')) return;
+      openModal(item.dataset.project);
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // ==========================================
+  // PORTFOLIO CAROUSEL
+  // ==========================================
+  const track = document.getElementById('carouselTrack');
+  const items = track.querySelectorAll('.portfolio-item');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  const dotsContainer = document.getElementById('carouselDots');
+  let currentSlide = 0;
+
+  function getVisibleCount() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function getMaxSlide() {
+    return Math.max(0, items.length - getVisibleCount());
+  }
+
+  function updateCarousel() {
+    const visible = getVisibleCount();
+    const gap = 16;
+    const itemWidth = (track.parentElement.offsetWidth - gap * (visible - 1)) / visible;
+
+    // Update item sizes
+    items.forEach(item => {
+      item.style.minWidth = itemWidth + 'px';
+      item.style.maxWidth = itemWidth + 'px';
+    });
+
+    const offset = currentSlide * (itemWidth + gap);
+    track.style.transform = 'translateX(-' + offset + 'px)';
+
+    // Update buttons
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide >= getMaxSlide();
+
+    // Update dots
+    const maxSlide = getMaxSlide();
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i <= maxSlide; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === currentSlide ? ' active' : '');
+      dot.addEventListener('click', () => { currentSlide = i; updateCarousel(); });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) { currentSlide--; updateCarousel(); }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < getMaxSlide()) { currentSlide++; updateCarousel(); }
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentSlide < getMaxSlide()) { currentSlide++; updateCarousel(); }
+      else if (diff < 0 && currentSlide > 0) { currentSlide--; updateCarousel(); }
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    currentSlide = Math.min(currentSlide, getMaxSlide());
+    updateCarousel();
+  });
+
+  updateCarousel();
+</script>
+
+</body>
+</html>

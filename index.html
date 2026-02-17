@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0E10">
 <title>Michael Scrivana — AI + Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,7 @@
     --section-gap: 140px;
 
     /* Dark by default */
+    color-scheme: dark;
     --bg-primary: #0E0E10;
     --bg-secondary: #18181B;
     --bg-inverted: #FAFAF8;
@@ -43,6 +44,7 @@
   }
 
   [data-theme="light"] {
+    color-scheme: light;
     --accent: #0047AB;
     --accent-light: #E8EFF8;
     --bg-primary: #FAFAF8;
@@ -63,8 +65,13 @@
     box-sizing: border-box;
   }
 
+  /* Force dark backgrounds on iOS Safari — prevents white bleed-through */
+  html, body, section, main {
+    background-color: var(--bg-primary);
+  }
+
   /* Smooth transitions for theme switching */
-  section, .portfolio-item, .mirafast-hero, .mirafast-stat,
+  html, section, .portfolio-item, .mirafast-hero, .mirafast-stat,
   .fit-row, .timeline-item, .divider, .about-me, nav,
   .portfolio-caption, .portfolio-thumb, .photo-placeholder {
     transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
@@ -73,6 +80,8 @@
   html {
     scroll-behavior: smooth;
     font-size: 16px;
+    background: var(--bg-primary);
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -82,6 +91,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
     transition: background 0.4s ease, color 0.4s ease;
   }
 
@@ -191,12 +201,107 @@
     color: var(--accent);
   }
 
+  /* Hamburger button */
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+    margin-right: 12px;
+    position: relative;
+    width: 24px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav-hamburger span:nth-child(1) { top: 2px; }
+  .nav-hamburger span:nth-child(2) { top: 9px; }
+  .nav-hamburger span:nth-child(3) { top: 16px; }
+
+  .nav-hamburger.active span:nth-child(1) {
+    top: 9px;
+    transform: rotate(45deg);
+  }
+
+  .nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-hamburger.active span:nth-child(3) {
+    top: 9px;
+    transform: rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: var(--bg-primary);
+    padding: 0 40px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    overflow-y: auto;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  .mobile-menu-links {
+    list-style: none;
+    padding: 32px 0;
+  }
+
+  .mobile-menu-links a {
+    display: block;
+    padding: 16px 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: color 0.2s ease;
+  }
+
+  .mobile-menu-links li:last-child a {
+    border-bottom: none;
+  }
+
+  .mobile-menu-links a:hover,
+  .mobile-menu-links a:active {
+    color: var(--accent);
+  }
+
   /* ============================================
      HERO
      ============================================ */
   .hero {
     padding: 160px 0 var(--section-gap);
     position: relative;
+    background: var(--bg-primary);
   }
 
   .hero-grid {
@@ -435,6 +540,7 @@
      ============================================ */
   .about-me {
     padding: var(--section-gap) 0;
+    background: var(--bg-primary);
   }
 
   .about-grid {
@@ -529,6 +635,27 @@
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: start;
+  }
+
+  /* One A Day card: 3-area layout for mobile reordering */
+  .project-card-oad {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .oad-header {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .oad-demo {
+    grid-column: 2;
+    grid-row: 1 / -1;
+  }
+
+  .oad-details {
+    grid-column: 1;
+    grid-row: 2;
   }
 
   .project-card:nth-child(even) {
@@ -810,8 +937,8 @@
     font-size: 0.68rem;
     letter-spacing: 0.04em;
     padding: 4px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(77, 143, 232, 0.3);
+    color: var(--accent);
     border-radius: 2px;
   }
 
@@ -874,7 +1001,22 @@
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 48px;
-    margin-bottom: 48px;
+    margin-bottom: 0;
+    align-items: start;
+  }
+
+  .mirafast-header .portfolio-thumb {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .mirafast-title {
@@ -1053,9 +1195,7 @@
   .mira-tab-number.fiber { color: var(--accent); }
   .mira-tab-number.fast { color: #E85D4D; }
   .mira-tab-number.combined {
-    background: linear-gradient(135deg, var(--accent), #E85D4D);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #4ADE80;
   }
 
   .mira-tab-detail {
@@ -1071,6 +1211,30 @@
     .growth-chart-wrap {
       padding: 20px 16px;
     }
+  }
+
+  .mira-meta-bar {
+    display: flex;
+    gap: 32px;
+    padding: 16px 0 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+  }
+
+  .mira-meta-item {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .mira-meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 10px;
   }
 
   @media (max-width: 900px) {
@@ -1180,6 +1344,7 @@
      ============================================ */
   .timeline {
     padding: var(--section-gap) 0;
+    background: var(--bg-primary);
   }
 
   .timeline-items {
@@ -1543,6 +1708,7 @@
      ============================================ */
   .game-section {
     padding: 80px 0;
+    background: var(--bg-primary);
   }
 
   .game-wrapper {
@@ -1622,6 +1788,29 @@
   /* ============================================
      SCROLL ANIMATIONS
      ============================================ */
+
+  /* Hero entrance — plays on load, not scroll */
+  @keyframes heroEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-anim {
+    opacity: 0;
+    animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-anim:nth-child(1) { animation-delay: 0.1s; }
+  .hero-anim:nth-child(2) { animation-delay: 0.3s; }
+  .hero-anim:nth-child(3) { animation-delay: 0.5s; }
+  .hero-anim:nth-child(4) { animation-delay: 0.75s; }
+
   .fade-in {
     opacity: 0;
     transform: translateY(24px);
@@ -1642,87 +1831,8 @@
   .stagger > .fade-in:nth-child(6) { transition-delay: 400ms; }
 
   /* ============================================
-      DPX CAROUSEL
-      ============================================ */
-  .dpx-carousel {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-  }
-
-  .dpx-carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-    height: 100%;
-  }
-
-  .dpx-carousel-slide {
-    flex: 0 0 100%;
-    height: 100%;
-  }
-
-  .dpx-carousel-controls {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    z-index: 2;
-  }
-
-  .dpx-carousel-btn {
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .dpx-carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-
-  .dpx-carousel-btn:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
-
-  .dpx-carousel-dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .dpx-carousel-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-
-  .dpx-carousel-dot.active {
-    background: #fff;
-    transform: scale(1.25);
-  }
-
-  /* ============================================
-      RESPONSIVE
-      ============================================ */
+     RESPONSIVE
+     ============================================ */
   @media (max-width: 900px) {
     :root {
       --section-gap: 96px;
@@ -1740,6 +1850,16 @@
     .project-card:nth-child(even) {
       direction: ltr;
     }
+
+    /* OAD mobile: title → demo → details */
+    .project-card-oad {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .oad-header { grid-column: 1; grid-row: auto; order: 1; }
+    .oad-demo   { grid-column: 1; grid-row: auto; order: 2; }
+    .oad-details { grid-column: 1; grid-row: auto; order: 3; }
 
     .portfolio-item {
       min-width: calc((100% - 16px) / 2);
@@ -1784,8 +1904,16 @@
       display: none;
     }
 
+    .nav-hamburger {
+      display: block;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+
     .theme-toggle {
-      margin-left: auto;
+      margin-left: 0;
     }
   }
 </style>
@@ -1805,6 +1933,11 @@
       <li><a href="#fit">Role Fit</a></li>
       <li><a href="#career">Career</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <div class="toggle-track">
         <div class="toggle-thumb">
@@ -1828,28 +1961,38 @@
   </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="mobile-menu-links">
+    <li><a href="#about-me" class="mobile-menu-link">About</a></li>
+    <li><a href="#ai" class="mobile-menu-link">AI Projects</a></li>
+    <li><a href="#portfolio" class="mobile-menu-link">Design Work</a></li>
+    <li><a href="#fit" class="mobile-menu-link">Role Fit</a></li>
+    <li><a href="#career" class="mobile-menu-link">Career</a></li>
+  </ul>
+</div>
+
 <!-- ============================================
      HERO
      ============================================ -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
-      <div class="fade-in">
+      <div class="hero-anim">
         <div class="hero-badge">Built with Claude — AI in action</div>
       </div>
-      <h1 class="hero-headline fade-in">
-        Where brand design<br>
-        meets <span class="accent-line">AI innovation</span>
+      <h1 class="hero-headline hero-anim">
+        I don't pitch AI adoption.<br>
+        I <span class="accent-line">demonstrate it.</span>
       </h1>
-      <div class="hero-meta fade-in">
+      <div class="hero-meta hero-anim">
         <p class="hero-description">
-          I'm a Brand Designer at Bayer Consumer Health applying for the 
-          <strong>AI Proficiency &amp; Learning Lead</strong> role. After 6 years 
-          directing design across 20+ brands, I'm building real AI systems that solve 
-          real business problems — and teaching others to do the same.
+          6 years at Bayer Consumer Health — designing brands, leading agencies, 
+          and delivering $100M+ in product revenue. Now building production AI systems, 
+          coaching teams on adoption, and embedding compliance into every workflow. 
+          This is my case for the <strong>AI Proficiency &amp; Learning Lead</strong> role.
         </p>
       </div>
-      <div class="hero-stats fade-in">
+      <div class="hero-stats hero-anim">
         <div class="stat">
           <span class="stat-number" data-count="6" data-suffix="+">0</span>
           <span class="stat-label">Years at Bayer</span>
@@ -1880,21 +2023,19 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-photo fade-in">
-        <img src="Img/1-MSportrait2023-1.jpg" alt="Michael Scrivana portrait" style="width: 100%; height: auto; display: block;">
+        <div class="photo-placeholder" id="about-img1">[ about-img1 · Profile Photo ]</div>
       </div>
       <div class="about-content fade-in">
         <span class="section-label">About Me</span>
         <h2 class="about-headline">I design brands for a living.<br>I build AI tools to make them better.</h2>
-        <!-- ALTERNATIVE A: "I design brands for a living. Now I'm building the AI to scale them." -->
-        <!-- ALTERNATIVE B: "I design brands for a living. AI is how I'll multiply the impact." -->
         <p class="about-text">
-          For the past 6 years at Bayer Consumer Health, I've directed creative across 20+ brands — from packaging and ecommerce to motion and brand systems. I know the work, the teams, and the constraints inside out.
+          For 6 years at Bayer Consumer Health, I've designed and managed over a dozen brands — packaging, ecommerce, web, motion, brand systems. I know the work, the teams, and the constraints inside out.
         </p>
         <p class="about-text">
-          On nights and weekends, I taught myself to code. I built local LLM deployments, experimented with APIs, and started shipping real AI tools that solve problems I see every day on the job. That curiosity turned into something bigger — I'm now 1 of 5 cross-functional AI representatives at Bayer, consulting Product Experience leadership on how AI can transform the way we work.
+          Local LLM deployments, API integrations, production-grade agents on Azure — I learn by building. That led to my selection as 1 of 5 cross-functional AI representatives on the Consumer Health Science Home team, where I partner with Product Development, Regulatory, and Medical to shape the division's AI roadmap and consult PX leadership on strategy.
         </p>
         <p class="about-text" style="color: var(--accent); font-weight: 500;">
-          This role is the convergence of everything I've been building toward.
+          This role isn't a pivot — it's the formalization of work I'm already doing.
         </p>
       </div>
     </div>
@@ -1909,43 +2050,19 @@
     <span class="section-label fade-in">01 — AI at Bayer</span>
     <h2 class="section-title fade-in">Building AI that works<br>for Consumer Health</h2>
     <p class="section-subtitle fade-in">
-      Not just experimenting — shipping real tools, training real teams, and proving 
-      AI's value to leadership with measurable results.
+      Building real prototypes, coaching peers on adoption, and turning AI from a 
+      buzzword into a workflow — one working demo at a time.
     </p>
 
     <div class="project-grid stagger">
 
       <!-- PROJECT 1: One A Day Agent -->
-      <div class="project-card fade-in">
-        <div>
+      <div class="project-card project-card-oad fade-in">
+        <div class="oad-header">
           <span class="project-number">01</span>
           <h3 class="project-title">One A Day — Orchestrated Design Review Agent</h3>
-          <div class="project-detail">
-            <div class="project-detail-label">Challenge</div>
-            <p>Design managers review hundreds of agency submissions for brand compliance — a manual, time-intensive process that limits strategic focus and creates bottlenecks across the portfolio.</p>
-          </div>
-          <div class="project-detail">
-            <div class="project-detail-label">Solution</div>
-            <p>Built an orchestrated AI agent on Azure with Claude. Agencies submit designs to a web app where the review agent scores submissions against brand guidelines with built-in compliance guardrails. The system is modular and designed to scale across all BCH brands.</p>
-          </div>
-          <div class="project-detail">
-            <div class="project-detail-label">Automation Vision</div>
-            <p>The endgame is full automation of executional volume — digital banners, social templates, ecommerce tiles — generated by AI with brand compliance baked in. Next phase: a generative design agent that pulls brand assets and creates compliant designs, freeing design managers from reviewing hundreds of executions so they can focus on strategic brand vision.</p>
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Azure</span>
-            <span class="tech-tag">Claude API</span>
-            <span class="tech-tag">VS Code</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">Brand Guardrails</span>
-            <span class="tech-tag">Automation</span>
-          </div>
-          <a href="#" class="github-link" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: opacity 0.2s ease;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            View on GitHub
-          </a>
         </div>
-        <div>
+        <div class="oad-demo">
           <div class="agent-demo" id="agentDemo">
             <div class="agent-demo-bar">
               <div class="agent-demo-dot"></div>
@@ -1990,9 +2107,35 @@
             <button class="agent-replay" id="agentReplay" onclick="runAgentDemo()">↻ Replay</button>
           </div>
           <div class="agent-screenshots">
-            <div class="agent-screenshot">[ Upload Interface ]</div>
-            <div class="agent-screenshot">[ Review Dashboard ]</div>
+            <div class="agent-screenshot" id="sec1-img1">[ sec1-img1 · Upload Interface ]</div>
+            <div class="agent-screenshot" id="sec1-img2">[ sec1-img2 · Review Dashboard ]</div>
           </div>
+        </div>
+        <div class="oad-details">
+          <div class="project-detail">
+            <div class="project-detail-label">Challenge</div>
+            <p>Thousands of agency submissions reviewed manually against brand guidelines every year — a bottleneck that pulls design managers away from strategic work.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Solution</div>
+            <p>Prototyping an orchestrated AI agent on Azure with Claude. Agencies submit designs through a web app; the agent scores them against brand guidelines with compliance guardrails built in. Modular architecture, designed to scale across all BCH brands.</p>
+          </div>
+          <div class="project-detail">
+            <div class="project-detail-label">Automation Vision</div>
+            <p>The roadmap: a generative design agent that pulls brand assets and produces compliant executions — banners, social templates, ecommerce tiles — so design managers can focus on brand vision instead of reviewing volume.</p>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">Claude API</span>
+            <span class="tech-tag">VS Code</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Brand Guardrails</span>
+            <span class="tech-tag">Automation</span>
+          </div>
+          <a href="#" class="github-link" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
         </div>
       </div>
 
@@ -2003,15 +2146,15 @@
           <h3 class="project-title">AI Strategy Consulting for Product Experience</h3>
           <div class="project-detail">
             <div class="project-detail-label">Context</div>
-            <p>As AI tools emerged, Product Experience leadership needed a grounded perspective — not hype, but an honest read on where AI is today, where it's heading, and how BCH can activate it. There was no formal role for this; the need surfaced organically.</p>
+            <p>PX leadership needed a grounded perspective on AI — not hype, but a practical read on what's real and what's relevant for Consumer Health. No formal role existed; I stepped into the gap.</p>
           </div>
           <div class="project-detail">
             <div class="project-detail-label">My Role</div>
-            <p>I became the informal AI advisor within PX — sharing what I was learning through hands-on building, presenting to leadership on practical AI applications, and helping the team separate signal from noise. Selected as 1 of 5 cross-functional representatives on Bayer's AI team, representing the entire Product Experience organization alongside Product Development, Regulatory, and Medical.</p>
+            <p>Informal AI advisor to PX leadership. Presenting strategy recommendations, demonstrating working prototypes, and helping the team separate signal from noise. Selected as PX's representative on the Consumer Health Science Home AI team.</p>
           </div>
           <div class="project-detail">
             <div class="project-detail-label">Approach</div>
-            <p>Lead by building, not by presenting slide decks. Shared AI efficiency techniques with colleagues through informal coaching and working sessions. Consulted leadership on where AI can realistically enhance design and other services — always grounded in what I'd actually tested and shipped.</p>
+            <p>Demos over decks. I coach peers through working sessions and informal knowledge shares — always grounded in what I've actually built and tested, not theoretical possibilities.</p>
           </div>
           <div class="tech-tags">
             <span class="tech-tag">AI Strategy</span>
@@ -2020,36 +2163,8 @@
             <span class="tech-tag">Change Management</span>
           </div>
         </div>
-        <div class="dpx-carousel">
-          <div class="dpx-carousel-track">
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v23.jpg" alt="DPX GenAI Example 1" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v28.jpg" alt="DPX GenAI Example 2" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v211.jpg" alt="DPX GenAI Example 3" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v214.jpg" alt="DPX GenAI Example 4" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v216.jpg" alt="DPX GenAI Example 5" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="dpx-carousel-slide">
-              <img src="Img/DPX-GenAI-030424-v218.jpg" alt="DPX GenAI Example 6" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-          </div>
-          <div class="dpx-carousel-controls">
-            <button class="dpx-carousel-btn dpx-carousel-prev" aria-label="Previous">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <div class="dpx-carousel-dots"></div>
-            <button class="dpx-carousel-btn dpx-carousel-next" aria-label="Next">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
+        <div class="project-image-placeholder" id="sec2-img1">
+          [ sec2-img1 · AI Team / Presentation Photo ]
         </div>
       </div>
 
@@ -2060,15 +2175,15 @@
           <h3 class="project-title">GenAI in Creative Workflows</h3>
           <div class="project-detail">
             <div class="project-detail-label">Challenge</div>
-            <p>Traditional creative development cycles — from concept exploration to photography direction to asset production — are time-intensive and limit the volume of ideas a team can explore.</p>
+            <p>Creative cycles from concept to production move slowly — limiting how many ideas a team can explore and how fast agencies can align on direction.</p>
           </div>
           <div class="project-detail">
             <div class="project-detail-label">Solution</div>
-            <p>Pioneered MidJourney as a production tool across BCH brands. Used it to develop photography style guides that aligned agency partners on creative direction, generated packaging concepts, key visuals, and ecommerce assets — both hands-on and directing agency partners to adopt AI into their workflows.</p>
+            <p>Introduced GenAI creative tools into production across BCH brands. Developed photography style guides that aligned agencies on creative direction before shoots. Generated packaging concepts, key visuals, and ecommerce assets — both hands-on and coaching agency partners to integrate AI into their own workflows.</p>
           </div>
           <div class="project-detail">
             <div class="project-detail-label">Impact</div>
-            <p>Dramatically accelerated creative ideation. Shortened the gap between vision and execution. Proved that GenAI can enhance — not replace — the creative process.</p>
+            <p>Compressed ideation timelines. Gave leadership more visual options faster. Established a repeatable model for AI-assisted creative that's now part of how PX works with agencies.</p>
           </div>
           <div class="tech-tags">
             <span class="tech-tag">MidJourney</span>
@@ -2077,8 +2192,8 @@
             <span class="tech-tag">Agency Management</span>
           </div>
         </div>
-        <div class="project-image-placeholder">
-          [ MidJourney Outputs / Style Guide Examples ]
+        <div class="project-image-placeholder" id="sec3-img1">
+          [ sec3-img1 · MidJourney Outputs / Style Guide Examples ]
         </div>
       </div>
 
@@ -2094,8 +2209,8 @@
     <span class="section-label fade-in">02 — Design Portfolio</span>
     <h2 class="section-title fade-in">6 years of brand work<br>across Consumer Health</h2>
     <p class="section-subtitle fade-in">
-      The domain expertise behind the AI vision. Deep knowledge of BCH brands, 
-      packaging systems, ecommerce, and cross-functional delivery.
+      This is the domain expertise behind the AI vision — and the reason I can 
+      build tools that actually fit how Consumer Health works.
     </p>
 
     <!-- MIRAFIBER + MIRAFAST HERO FEATURE -->
@@ -2104,31 +2219,31 @@
         <div>
           <span class="section-label" style="color: var(--accent);">Featured Project</span>
           <h3 class="mirafast-title">Two brands I designed.<br>$48M in sales. $67M projected.</h3>
-          <p class="mirafast-desc">I designed the brand identity and packaging for both MiraFIBER and MiraFAST — the two products driving essentially all of MiraLAX's brand growth. Built a modular design system with MiraFIBER, then replicated it at speed for MiraFAST — inception to design lock in 3 weeks.</p>
+          <p class="mirafast-desc">I led brand identity and packaging for both MiraFIBER and MiraFAST — the two products driving over half of MiraLAX's retail growth. Recreated the logo to be simpler and more impactful at shelf. Built a modular design system with MiraFIBER, then replicated it at speed for MiraFAST — inception to design lock in 3 weeks.</p>
         </div>
-        <div class="mirafast-role">
-          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Core Team</div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary);">Michael Scrivana, Monica O'Malley, JD English</p>
-          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; margin-top: 16px;">Services</div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary);">Brand Identity, Brand World, Packaging Innovation, Graphic Innovation, Graphic Business Protection</p>
-        </div>
+        <div class="portfolio-thumb" id="mira-img1" style="aspect-ratio: 4/3; min-height: 200px;">[ mira-img1 · MiraFAST / MiraFIBER Pack Design ]</div>
+      </div>
+
+      <div class="mira-meta-bar">
+        <div class="mira-meta-item"><span class="mira-meta-label">Core Team</span> Michael Scrivana, Monica O'Malley, JD English</div>
+        <div class="mira-meta-item"><span class="mira-meta-label">Services</span> Brand Identity, Brand World, Packaging Innovation, Graphic Innovation</div>
       </div>
 
       <!-- Product performance tabs -->
       <div class="mira-product-tabs">
         <div class="mira-tab">
           <div class="mira-tab-label fiber">MiraFIBER</div>
-          <div class="mira-tab-number fiber">$19M</div>
+          <div class="mira-tab-number fiber" data-count="19" data-suffix="M" data-prefix="$">$0</div>
           <div class="mira-tab-detail">2025 · projected $25M in 2026</div>
         </div>
         <div class="mira-tab">
           <div class="mira-tab-label fast">MiraFAST</div>
-          <div class="mira-tab-number fast">$18M</div>
+          <div class="mira-tab-number fast" data-count="18" data-suffix="M" data-prefix="$">$0</div>
           <div class="mira-tab-detail">2025 · projected $42M in 2026</div>
         </div>
         <div class="mira-tab">
           <div class="mira-tab-label combined">2026 Combined</div>
-          <div class="mira-tab-number combined">$67M</div>
+          <div class="mira-tab-number combined" data-count="67" data-suffix="M" data-prefix="$">$0</div>
           <div class="mira-tab-detail">projected · up from $37M in 2025</div>
         </div>
       </div>
@@ -2148,20 +2263,20 @@
 
       <div class="mirafast-stats-grid">
         <div class="mirafast-stat">
-          <div class="mirafast-stat-number">3rd</div>
+          <div class="mirafast-stat-number" data-count="3" data-suffix="rd" data-prefix="">0</div>
           <div class="mirafast-stat-label">Fastest scaling launch<br><span style="color: var(--text-muted);">in Digestive Health, past 5 years</span></div>
         </div>
         <div class="mirafast-stat">
-          <div class="mirafast-stat-number">54%</div>
+          <div class="mirafast-stat-number" data-count="54" data-suffix="%" data-prefix="">0</div>
           <div class="mirafast-stat-label">Of total MiraLAX brand<br><span style="color: var(--text-muted);">retail sales growth YTD 2025</span></div>
         </div>
         <div class="mirafast-stat">
-          <div class="mirafast-stat-number">81%</div>
+          <div class="mirafast-stat-number" data-count="81" data-suffix="%" data-prefix="">0</div>
           <div class="mirafast-stat-label">YoY combined growth<br><span style="color: var(--text-muted);">$37M in '25 → $67M projected '26</span></div>
         </div>
         <div class="mirafast-stat">
-          <div class="mirafast-stat-number">3 wks</div>
-          <div class="mirafast-stat-label">MiraFAST design sprint<br><span style="color: var(--text-muted);">inception to design lock</span></div>
+          <div class="mirafast-stat-number" data-count="115" data-suffix="M+" data-prefix="$">$0</div>
+          <div class="mirafast-stat-label">Total projected value<br><span style="color: var(--text-muted);">cumulative since launch through '26</span></div>
         </div>
       </div>
 
@@ -2179,11 +2294,6 @@
           <strong>2026</strong> expanded distribution — Kids, Club, count sizes
         </div>
       </div>
-
-      <div class="mirafast-images">
-        <img src="Img/DPX-GenAI-030424-v23.jpg" alt="MiraFAST Pack Design" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        <img src="Img/DPX-GenAI-030424-v28.jpg" alt="MiraFAST Brand World" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-      </div>
     </div>
 
     <!-- PX PLATFORM FEATURE -->
@@ -2193,73 +2303,20 @@
           <span class="section-label" style="color: var(--accent);">Featured Project</span>
           <h3 class="mirafast-title">PX Platform: Department Website</h3>
           <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-top: 12px; max-width: 640px;">
-            Designed and developed a digital platform for the Product Experience department, showcasing the full breadth of PX's work — from packaging and brand identity to ecommerce and innovation. Built to improve internal visibility, streamline stakeholder engagement, and give PX a cohesive digital presence.
+            Designed and built a digital platform for the Product Experience department — a single destination for PX's capabilities, work, and processes. The same instinct that drives this project drives the AI work: make complex information accessible and useful for the people who need it.
           </p>
+          <a href="https://www.px.int.bayer.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">Visit PX Platform ↗</a>
         </div>
-        <div class="mirafast-role">
-          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Role</div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary);">Design & Development Lead</p>
-          <div class="project-detail-label" style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; margin-top: 16px;">Services</div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary);">Web Design, UI/UX, Content Architecture, Frontend Development</p>
-        </div>
+        <div class="portfolio-thumb" id="px-img1" style="aspect-ratio: 4/3; min-height: 200px;">[ px-img1 · PX Platform — Homepage ]</div>
       </div>
 
-      <div class="mirafast-images">
-        <img src="Img/DPX-GenAI-030424-v211.jpg" alt="PX Platform Homepage" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        <img src="Img/DPX-GenAI-030424-v214.jpg" alt="PX Platform Project Detail" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      <div class="mira-meta-bar">
+        <div class="mira-meta-item"><span class="mira-meta-label">Role</span> Design & Development Lead</div>
+        <div class="mira-meta-item"><span class="mira-meta-label">Services</span> Web Design, UI/UX, Content Architecture, Frontend Development</div>
       </div>
     </div>
 
-    <!-- PORTFOLIO CAROUSEL -->
-    <div class="carousel-wrapper fade-in" style="margin-top: 48px;">
-      <div class="carousel-track" id="carouselTrack">
-
-        <div class="portfolio-item" data-project="oad">
-          <img src="Img/DPX-GenAI-030424-v216.jpg" alt="OAD Brand Platform" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="portfolio-caption">
-            <h3>OAD Brand Platform</h3>
-            <p>Led interim platform rollout across all channels. Digital brandbook, 700+ renders, animations.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-item" data-project="agefactor">
-          <img src="Img/DPX-GenAI-030424-v218.jpg" alt="Age Factor Launch" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="portfolio-caption">
-            <h3>Age Factor</h3>
-            <p>End-to-end brand launch — social, ecomm, photoshoot direction, app assets.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-item" data-project="iberogast">
-          <img src="Img/MiraFAST_Endcard_White.jpg" alt="Iberogast" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="portfolio-caption">
-            <h3>Iberogast</h3>
-            <p>Web direction, MOA animation, social playbook, ecommerce management.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-item" data-project="bold">
-          <img src="Img/OAD_VISID_Toolkit_Logos_RGB_Women 1.jpg" alt="Bold Activation" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          <div class="portfolio-caption">
-            <h3>Bold Breakthrough Tour</h3>
-            <p>Marketing identity for an internal keynote/workshop series to engage colleagues and drive innovation.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="carousel-dots" id="carouselDots"></div>
-        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 32px;">
+    <div style="text-align: center; margin-top: 48px;">
       <a href="https://www.michaelscrivana.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">View All Projects ↗</a>
     </div>
 
@@ -2292,7 +2349,7 @@
 
       <div class="fit-card fade-in">
         <div class="fit-card-need">Build AI proficiency program</div>
-        <div class="fit-card-have">Built a Design Training Module across Consumer Health, making a complex discipline practical for non-design teams. Same muscle, different domain.</div>
+        <div class="fit-card-have">Helped build a Design Training Module for Consumer Health — translating a complex discipline into practical guidance for non-design teams. Same approach this role requires, applied to AI.</div>
       </div>
 
       <div class="fit-card fade-in">
@@ -2302,22 +2359,27 @@
 
       <div class="fit-card fade-in">
         <div class="fit-card-need">Embed compliance as guardrails</div>
-        <div class="fit-card-have">Brand compliance scoring built into the One A Day agent. 6 years managing standards across 20+ SKU families.</div>
+        <div class="fit-card-have">Compliance isn't a gate — it's architecture. Brand guardrails are coded directly into the One A Day agent, turning 6 years of standards expertise into automated, scalable enforcement.</div>
       </div>
 
       <div class="fit-card fade-in">
         <div class="fit-card-need">Partner cross-functionally</div>
-        <div class="fit-card-have">1 of 5 AI team reps alongside Product Dev, Regulatory, and Medical. Regular AI strategy consulting with PX leadership.</div>
+        <div class="fit-card-have">Selected to represent Product Experience on Bayer's Science Home 5-person AI team — bridging Design, Product Development, Regulatory, and Medical to shape the division's AI roadmap.</div>
       </div>
 
       <div class="fit-card fade-in">
         <div class="fit-card-need">Track adoption & impact</div>
-        <div class="fit-card-have">One A Day generates quantifiable compliance scores. 6 years making complex data visual and actionable for leadership.</div>
+        <div class="fit-card-have">The One A Day agent generates quantifiable compliance scores per submission. Measuring impact isn't an afterthought — it's built into the tool.</div>
       </div>
 
       <div class="fit-card fade-in">
         <div class="fit-card-need">Share wins that inspire</div>
-        <div class="fit-card-have">This website — built with Claude. Pioneered GenAI in DPX. Every tool I've built has been shared to pull others in.</div>
+        <div class="fit-card-have">This website — Claude, VS Code, shipped. Introduced GenAI creative tools across PX. Adoption starts when people see something working, not when they read about it.
+          <a href="https://github.com/MichaelScrivana/ms-porfolio-1/tree/main" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Repo
+          </a>
+        </div>
       </div>
 
     </div>
@@ -2340,9 +2402,9 @@
           <h3>Bayer Consumer Health</h3>
           <div class="role">Brand Designer & AI Strategy Lead — Whippany, NJ</div>
           <p><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">AI Leadership & Enablement</strong></p>
-          <p style="margin-top: 8px;">Selected as 1 of 5 cross-functional AI team representatives, advising Product Experience leadership on AI strategy. Architecting a modular design review agent on Azure with Claude that automates agency submission scoring against brand guidelines. Coaching peers on practical AI adoption — from MidJourney-driven photography direction to generative ecommerce workflows. Embedding brand compliance guardrails directly into AI-powered tools. Self-taught through local LLM deployments, Azure infrastructure, and AI/ML courses.</p>
+          <p style="margin-top: 8px;">PX representative on Bayer's Consumer Health Science Home AI team. Consulting leadership on AI strategy, prototyping production tools on Azure with Claude, and coaching peers on practical adoption. Building compliance directly into AI-powered workflows.</p>
           <p style="margin-top: 16px;"><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">Brand Design & Creative Leadership</strong></p>
-          <p style="margin-top: 8px;">Developed brand identity systems across digital and physical channels for 20+ consumer health brands. Led end-to-end package design — collaborating with printers and production teams on printability, color integrity, and visual consistency. Designed the MiraFAST identity in a 3-week sprint, contributing to $14M+ in retail sales. Produced 700+ product renders for GS1 syndication. Directed photoshoots, mentored design teams and external agencies, and led design thinking workshops.</p>
+          <p style="margin-top: 8px;">Led brand identity and package design across a dozen+ consumer health brands. Designed MiraFAST in a 3-week sprint and built the MiraFIBER system it scaled from — $37M combined in 2025, $67M projected for 2026. Produced 700+ product renders for GS1 syndication. Directed photoshoots, managed agency partners, and led design thinking workshops across the organization.</p>
         </div>
       </div>
       <div class="timeline-item fade-in">
@@ -2389,11 +2451,13 @@
       <span class="section-label" style="margin-bottom: 16px;">References</span>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px;">
         <div>
-          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px;">Chris Padain</h3>
+          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Chris Padain</h3>
+          <div style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">Head of Product Experience</div>
           <a href="mailto:christopher.padain@bayer.com" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--accent); text-decoration: none;">christopher.padain@bayer.com</a>
         </div>
         <div>
-          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 4px;">Beth Harlor</h3>
+          <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Beth Harlor</h3>
+          <div style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">Head of Design</div>
           <a href="mailto:beth.harlor@bayer.com" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--accent); text-decoration: none;">beth.harlor@bayer.com</a>
         </div>
       </div>
@@ -2465,8 +2529,40 @@
   toggle.addEventListener('click', () => {
     const html = document.documentElement;
     const isLight = html.getAttribute('data-theme') === 'light';
-    html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    const newTheme = isLight ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    // Sync browser color-scheme for iOS Safari
+    var csMeta = document.querySelector('meta[name="color-scheme"]');
+    if (csMeta) csMeta.setAttribute('content', newTheme);
+    var tcMeta = document.querySelector('meta[name="theme-color"]');
+    if (tcMeta) tcMeta.setAttribute('content', newTheme === 'dark' ? '#0E0E10' : '#FAFAF8');
   });
+
+  // ==========================================
+  // HAMBURGER MENU
+  // ==========================================
+  (function() {
+    var hamburger = document.getElementById('navHamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu when a link is tapped
+    var menuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+    menuLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  })();
 
   // ==========================================
   // SCROLL ANIMATIONS
@@ -2555,11 +2651,11 @@
   })();
 
   // ==========================================
-  // STAT COUNT-UP ANIMATION
+  // STAT COUNT-UP ANIMATION (universal)
   // ==========================================
   (function() {
-    const statEls = document.querySelectorAll('.stat-number[data-count]');
-    if (!statEls.length) return;
+    var allCountEls = document.querySelectorAll('[data-count]');
+    if (!allCountEls.length) return;
 
     function easeOutExpo(t) {
       return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
@@ -2569,54 +2665,61 @@
       if (el._counted) return;
       el._counted = true;
 
-      const target = parseInt(el.getAttribute('data-count'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      const prefix = el.getAttribute('data-prefix');
-      // Default prefix is '$' for the $100M stat, '' for others
-      const pre = prefix !== null ? prefix : (suffix.includes('M') ? '$' : '');
-      const duration = 2000;
-      const start = performance.now();
-      const useCommas = target >= 1000;
+      var target = parseInt(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var prefix = el.getAttribute('data-prefix');
+      // Default prefix: '$' if suffix contains 'M', '' otherwise
+      var pre = prefix !== null ? prefix : (suffix.indexOf('M') !== -1 ? '$' : '');
+      var duration = 1800;
+      var start = performance.now();
+      var useCommas = target >= 1000;
 
       function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeOutExpo(progress);
-        const current = Math.round(eased * target);
-        const formatted = useCommas ? current.toLocaleString() : current;
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutExpo(progress);
+        var current = Math.round(eased * target);
+        var formatted = useCommas ? current.toLocaleString() : current;
         el.textContent = pre + formatted + suffix;
-
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        }
+        if (progress < 1) requestAnimationFrame(update);
       }
 
       requestAnimationFrame(update);
     }
 
-    const statObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+    // Group countable elements by their nearest section-level parent
+    // and observe each group independently
+    var containers = [];
+    allCountEls.forEach(function(el) {
+      // Walk up to find a suitable container
+      var parent = el.closest('.hero-stats, .mira-product-tabs, .mirafast-stats-grid');
+      if (parent && containers.indexOf(parent) === -1) {
+        containers.push(parent);
+      }
+    });
+
+    var countObserver = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            // Stagger each stat slightly
-            const stats = entry.target.querySelectorAll('.stat-number[data-count]');
-            stats.forEach((el, i) => {
-              setTimeout(() => animateCount(el), i * 150);
+            var els = entry.target.querySelectorAll('[data-count]');
+            els.forEach(function(el, i) {
+              setTimeout(function() { animateCount(el); }, i * 150);
             });
-            statObserver.unobserve(entry.target);
+            countObserver.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.3 }
     );
 
-    const statsContainer = document.querySelector('.hero-stats');
-    if (statsContainer) statObserver.observe(statsContainer);
+    containers.forEach(function(c) { countObserver.observe(c); });
   })();
 
   // ==========================================
+
   // ==========================================
-  // GROWTH CHART
+  // GROWTH CHART (animated)
   // ==========================================
   (function() {
     const fiberData = [
@@ -2648,13 +2751,13 @@
       { date: '12-28-25', val: 2215333 }, { date: '01-25-26', val: 2649231 }
     ];
 
-    // 2026 projections — quarterly (brand team: FIBER $25M, FAST $42M)
-    const projDates = ['04-26', '07-26', '10-26', '12-26'];
-    const fiberProj = [
+    // 2026 projections (brand team: FIBER $25M, FAST $42M)
+    var projDates = ['04-26', '07-26', '10-26', '12-26'];
+    var fiberProj = [
       { date: '04-26', val: 1850000 }, { date: '07-26', val: 1950000 },
       { date: '10-26', val: 1950000 }, { date: '12-26', val: 2000000 }
     ];
-    const fastProj = [
+    var fastProj = [
       { date: '04-26', val: 2900000 }, { date: '07-26', val: 3300000 },
       { date: '10-26', val: 3500000 }, { date: '12-26', val: 3600000 }
     ];
@@ -2669,6 +2772,13 @@
     const maxVal = 3500000;
     const gpad = { top: 20, right: 16, bottom: 44, left: 58 };
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    // Animation state
+    var animProgress = 0;   // 0 to 1 for actuals
+    var projProgress = 0;   // 0 to 1 for projections
+    var animStarted = false;
+    var animDone = false;
+    var animFrame = null;
 
     function resizeGC() {
       var rect = gc.parentElement.getBoundingClientRect();
@@ -2686,119 +2796,202 @@
     function gX(i) { return gpad.left + (i / (allDates.length - 1)) * (gc._w - gpad.left - gpad.right); }
     function gY(v) { return gpad.top + (1 - v / maxVal) * (gc._h - gpad.top - gpad.bottom); }
 
-    function drawGLine(data, color) {
-      gctx.save();
-      gctx.globalAlpha = 0.08;
-      gctx.fillStyle = color;
-      gctx.beginPath();
-      var started = false, lastX;
+    // Easing
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    // Get points array with pixel coords for a dataset
+    function getPoints(data) {
+      var pts = [];
       for (var i = 0; i < data.length; i++) {
         var idx = allDates.indexOf(data[i].date);
         if (idx === -1) continue;
-        var x = gX(idx), y = gY(data[i].val);
-        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
-        lastX = x;
+        pts.push({ x: gX(idx), y: gY(data[i].val), val: data[i].val, date: data[i].date });
       }
-      gctx.lineTo(lastX, gY(0));
-      gctx.lineTo(gX(allDates.indexOf(data[0].date)), gY(0));
+      return pts;
+    }
+
+    // Get total path length for a set of points
+    function pathLength(pts) {
+      var len = 0;
+      for (var i = 1; i < pts.length; i++) {
+        var dx = pts[i].x - pts[i-1].x;
+        var dy = pts[i].y - pts[i-1].y;
+        len += Math.sqrt(dx*dx + dy*dy);
+      }
+      return len;
+    }
+
+    // Get point along path at distance d
+    function pointAtDistance(pts, d) {
+      var traveled = 0;
+      for (var i = 1; i < pts.length; i++) {
+        var dx = pts[i].x - pts[i-1].x;
+        var dy = pts[i].y - pts[i-1].y;
+        var segLen = Math.sqrt(dx*dx + dy*dy);
+        if (traveled + segLen >= d) {
+          var t = (d - traveled) / segLen;
+          return { x: pts[i-1].x + dx * t, y: pts[i-1].y + dy * t, seg: i };
+        }
+        traveled += segLen;
+      }
+      return pts[pts.length - 1];
+    }
+
+    // Draw a partial line + area up to a given fraction of total path
+    function drawAnimatedLine(data, color, frac) {
+      if (frac <= 0) return;
+      var pts = getPoints(data);
+      if (pts.length < 2) return;
+      var total = pathLength(pts);
+      var drawLen = total * Math.min(frac, 1);
+      var endPt = pointAtDistance(pts, drawLen);
+
+      // Determine how many full segments + partial
+      var traveled = 0;
+      var drawPts = [pts[0]];
+      for (var i = 1; i < pts.length; i++) {
+        var dx = pts[i].x - pts[i-1].x;
+        var dy = pts[i].y - pts[i-1].y;
+        var segLen = Math.sqrt(dx*dx + dy*dy);
+        if (traveled + segLen <= drawLen) {
+          drawPts.push(pts[i]);
+          traveled += segLen;
+        } else {
+          drawPts.push(endPt);
+          break;
+        }
+      }
+
+      // Area fill
+      gctx.save();
+      gctx.globalAlpha = 0.08 * Math.min(frac * 2, 1); // fade in
+      gctx.fillStyle = color;
+      gctx.beginPath();
+      gctx.moveTo(drawPts[0].x, drawPts[0].y);
+      for (var i = 1; i < drawPts.length; i++) {
+        gctx.lineTo(drawPts[i].x, drawPts[i].y);
+      }
+      gctx.lineTo(drawPts[drawPts.length-1].x, gY(0));
+      gctx.lineTo(drawPts[0].x, gY(0));
       gctx.closePath();
       gctx.fill();
       gctx.restore();
 
+      // Line
       gctx.beginPath();
       gctx.strokeStyle = color;
       gctx.lineWidth = 2.5;
       gctx.lineJoin = 'round';
       gctx.lineCap = 'round';
-      started = false;
-      for (var i = 0; i < data.length; i++) {
-        var idx = allDates.indexOf(data[i].date);
-        if (idx === -1) continue;
-        var x = gX(idx), y = gY(data[i].val);
-        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+      gctx.moveTo(drawPts[0].x, drawPts[0].y);
+      for (var i = 1; i < drawPts.length; i++) {
+        gctx.lineTo(drawPts[i].x, drawPts[i].y);
       }
       gctx.stroke();
 
-      var last = data[data.length - 1];
-      var li = allDates.indexOf(last.date);
-      var lx = gX(li), ly = gY(last.val);
+      // Moving head dot
+      var last = drawPts[drawPts.length - 1];
       gctx.beginPath();
-      gctx.arc(lx, ly, 4, 0, Math.PI * 2);
+      gctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
       gctx.fillStyle = color;
       gctx.fill();
+
+      // Glow ring on head (pulses when drawing, static when done)
       gctx.save();
       gctx.beginPath();
-      gctx.arc(lx, ly, 7, 0, Math.PI * 2);
+      var glowR = frac >= 1 ? 7 : 5 + Math.sin(performance.now() / 200) * 2;
+      gctx.arc(last.x, last.y, glowR, 0, Math.PI * 2);
       gctx.strokeStyle = color;
-      gctx.globalAlpha = 0.3;
+      gctx.globalAlpha = frac >= 1 ? 0.3 : 0.4;
       gctx.lineWidth = 2;
       gctx.stroke();
       gctx.restore();
     }
 
-    function drawProjection(actualData, projData, color) {
+    // Draw projection with animation
+    function drawAnimatedProjection(actualData, projData, color, frac) {
+      if (frac <= 0) return;
       var lastActual = actualData[actualData.length - 1];
-      var points = [lastActual].concat(projData);
+      var allProjPts = [lastActual].concat(projData);
+      var pts = getPoints(allProjPts);
+      if (pts.length < 2) return;
+
+      var total = pathLength(pts);
+      var drawLen = total * Math.min(frac, 1);
+
+      var traveled = 0;
+      var drawPts = [pts[0]];
+      for (var i = 1; i < pts.length; i++) {
+        var dx = pts[i].x - pts[i-1].x;
+        var dy = pts[i].y - pts[i-1].y;
+        var segLen = Math.sqrt(dx*dx + dy*dy);
+        if (traveled + segLen <= drawLen) {
+          drawPts.push(pts[i]);
+          traveled += segLen;
+        } else {
+          var endPt = pointAtDistance(pts, drawLen);
+          drawPts.push(endPt);
+          break;
+        }
+      }
+
       gctx.save();
+      // Dashed line
       gctx.setLineDash([6, 4]);
       gctx.strokeStyle = color;
-      gctx.globalAlpha = 0.5;
+      gctx.globalAlpha = 0.5 * Math.min(frac * 2, 1);
       gctx.lineWidth = 2;
       gctx.lineJoin = 'round';
       gctx.beginPath();
-      var started = false;
-      for (var i = 0; i < points.length; i++) {
-        var idx = allDates.indexOf(points[i].date);
-        if (idx === -1) continue;
-        var x = gX(idx), y = gY(points[i].val);
-        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
+      gctx.moveTo(drawPts[0].x, drawPts[0].y);
+      for (var i = 1; i < drawPts.length; i++) {
+        gctx.lineTo(drawPts[i].x, drawPts[i].y);
       }
       gctx.stroke();
       gctx.setLineDash([]);
-      gctx.globalAlpha = 0.04;
+
+      // Area
+      gctx.globalAlpha = 0.04 * Math.min(frac * 2, 1);
       gctx.fillStyle = color;
       gctx.beginPath();
-      started = false;
-      var lastX;
-      for (var i = 0; i < points.length; i++) {
-        var idx = allDates.indexOf(points[i].date);
-        if (idx === -1) continue;
-        var x = gX(idx), y = gY(points[i].val);
-        if (!started) { gctx.moveTo(x, y); started = true; } else gctx.lineTo(x, y);
-        lastX = x;
+      gctx.moveTo(drawPts[0].x, drawPts[0].y);
+      for (var i = 1; i < drawPts.length; i++) {
+        gctx.lineTo(drawPts[i].x, drawPts[i].y);
       }
-      gctx.lineTo(lastX, gY(0));
-      gctx.lineTo(gX(allDates.indexOf(points[0].date)), gY(0));
+      gctx.lineTo(drawPts[drawPts.length-1].x, gY(0));
+      gctx.lineTo(drawPts[0].x, gY(0));
       gctx.closePath();
       gctx.fill();
 
-      var last = projData[projData.length - 1];
-      var li = allDates.indexOf(last.date);
-      var lx = gX(li), ly = gY(last.val);
-      gctx.globalAlpha = 0.5;
-      gctx.beginPath();
-      gctx.arc(lx, ly, 4, 0, Math.PI * 2);
-      gctx.strokeStyle = color;
-      gctx.lineWidth = 2;
-      gctx.stroke();
+      // End dot (hollow) only when fully drawn
+      if (frac >= 1) {
+        var last = pts[pts.length - 1];
+        gctx.globalAlpha = 0.5;
+        gctx.beginPath();
+        gctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
+        gctx.strokeStyle = color;
+        gctx.lineWidth = 2;
+        gctx.stroke();
+      }
       gctx.restore();
     }
 
-    function drawGChart() {
+    // Static elements (grid, labels, annotations)
+    function drawStatic(showProjZone) {
       gctx.clearRect(0, 0, gc._w, gc._h);
 
-      // Projection zone
-      if (projStartIdx !== -1) {
+      // Projection zone (fades in)
+      if (projStartIdx !== -1 && showProjZone) {
         var px = gX(projStartIdx) - 20;
         gctx.fillStyle = 'rgba(255,255,255,0.015)';
         gctx.fillRect(px, gpad.top, gc._w - gpad.right - px, gc._h - gpad.top - gpad.bottom);
-        gctx.fillStyle = 'rgba(255,255,255,0.2)';
+        gctx.fillStyle = 'rgba(255,255,255,' + (0.2 * showProjZone) + ')';
         gctx.font = '600 8px "IBM Plex Mono", monospace';
         gctx.textAlign = 'left';
         gctx.fillText('2026 PROJECTION', px + 8, gpad.top + 14);
         gctx.save();
         gctx.setLineDash([3, 3]);
-        gctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        gctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * showProjZone) + ')';
         gctx.lineWidth = 1;
         gctx.beginPath();
         gctx.moveTo(px, gpad.top);
@@ -2836,30 +3029,78 @@
         }
       }
 
-      // MiraFAST launch line
+      // MiraFAST launch line (appears when animation reaches that point)
       var fli = allDates.indexOf('03-23-25');
-      if (fli !== -1) {
+      var fliNorm = fli / (fiberData.length - 1); // normalized position within actuals
+      if (fli !== -1 && animProgress >= fliNorm) {
         var ax = gX(fli);
+        var fadeIn = Math.min((animProgress - fliNorm) / 0.05, 1);
         gctx.save();
         gctx.setLineDash([3, 3]);
-        gctx.strokeStyle = 'rgba(232, 93, 77, 0.35)';
+        gctx.strokeStyle = 'rgba(232, 93, 77,' + (0.35 * fadeIn) + ')';
         gctx.lineWidth = 1;
         gctx.beginPath();
         gctx.moveTo(ax, gpad.top);
         gctx.lineTo(ax, gc._h - gpad.bottom);
         gctx.stroke();
         gctx.setLineDash([]);
-        gctx.fillStyle = 'rgba(232, 93, 77, 0.6)';
+        gctx.fillStyle = 'rgba(232, 93, 77,' + (0.6 * fadeIn) + ')';
         gctx.font = '600 8px "IBM Plex Mono", monospace';
         gctx.textAlign = 'center';
         gctx.fillText('MIRAFAST LAUNCH', ax, gpad.top - 3);
         gctx.restore();
       }
+    }
 
-      drawGLine(fiberData, '#4D8FE8');
-      drawGLine(fastData, '#E85D4D');
-      drawProjection(fiberData, fiberProj, '#4D8FE8');
-      drawProjection(fastData, fastProj, '#E85D4D');
+    // Main animation loop
+    var animStart = null;
+    var ACTUAL_DUR = 2500;  // ms for actual lines
+    var PROJ_DUR = 1000;    // ms for projections
+    var PROJ_DELAY = 400;   // pause between actuals finishing and projections starting
+
+    function animate(timestamp) {
+      if (!animStart) animStart = timestamp;
+      var elapsed = timestamp - animStart;
+
+      // Phase 1: draw actual lines
+      animProgress = easeOutCubic(Math.min(elapsed / ACTUAL_DUR, 1));
+
+      // Phase 2: draw projections (starts after actuals + delay)
+      var projElapsed = elapsed - ACTUAL_DUR - PROJ_DELAY;
+      projProgress = projElapsed > 0 ? easeOutCubic(Math.min(projElapsed / PROJ_DUR, 1)) : 0;
+
+      var projZoneOpacity = projElapsed > 0 ? Math.min(projElapsed / 300, 1) : 0;
+
+      // Draw frame
+      drawStatic(projZoneOpacity);
+      drawAnimatedLine(fiberData, '#4D8FE8', animProgress);
+      drawAnimatedLine(fastData, '#E85D4D', animProgress);
+
+      if (projProgress > 0) {
+        drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', projProgress);
+        drawAnimatedProjection(fastData, fastProj, '#E85D4D', projProgress);
+      }
+
+      if (elapsed < ACTUAL_DUR + PROJ_DELAY + PROJ_DUR) {
+        animFrame = requestAnimationFrame(animate);
+      } else {
+        animDone = true;
+      }
+    }
+
+    function startAnimation() {
+      if (animStarted) return;
+      animStarted = true;
+      animStart = null;
+      animProgress = 0;
+      projProgress = 0;
+      animDone = false;
+      animFrame = requestAnimationFrame(animate);
+    }
+
+    // Draw static grid immediately (so it's not blank before scroll)
+    function drawInitial() {
+      drawStatic(0);
     }
 
     // Tooltip
@@ -2869,6 +3110,7 @@
     gc.parentElement.appendChild(tip);
 
     gc.addEventListener('mousemove', function(e) {
+      if (!animDone) return; // no tooltip during animation
       var rect = gc.getBoundingClientRect();
       var mx = e.clientX - rect.left;
       var ci = 0, cd = Infinity;
@@ -2899,9 +3141,36 @@
 
     gc.addEventListener('mouseleave', function() { tip.style.opacity = '0'; });
 
+    // Init + trigger on scroll
     resizeGC();
-    drawGChart();
-    window.addEventListener('resize', function() { resizeGC(); drawGChart(); });
+    drawInitial();
+
+    var chartObserver = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            startAnimation();
+            chartObserver.unobserve(gc);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    chartObserver.observe(gc);
+
+    // On resize, redraw final state if animation done
+    window.addEventListener('resize', function() {
+      resizeGC();
+      if (animDone) {
+        drawStatic(1);
+        drawAnimatedLine(fiberData, '#4D8FE8', 1);
+        drawAnimatedLine(fastData, '#E85D4D', 1);
+        drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', 1);
+        drawAnimatedProjection(fastData, fastProj, '#E85D4D', 1);
+      } else {
+        drawInitial();
+      }
+    });
   })();
 
   // BRAND RUNNER GAME
@@ -3267,100 +3536,6 @@
   resizeCanvas();
 
   // ==========================================
-  // DPX CAROUSEL
-  // ==========================================
-  const dpxCarousel = document.querySelector('.dpx-carousel');
-  const dpxTrack = dpxCarousel.querySelector('.dpx-carousel-track');
-  const dpxSlides = dpxTrack.querySelectorAll('.dpx-carousel-slide');
-  const dpxPrevBtn = dpxCarousel.querySelector('.dpx-carousel-prev');
-  const dpxNextBtn = dpxCarousel.querySelector('.dpx-carousel-next');
-  const dpxDotsContainer = dpxCarousel.querySelector('.dpx-carousel-dots');
-  let dpxCurrentSlide = 0;
-  let dpxAutoplayInterval;
-
-  // Create dots
-  dpxSlides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'dpx-carousel-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => {
-      dpxCurrentSlide = i;
-      updateDpxCarousel();
-      resetDpxAutoplay();
-    });
-    dpxDotsContainer.appendChild(dot);
-  });
-
-  function updateDpxCarousel() {
-    // Update track position
-    dpxTrack.style.transform = `translateX(-${dpxCurrentSlide * 100}%)`;
-
-    // Update dots
-    dpxCarousel.querySelectorAll('.dpx-carousel-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === dpxCurrentSlide);
-    });
-
-    // Update buttons
-    dpxPrevBtn.disabled = dpxCurrentSlide === 0;
-    dpxNextBtn.disabled = dpxCurrentSlide === dpxSlides.length - 1;
-  }
-
-  function resetDpxAutoplay() {
-    clearInterval(dpxAutoplayInterval);
-    dpxAutoplayInterval = setInterval(nextDpxSlide, 5000);
-  }
-
-  function nextDpxSlide() {
-    if (dpxCurrentSlide < dpxSlides.length - 1) {
-      dpxCurrentSlide++;
-      updateDpxCarousel();
-    } else {
-      dpxCurrentSlide = 0;
-      updateDpxCarousel();
-    }
-  }
-
-  dpxPrevBtn.addEventListener('click', () => {
-    if (dpxCurrentSlide > 0) {
-      dpxCurrentSlide--;
-      updateDpxCarousel();
-      resetDpxAutoplay();
-    }
-  });
-
-  dpxNextBtn.addEventListener('click', () => {
-    if (dpxCurrentSlide < dpxSlides.length - 1) {
-      dpxCurrentSlide++;
-      updateDpxCarousel();
-      resetDpxAutoplay();
-    }
-  });
-
-  // Touch/swipe support
-  let dpxTouchStartX = 0;
-  let dpxTouchEndX = 0;
-  dpxTrack.addEventListener('touchstart', (e) => {
-    dpxTouchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  dpxTrack.addEventListener('touchend', (e) => {
-    dpxTouchEndX = e.changedTouches[0].screenX;
-    const diff = dpxTouchStartX - dpxTouchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && dpxCurrentSlide < dpxSlides.length - 1) {
-        dpxCurrentSlide++;
-        updateDpxCarousel();
-        resetDpxAutoplay();
-      } else if (diff < 0 && dpxCurrentSlide > 0) {
-        dpxCurrentSlide--;
-        updateDpxCarousel();
-        resetDpxAutoplay();
-      }
-    }
-  }, { passive: true });
-
-  // Start autoplay
-  resetDpxAutoplay();
-
-  // ==========================================
   // PORTFOLIO MODALS
   // ==========================================
   const projectData = {
@@ -3469,83 +3644,6 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
   });
-
-  // ==========================================
-  // PORTFOLIO CAROUSEL
-  // ==========================================
-  const track = document.getElementById('carouselTrack');
-  const items = track.querySelectorAll('.portfolio-item');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  const dotsContainer = document.getElementById('carouselDots');
-  let currentSlide = 0;
-
-  function getVisibleCount() {
-    if (window.innerWidth <= 600) return 1;
-    if (window.innerWidth <= 900) return 2;
-    return 3;
-  }
-
-  function getMaxSlide() {
-    return Math.max(0, items.length - getVisibleCount());
-  }
-
-  function updateCarousel() {
-    const visible = getVisibleCount();
-    const gap = 16;
-    const itemWidth = (track.parentElement.offsetWidth - gap * (visible - 1)) / visible;
-
-    // Update item sizes
-    items.forEach(item => {
-      item.style.minWidth = itemWidth + 'px';
-      item.style.maxWidth = itemWidth + 'px';
-    });
-
-    const offset = currentSlide * (itemWidth + gap);
-    track.style.transform = 'translateX(-' + offset + 'px)';
-
-    // Update buttons
-    prevBtn.disabled = currentSlide === 0;
-    nextBtn.disabled = currentSlide >= getMaxSlide();
-
-    // Update dots
-    const maxSlide = getMaxSlide();
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i <= maxSlide; i++) {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot' + (i === currentSlide ? ' active' : '');
-      dot.addEventListener('click', () => { currentSlide = i; updateCarousel(); });
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  prevBtn.addEventListener('click', () => {
-    if (currentSlide > 0) { currentSlide--; updateCarousel(); }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentSlide < getMaxSlide()) { currentSlide++; updateCarousel(); }
-  });
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
-  track.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-  track.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && currentSlide < getMaxSlide()) { currentSlide++; updateCarousel(); }
-      else if (diff < 0 && currentSlide > 0) { currentSlide--; updateCarousel(); }
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', () => {
-    currentSlide = Math.min(currentSlide, getMaxSlide());
-    updateCarousel();
-  });
-
-  updateCarousel();
 </script>
 
 </body>

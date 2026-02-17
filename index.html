@@ -1642,8 +1642,87 @@
   .stagger > .fade-in:nth-child(6) { transition-delay: 400ms; }
 
   /* ============================================
-     RESPONSIVE
-     ============================================ */
+      DPX CAROUSEL
+      ============================================ */
+  .dpx-carousel {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+
+  .dpx-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+  }
+
+  .dpx-carousel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+  }
+
+  .dpx-carousel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    z-index: 2;
+  }
+
+  .dpx-carousel-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .dpx-carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .dpx-carousel-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .dpx-carousel-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dpx-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .dpx-carousel-dot.active {
+    background: #fff;
+    transform: scale(1.25);
+  }
+
+  /* ============================================
+      RESPONSIVE
+      ============================================ */
   @media (max-width: 900px) {
     :root {
       --section-gap: 96px;
@@ -1801,7 +1880,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-photo fade-in">
-        <div class="photo-placeholder">[ Profile Photo ]</div>
+        <img src="Img/1-MSportrait2023-1.jpg" alt="Michael Scrivana portrait" style="width: 100%; height: auto; display: block;">
       </div>
       <div class="about-content fade-in">
         <span class="section-label">About Me</span>
@@ -1941,8 +2020,36 @@
             <span class="tech-tag">Change Management</span>
           </div>
         </div>
-        <div class="project-image-placeholder">
-          [ AI Team / Presentation Photo ]
+        <div class="dpx-carousel">
+          <div class="dpx-carousel-track">
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v23.jpg" alt="DPX GenAI Example 1" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v28.jpg" alt="DPX GenAI Example 2" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v211.jpg" alt="DPX GenAI Example 3" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v214.jpg" alt="DPX GenAI Example 4" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v216.jpg" alt="DPX GenAI Example 5" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="dpx-carousel-slide">
+              <img src="Img/DPX-GenAI-030424-v218.jpg" alt="DPX GenAI Example 6" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          <div class="dpx-carousel-controls">
+            <button class="dpx-carousel-btn dpx-carousel-prev" aria-label="Previous">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="dpx-carousel-dots"></div>
+            <button class="dpx-carousel-btn dpx-carousel-next" aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -2074,8 +2181,8 @@
       </div>
 
       <div class="mirafast-images">
-        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ MiraFAST Pack Design ]</div>
-        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ MiraFAST Brand World ]</div>
+        <img src="Img/DPX-GenAI-030424-v23.jpg" alt="MiraFAST Pack Design" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="Img/DPX-GenAI-030424-v28.jpg" alt="MiraFAST Brand World" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
     </div>
 
@@ -2098,8 +2205,8 @@
       </div>
 
       <div class="mirafast-images">
-        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ PX Platform — Homepage ]</div>
-        <div class="portfolio-thumb" style="aspect-ratio: 16/9;">[ PX Platform — Project Detail ]</div>
+        <img src="Img/DPX-GenAI-030424-v211.jpg" alt="PX Platform Homepage" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="Img/DPX-GenAI-030424-v214.jpg" alt="PX Platform Project Detail" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
     </div>
 
@@ -2108,7 +2215,7 @@
       <div class="carousel-track" id="carouselTrack">
 
         <div class="portfolio-item" data-project="oad">
-          <div class="portfolio-thumb">[ OAD Brand Platform ]</div>
+          <img src="Img/DPX-GenAI-030424-v216.jpg" alt="OAD Brand Platform" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           <div class="portfolio-caption">
             <h3>OAD Brand Platform</h3>
             <p>Led interim platform rollout across all channels. Digital brandbook, 700+ renders, animations.</p>
@@ -2116,7 +2223,7 @@
         </div>
 
         <div class="portfolio-item" data-project="agefactor">
-          <div class="portfolio-thumb">[ Age Factor Launch ]</div>
+          <img src="Img/DPX-GenAI-030424-v218.jpg" alt="Age Factor Launch" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           <div class="portfolio-caption">
             <h3>Age Factor</h3>
             <p>End-to-end brand launch — social, ecomm, photoshoot direction, app assets.</p>
@@ -2124,7 +2231,7 @@
         </div>
 
         <div class="portfolio-item" data-project="iberogast">
-          <div class="portfolio-thumb">[ Iberogast ]</div>
+          <img src="Img/MiraFAST_Endcard_White.jpg" alt="Iberogast" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           <div class="portfolio-caption">
             <h3>Iberogast</h3>
             <p>Web direction, MOA animation, social playbook, ecommerce management.</p>
@@ -2132,7 +2239,7 @@
         </div>
 
         <div class="portfolio-item" data-project="bold">
-          <div class="portfolio-thumb">[ Bold Activation ]</div>
+          <img src="Img/OAD_VISID_Toolkit_Logos_RGB_Women 1.jpg" alt="Bold Activation" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           <div class="portfolio-caption">
             <h3>Bold Breakthrough Tour</h3>
             <p>Marketing identity for an internal keynote/workshop series to engage colleagues and drive innovation.</p>
@@ -3158,6 +3265,100 @@
   // Handle resize
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
+
+  // ==========================================
+  // DPX CAROUSEL
+  // ==========================================
+  const dpxCarousel = document.querySelector('.dpx-carousel');
+  const dpxTrack = dpxCarousel.querySelector('.dpx-carousel-track');
+  const dpxSlides = dpxTrack.querySelectorAll('.dpx-carousel-slide');
+  const dpxPrevBtn = dpxCarousel.querySelector('.dpx-carousel-prev');
+  const dpxNextBtn = dpxCarousel.querySelector('.dpx-carousel-next');
+  const dpxDotsContainer = dpxCarousel.querySelector('.dpx-carousel-dots');
+  let dpxCurrentSlide = 0;
+  let dpxAutoplayInterval;
+
+  // Create dots
+  dpxSlides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dpx-carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => {
+      dpxCurrentSlide = i;
+      updateDpxCarousel();
+      resetDpxAutoplay();
+    });
+    dpxDotsContainer.appendChild(dot);
+  });
+
+  function updateDpxCarousel() {
+    // Update track position
+    dpxTrack.style.transform = `translateX(-${dpxCurrentSlide * 100}%)`;
+
+    // Update dots
+    dpxCarousel.querySelectorAll('.dpx-carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === dpxCurrentSlide);
+    });
+
+    // Update buttons
+    dpxPrevBtn.disabled = dpxCurrentSlide === 0;
+    dpxNextBtn.disabled = dpxCurrentSlide === dpxSlides.length - 1;
+  }
+
+  function resetDpxAutoplay() {
+    clearInterval(dpxAutoplayInterval);
+    dpxAutoplayInterval = setInterval(nextDpxSlide, 5000);
+  }
+
+  function nextDpxSlide() {
+    if (dpxCurrentSlide < dpxSlides.length - 1) {
+      dpxCurrentSlide++;
+      updateDpxCarousel();
+    } else {
+      dpxCurrentSlide = 0;
+      updateDpxCarousel();
+    }
+  }
+
+  dpxPrevBtn.addEventListener('click', () => {
+    if (dpxCurrentSlide > 0) {
+      dpxCurrentSlide--;
+      updateDpxCarousel();
+      resetDpxAutoplay();
+    }
+  });
+
+  dpxNextBtn.addEventListener('click', () => {
+    if (dpxCurrentSlide < dpxSlides.length - 1) {
+      dpxCurrentSlide++;
+      updateDpxCarousel();
+      resetDpxAutoplay();
+    }
+  });
+
+  // Touch/swipe support
+  let dpxTouchStartX = 0;
+  let dpxTouchEndX = 0;
+  dpxTrack.addEventListener('touchstart', (e) => {
+    dpxTouchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  dpxTrack.addEventListener('touchend', (e) => {
+    dpxTouchEndX = e.changedTouches[0].screenX;
+    const diff = dpxTouchStartX - dpxTouchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && dpxCurrentSlide < dpxSlides.length - 1) {
+        dpxCurrentSlide++;
+        updateDpxCarousel();
+        resetDpxAutoplay();
+      } else if (diff < 0 && dpxCurrentSlide > 0) {
+        dpxCurrentSlide--;
+        updateDpxCarousel();
+        resetDpxAutoplay();
+      }
+    }
+  }, { passive: true });
+
+  // Start autoplay
+  resetDpxAutoplay();
 
   // ==========================================
   // PORTFOLIO MODALS

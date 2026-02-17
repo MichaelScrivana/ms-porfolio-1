@@ -565,6 +565,13 @@
     text-transform: uppercase;
   }
 
+  img.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .about-headline {
     font-family: var(--font-display);
     font-size: clamp(1.5rem, 3vw, 2.2rem);
@@ -717,6 +724,108 @@
     color: rgba(255, 255, 255, 0.25);
     letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  img.project-image-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Image Carousel */
+  .image-carousel {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    position: relative;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: pointer;
+  }
+
+  .carousel-image.active {
+    opacity: 1;
+  }
+
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    z-index: 2;
+  }
+
+  .carousel-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .carousel-prev {
+    left: 12px;
+  }
+
+  .carousel-next {
+    right: 12px;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .indicator.active {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
   }
 
   /* Agent demo animation */
@@ -899,6 +1008,13 @@
     color: rgba(255,255,255,0.2);
     letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  img.agent-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .agent-replay {
@@ -1320,6 +1436,14 @@
     line-height: 1.5;
   }
 
+  img.portfolio-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    padding: 0;
+  }
+
   .portfolio-caption {
     padding: 16px 20px;
     border-top: 1px solid var(--border-color);
@@ -1704,6 +1828,122 @@
   }
 
   /* ============================================
+     LIGHTBOX
+     ============================================ */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 40px;
+  }
+
+  .lightbox-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    animation: lightbox-zoom 0.3s ease;
+  }
+
+  @keyframes lightbox-zoom {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    z-index: 301;
+  }
+
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    z-index: 301;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .lightbox-prev {
+    left: 24px;
+  }
+
+  .lightbox-next {
+    right: 24px;
+  }
+
+  .lightbox-counter {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    z-index: 301;
+  }
+
+  /* ============================================
      BRAND RUNNER GAME
      ============================================ */
   .game-section {
@@ -1982,7 +2222,7 @@
       </div>
       <h1 class="hero-headline hero-anim">
         I don't pitch AI adoption.<br>
-        I <span class="accent-line">demonstrate it.</span>
+        <span class="accent-line">I demonstrate it.</span>
       </h1>
       <div class="hero-meta hero-anim">
         <p class="hero-description">
@@ -2023,7 +2263,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-photo fade-in">
-        <div class="photo-placeholder" id="about-img1">[ about-img1 · Profile Photo ]</div>
+        <img src="./Img/1-MSportrait2023-1.jpg" alt="Michael Scrivana" class="photo-placeholder" id="about-img1" />
       </div>
       <div class="about-content fade-in">
         <span class="section-label">About Me</span>
@@ -2107,8 +2347,8 @@
             <button class="agent-replay" id="agentReplay" onclick="runAgentDemo()">↻ Replay</button>
           </div>
           <div class="agent-screenshots">
-            <div class="agent-screenshot" id="sec1-img1">[ sec1-img1 · Upload Interface ]</div>
-            <div class="agent-screenshot" id="sec1-img2">[ sec1-img2 · Review Dashboard ]</div>
+            <img src="./Img/2-01-oad.png" alt="Upload Interface" class="agent-screenshot" id="sec1-img1" />
+            <img src="./Img/2-02-oad.png" alt="Review Dashboard" class="agent-screenshot" id="sec1-img2" />
           </div>
         </div>
         <div class="oad-details">
@@ -2132,7 +2372,7 @@
             <span class="tech-tag">Brand Guardrails</span>
             <span class="tech-tag">Automation</span>
           </div>
-          <a href="#" class="github-link" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">
+          <a href="https://github.com/MichaelScrivana/OAD-DesignReviewer" class="github-link" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #000; background: #fff; text-decoration: none; padding: 12px 24px; border: none; border-radius: 4px; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.background='#f0f0f0';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.background='#fff';this.style.transform='translateY(0)';this.style.boxShadow='none'">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             View on GitHub
           </a>
@@ -2163,8 +2403,25 @@
             <span class="tech-tag">Change Management</span>
           </div>
         </div>
-        <div class="project-image-placeholder" id="sec2-img1">
-          [ sec2-img1 · AI Team / Presentation Photo ]
+        <div class="image-carousel" id="sec2Carousel">
+          <div class="carousel-container">
+            <img src="./Img/Sec2/DPX-GenAI-030424-v211.jpg" alt="DPX GenAI v211" class="carousel-image" data-carousel-index="0" />
+            <img src="./Img/Sec2/DPX-GenAI-030424-v214.jpg" alt="DPX GenAI v214" class="carousel-image" data-carousel-index="1" />
+            <img src="./Img/Sec2/DPX-GenAI-030424-v216.jpg" alt="DPX GenAI v216" class="carousel-image" data-carousel-index="2" />
+            <img src="./Img/Sec2/DPX-GenAI-030424-v218.jpg" alt="DPX GenAI v218" class="carousel-image" data-carousel-index="3" />
+            <img src="./Img/Sec2/DPX-GenAI-030424-v23.jpg" alt="DPX GenAI v23" class="carousel-image" data-carousel-index="4" />
+            <img src="./Img/Sec2/DPX-GenAI-030424-v28.jpg" alt="DPX GenAI v28" class="carousel-image" data-carousel-index="5" />
+          </div>
+          <button class="carousel-nav carousel-prev" data-carousel-id="sec2Carousel">‹</button>
+          <button class="carousel-nav carousel-next" data-carousel-id="sec2Carousel">›</button>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-carousel-id="sec2Carousel" data-index="0"></span>
+            <span class="indicator" data-carousel-id="sec2Carousel" data-index="1"></span>
+            <span class="indicator" data-carousel-id="sec2Carousel" data-index="2"></span>
+            <span class="indicator" data-carousel-id="sec2Carousel" data-index="3"></span>
+            <span class="indicator" data-carousel-id="sec2Carousel" data-index="4"></span>
+            <span class="indicator" data-carousel-id="sec2Carousel" data-index="5"></span>
+          </div>
         </div>
       </div>
 
@@ -2192,8 +2449,23 @@
             <span class="tech-tag">Agency Management</span>
           </div>
         </div>
-        <div class="project-image-placeholder" id="sec3-img1">
-          [ sec3-img1 · MidJourney Outputs / Style Guide Examples ]
+        <div class="image-carousel" id="sec3Carousel">
+          <div class="carousel-container">
+            <img src="./Img/Sec1/IB-04.jpg" alt="Iberogast IB-04" class="carousel-image" data-carousel-index="0" />
+            <img src="./Img/Sec1/IB-05.jpg" alt="Iberogast IB-05" class="carousel-image" data-carousel-index="1" />
+            <img src="./Img/Sec1/IB-06v2.jpg" alt="Iberogast IB-06v2" class="carousel-image" data-carousel-index="2" />
+            <img src="./Img/Sec1/IB-07.jpg" alt="Iberogast IB-07" class="carousel-image" data-carousel-index="3" />
+            <img src="./Img/Sec1/IB-08v7.jpg" alt="Iberogast IB-08v7" class="carousel-image" data-carousel-index="4" />
+          </div>
+          <button class="carousel-nav carousel-prev" data-carousel-id="sec3Carousel">‹</button>
+          <button class="carousel-nav carousel-next" data-carousel-id="sec3Carousel">›</button>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-carousel-id="sec3Carousel" data-index="0"></span>
+            <span class="indicator" data-carousel-id="sec3Carousel" data-index="1"></span>
+            <span class="indicator" data-carousel-id="sec3Carousel" data-index="2"></span>
+            <span class="indicator" data-carousel-id="sec3Carousel" data-index="3"></span>
+            <span class="indicator" data-carousel-id="sec3Carousel" data-index="4"></span>
+          </div>
         </div>
       </div>
 
@@ -2221,7 +2493,7 @@
           <h3 class="mirafast-title">Two brands I designed.<br>$48M in sales. $67M projected.</h3>
           <p class="mirafast-desc">I led brand identity and packaging for both MiraFIBER and MiraFAST — the two products driving over half of MiraLAX's retail growth. Recreated the logo to be simpler and more impactful at shelf. Built a modular design system with MiraFIBER, then replicated it at speed for MiraFAST — inception to design lock in 3 weeks.</p>
         </div>
-        <div class="portfolio-thumb" id="mira-img1" style="aspect-ratio: 4/3; min-height: 200px;">[ mira-img1 · MiraFAST / MiraFIBER Pack Design ]</div>
+        <img src="./Img/MiraFAST Endcard_White.jpg" alt="MiraFAST / MiraFIBER Pack Design" class="portfolio-thumb" id="mira-img1" style="aspect-ratio: 4/3; min-height: 200px;" />
       </div>
 
       <div class="mira-meta-bar">
@@ -2305,9 +2577,26 @@
           <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-top: 12px; max-width: 640px;">
             Designed and built a digital platform for the Product Experience department — a single destination for PX's capabilities, work, and processes. The same instinct that drives this project drives the AI work: make complex information accessible and useful for the people who need it.
           </p>
-          <a href="https://www.px.int.bayer.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">Visit PX Platform ↗</a>
+          <a href="https://www.px.int.bayer.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #000; background: #fff; text-decoration: none; padding: 12px 24px; border: none; border-radius: 4px; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.background='#f0f0f0';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.background='#fff';this.style.transform='translateY(0)';this.style.boxShadow='none'">Visit PX Platform ↗</a>
         </div>
-        <div class="portfolio-thumb" id="px-img1" style="aspect-ratio: 4/3; min-height: 200px;">[ px-img1 · PX Platform — Homepage ]</div>
+        <div class="image-carousel" id="pxCarousel">
+          <div class="carousel-container">
+            <img src="./Img/Sec3/px1.png" alt="PX Platform px1" class="carousel-image" data-carousel-index="0" />
+            <img src="./Img/Sec3/px2.png" alt="PX Platform px2" class="carousel-image" data-carousel-index="1" />
+            <img src="./Img/Sec3/px3.png" alt="PX Platform px3" class="carousel-image" data-carousel-index="2" />
+            <img src="./Img/Sec3/px4.png" alt="PX Platform px4" class="carousel-image" data-carousel-index="3" />
+            <img src="./Img/Sec3/px5.png" alt="PX Platform px5" class="carousel-image" data-carousel-index="4" />
+          </div>
+          <button class="carousel-nav carousel-prev" data-carousel-id="pxCarousel">‹</button>
+          <button class="carousel-nav carousel-next" data-carousel-id="pxCarousel">›</button>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-carousel-id="pxCarousel" data-index="0"></span>
+            <span class="indicator" data-carousel-id="pxCarousel" data-index="1"></span>
+            <span class="indicator" data-carousel-id="pxCarousel" data-index="2"></span>
+            <span class="indicator" data-carousel-id="pxCarousel" data-index="3"></span>
+            <span class="indicator" data-carousel-id="pxCarousel" data-index="4"></span>
+          </div>
+        </div>
       </div>
 
       <div class="mira-meta-bar">
@@ -2319,6 +2608,15 @@
     <div style="text-align: center; margin-top: 48px;">
       <a href="https://www.michaelscrivana.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">View All Projects ↗</a>
     </div>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" style="display: none;">‹</button>
+  <img id="lightboxImage" src="" alt="Enlarged view" class="lightbox-image" />
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" style="display: none;">›</button>
+  <div class="lightbox-counter" id="lightboxCounter" style="display: none;"></div>
+</div>
 
 <!-- PROJECT MODAL -->
 <div class="modal-overlay" id="projectModal">
@@ -2375,7 +2673,7 @@
       <div class="fit-card fade-in">
         <div class="fit-card-need">Share wins that inspire</div>
         <div class="fit-card-have">This website — Claude, VS Code, shipped. Introduced GenAI creative tools across PX. Adoption starts when people see something working, not when they read about it.
-          <a href="https://github.com/MichaelScrivana/ms-porfolio-1/tree/main" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">
+          <a href="https://github.com/MichaelScrivana/ms-porfolio-1/tree/main" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; color: #000; background: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border: none; border-radius: 4px; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.background='#f0f0f0';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.background='#fff';this.style.transform='translateY(0)';this.style.boxShadow='none'">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             View Repo
           </a>
@@ -3183,6 +3481,10 @@
   const finalScoreEl = document.getElementById('finalScore');
   const gameOverTitle = document.getElementById('gameOverTitle');
 
+  // Load player image (Bayer logo)
+  const playerImg = new Image();
+  playerImg.src = './Img/corp-logo_bg_bayer-cross_rev_150dpi_on-screen_rgb (1).png';
+
   // Bayer brands as obstacles
   const brandNames = [
     'OAD', 'MiraLAX', 'Claritin', 'Aleve', 'Afrin',
@@ -3418,7 +3720,7 @@
       ctx.fillText(o.brand, o.x + o.w / 2, o.y + o.h / 2);
     }
 
-    // Player (the Bayer cross inspired shape)
+    // Player (Bayer logo image)
     ctx.save();
     ctx.translate(player.x + player.w / 2, player.y + player.h / 2);
     ctx.scale(1, player.squash);
@@ -3431,22 +3733,25 @@
       ctx.fill();
     }
 
-    // Cross shape
-    const s = player.w * 0.4;
-    const t = player.w * 0.16;
-    ctx.fillStyle = c.player;
-    ctx.beginPath();
-    ctx.rect(-t, -s, t * 2, s * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.rect(-s, -t, s * 2, t * 2);
-    ctx.fill();
-
-    // Small circle in center
-    ctx.fillStyle = c.bg;
-    ctx.beginPath();
-    ctx.arc(0, 0, t * 0.5, 0, Math.PI * 2);
-    ctx.fill();
+    // Draw player image
+    if (playerImg.complete) {
+      ctx.drawImage(playerImg, -player.w / 2, -player.h / 2, player.w, player.h);
+    } else {
+      // Fallback to cross if image not loaded
+      const s = player.w * 0.4;
+      const t = player.w * 0.16;
+      ctx.fillStyle = c.player;
+      ctx.beginPath();
+      ctx.rect(-t, -s, t * 2, s * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.rect(-s, -t, s * 2, t * 2);
+      ctx.fill();
+      ctx.fillStyle = c.bg;
+      ctx.beginPath();
+      ctx.arc(0, 0, t * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     ctx.restore();
 
@@ -3643,6 +3948,158 @@
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // ==========================================
+  // LIGHTBOX WITH CAROUSEL
+  // ==========================================
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+
+  let currentCarouselImages = [];
+  let currentImageIndex = 0;
+
+  function openLightbox(src, carouselId) {
+    lightboxImage.src = src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Check if this image is part of a carousel
+    if (carouselId) {
+      const carousel = document.getElementById(carouselId);
+      const images = carousel.querySelectorAll('.carousel-image');
+      currentCarouselImages = Array.from(images).map(img => img.src);
+      currentImageIndex = currentCarouselImages.indexOf(src);
+      
+      // Show/hide carousel controls
+      lightboxPrev.style.display = 'flex';
+      lightboxNext.style.display = 'flex';
+      lightboxCounter.style.display = 'block';
+      updateLightboxCounter();
+    } else {
+      lightboxPrev.style.display = 'none';
+      lightboxNext.style.display = 'none';
+      lightboxCounter.style.display = 'none';
+      currentCarouselImages = [];
+    }
+  }
+
+  function updateLightboxCounter() {
+    if (currentCarouselImages.length > 0) {
+      lightboxCounter.textContent = (currentImageIndex + 1) + ' / ' + currentCarouselImages.length;
+    }
+  }
+
+  function nextLightboxImage() {
+    if (currentCarouselImages.length > 0) {
+      currentImageIndex = (currentImageIndex + 1) % currentCarouselImages.length;
+      lightboxImage.src = currentCarouselImages[currentImageIndex];
+      updateLightboxCounter();
+    }
+  }
+
+  function prevLightboxImage() {
+    if (currentCarouselImages.length > 0) {
+      currentImageIndex = (currentImageIndex - 1 + currentCarouselImages.length) % currentCarouselImages.length;
+      lightboxImage.src = currentCarouselImages[currentImageIndex];
+      updateLightboxCounter();
+    }
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    currentCarouselImages = [];
+  }
+
+  // Add click handlers to all carousel images
+  const carouselImages = document.querySelectorAll('.carousel-image');
+  carouselImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      const carousel = img.closest('.image-carousel');
+      openLightbox(img.src, carousel.id);
+    });
+  });
+
+  // Add click handlers to other images
+  const clickableImages = document.querySelectorAll('img.agent-screenshot, img.photo-placeholder, img.project-image-placeholder, img.portfolio-thumb');
+  clickableImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      openLightbox(img.src);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', prevLightboxImage);
+  lightboxNext.addEventListener('click', nextLightboxImage);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('active')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevLightboxImage();
+      if (e.key === 'ArrowRight') nextLightboxImage();
+    }
+  });
+
+  // ==========================================
+  // CAROUSEL NAVIGATION
+  // ==========================================
+  document.querySelectorAll('.carousel-nav').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const carouselId = btn.dataset.carouselId;
+      const carousel = document.getElementById(carouselId);
+      const images = carousel.querySelectorAll('.carousel-image');
+      const indicators = carousel.parentElement.querySelectorAll('.indicator');
+      
+      let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+      if (currentIndex === -1) currentIndex = 0;
+
+      if (btn.classList.contains('carousel-next')) {
+        currentIndex = (currentIndex + 1) % images.length;
+      } else {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+      }
+
+      updateCarousel(carouselId, currentIndex);
+    });
+  });
+
+  document.querySelectorAll('.indicator').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const carouselId = dot.dataset.carouselId;
+      const index = parseInt(dot.dataset.index);
+      updateCarousel(carouselId, index);
+    });
+  });
+
+  function updateCarousel(carouselId, index) {
+    const carousel = document.getElementById(carouselId);
+    const images = carousel.querySelectorAll('.carousel-image');
+    const indicators = document.querySelectorAll('.indicator[data-carousel-id="' + carouselId + '"]');
+    
+    images.forEach(img => img.classList.remove('active'));
+    indicators.forEach(dot => dot.classList.remove('active'));
+    
+    images[index].classList.add('active');
+    indicators[index].classList.add('active');
+  }
+
+  // Initialize first carousel image as active
+  document.querySelectorAll('.image-carousel').forEach(carousel => {
+    const firstImage = carousel.querySelector('.carousel-image');
+    const firstIndicator = carousel.querySelector('.indicator');
+    if (firstImage) firstImage.classList.add('active');
+    if (firstIndicator) firstIndicator.classList.add('active');
   });
 </script>
 

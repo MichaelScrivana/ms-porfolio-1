@@ -65,12 +65,11 @@
     box-sizing: border-box;
   }
 
-  /* Force dark backgrounds on iOS Safari — prevents white bleed-through */
+  /* Force dark backgrounds on iOS Safari */
   html, body, section, main {
     background-color: var(--bg-primary);
   }
 
-  /* Smooth transitions for theme switching */
   html, section, .portfolio-item, .mirafast-hero, .mirafast-stat,
   .fit-row, .timeline-item, .divider, .about-me, nav,
   .portfolio-caption, .portfolio-thumb, .photo-placeholder {
@@ -201,7 +200,6 @@
     color: var(--accent);
   }
 
-  /* Hamburger button */
   .nav-hamburger {
     display: none;
     background: none;
@@ -245,7 +243,6 @@
     transform: rotate(-45deg);
   }
 
-  /* Mobile menu overlay */
   .mobile-menu {
     display: none;
     position: fixed;
@@ -398,7 +395,7 @@
   }
 
   /* ============================================
-     DARK/LIGHT OVERRIDES (dark is default)
+     DARK/LIGHT OVERRIDES
      ============================================ */
   .ai-projects {
     background: #141418;
@@ -644,7 +641,6 @@
     align-items: start;
   }
 
-  /* One A Day card: 3-area layout for mobile reordering */
   .project-card-oad {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
@@ -792,13 +788,8 @@
     border-color: rgba(255, 255, 255, 0.4);
   }
 
-  .carousel-prev {
-    left: 12px;
-  }
-
-  .carousel-next {
-    right: 12px;
-  }
+  .carousel-prev { left: 12px; }
+  .carousel-next { right: 12px; }
 
   .carousel-indicators {
     position: absolute;
@@ -819,14 +810,8 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .indicator:hover {
-    background: rgba(255, 255, 255, 0.5);
-  }
-
-  .indicator.active {
-    background: rgba(255, 255, 255, 0.8);
-    transform: scale(1.2);
-  }
+  .indicator:hover { background: rgba(255, 255, 255, 0.5); }
+  .indicator.active { background: rgba(255, 255, 255, 0.8); transform: scale(1.2); }
 
   /* Agent demo animation */
   .agent-demo {
@@ -896,21 +881,10 @@
     color: rgba(255,255,255,0.55);
   }
 
-  .agent-line-text .highlight {
-    color: #4D8FE8;
-  }
-
-  .agent-line-text .success {
-    color: #4ADE80;
-  }
-
-  .agent-line-text .warn {
-    color: #FBBF24;
-  }
-
-  .agent-line-text .file {
-    color: rgba(255,255,255,0.8);
-  }
+  .agent-line-text .highlight { color: #4D8FE8; }
+  .agent-line-text .success { color: #4ADE80; }
+  .agent-line-text .warn { color: #FBBF24; }
+  .agent-line-text .file { color: rgba(255,255,255,0.8); }
 
   .agent-checks {
     display: grid;
@@ -929,10 +903,7 @@
     transition: opacity 0.3s ease;
   }
 
-  .agent-check.visible {
-    opacity: 1;
-  }
-
+  .agent-check.visible { opacity: 1; }
   .agent-check.pass { color: #4ADE80; }
   .agent-check.flag { color: #FBBF24; }
 
@@ -957,10 +928,7 @@
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .agent-score.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
+  .agent-score.visible { opacity: 1; transform: scale(1); }
 
   .agent-score-number {
     font-family: var(--font-display);
@@ -986,9 +954,7 @@
     vertical-align: middle;
   }
 
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
+  @keyframes blink { 50% { opacity: 0; } }
 
   .agent-screenshots {
     display: grid;
@@ -1059,47 +1025,107 @@
   }
 
   /* ============================================
-     ROLE FIT
+     90-DAY VISION
      ============================================ */
-  .role-fit {
-    padding: var(--section-gap) 0;
+  .vision-section {
+    padding: 120px 0;
     background: var(--bg-primary);
-    transition: background 0.4s ease;
   }
 
-  .fit-grid {
+  .vision-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
     margin-top: 48px;
-    background: var(--border-color);
+  }
+
+  .vision-phase {
+    padding: 32px;
     border: 1px solid var(--border-color);
+    border-radius: 0;
+    position: relative;
+    transition: border-color 0.3s ease;
   }
 
-  .fit-card {
-    background: var(--bg-primary);
-    padding: 28px 28px 24px;
+  .vision-phase:hover {
+    border-color: var(--text-muted);
   }
 
-  .fit-card-need {
+  .vision-phase-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.25;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+
+  .vision-phase-label {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 10px;
-    line-height: 1.4;
+    margin-bottom: 4px;
   }
 
-  .fit-card-have {
-    font-size: 0.9rem;
-    line-height: 1.55;
+  .vision-phase-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 800;
     color: var(--text-primary);
+    margin-bottom: 16px;
+    line-height: 1.3;
   }
 
-  @media (max-width: 600px) {
-    .fit-grid {
+  .vision-item {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .vision-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .vision-principle {
+    margin-top: 48px;
+    padding: 32px 40px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-secondary);
+  }
+
+  .vision-principle p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .vision-grid {
       grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .vision-phase {
+      padding: 24px;
+    }
+    .vision-principle {
+      padding: 24px;
     }
   }
 
@@ -1216,7 +1242,6 @@
     border: 1px solid var(--border-color);
   }
 
-  /* Chart within featured section */
   .growth-chart-wrap {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -1310,9 +1335,7 @@
 
   .mira-tab-number.fiber { color: var(--accent); }
   .mira-tab-number.fast { color: #E85D4D; }
-  .mira-tab-number.combined {
-    color: #4ADE80;
-  }
+  .mira-tab-number.combined { color: #4ADE80; }
 
   .mira-tab-detail {
     font-size: 0.78rem;
@@ -1321,12 +1344,8 @@
   }
 
   @media (max-width: 600px) {
-    .mira-product-tabs {
-      flex-direction: column;
-    }
-    .growth-chart-wrap {
-      padding: 20px 16px;
-    }
+    .mira-product-tabs { flex-direction: column; }
+    .growth-chart-wrap { padding: 20px 16px; }
   }
 
   .mira-meta-bar {
@@ -1354,36 +1373,16 @@
   }
 
   @media (max-width: 900px) {
-    .mirafast-hero {
-      padding: 32px 24px;
-    }
-
-    .mirafast-header {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .mirafast-stats-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .mirafast-highlights {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .mirafast-images {
-      grid-template-columns: 1fr;
-    }
+    .mirafast-hero { padding: 32px 24px; }
+    .mirafast-header { grid-template-columns: 1fr; gap: 24px; }
+    .mirafast-stats-grid { grid-template-columns: 1fr 1fr; }
+    .mirafast-highlights { grid-template-columns: 1fr 1fr; }
+    .mirafast-images { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
-    .mirafast-stats-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .mirafast-highlights {
-      grid-template-columns: 1fr;
-    }
+    .mirafast-stats-grid { grid-template-columns: 1fr; }
+    .mirafast-highlights { grid-template-columns: 1fr; }
   }
 
   /* ============================================
@@ -1394,19 +1393,8 @@
     padding: var(--section-gap) 0;
   }
 
-  /* ============================================
-     PORTFOLIO CAROUSEL
-     ============================================ */
-  .carousel-wrapper {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .carousel-track {
-    display: flex;
-    gap: 16px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .carousel-wrapper { position: relative; overflow: hidden; }
+  .carousel-track { display: flex; gap: 16px; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
   .portfolio-item {
     min-width: calc((100% - 32px) / 3);
@@ -1464,7 +1452,7 @@
   }
 
   /* ============================================
-     TIMELINE (brief career summary)
+     TIMELINE
      ============================================ */
   .timeline {
     padding: var(--section-gap) 0;
@@ -1555,9 +1543,7 @@
     transition: color 0.2s ease;
   }
 
-  .footer-links a:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
+  .footer-links a:hover { color: rgba(255, 255, 255, 0.8); }
 
   .footer-built {
     font-family: var(--font-mono);
@@ -1567,17 +1553,9 @@
     text-align: right;
   }
 
-  [data-theme="light"] .footer-links a {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  [data-theme="light"] .footer-links a:hover {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  [data-theme="light"] .footer-built {
-    color: rgba(255, 255, 255, 0.3);
-  }
+  [data-theme="light"] .footer-links a { color: rgba(255, 255, 255, 0.5); }
+  [data-theme="light"] .footer-links a:hover { color: rgba(255, 255, 255, 0.9); }
+  [data-theme="light"] .footer-built { color: rgba(255, 255, 255, 0.3); }
 
   /* ============================================
      PORTFOLIO MODAL
@@ -1596,10 +1574,7 @@
     padding: 40px;
   }
 
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
 
   .modal {
     background: var(--bg-primary);
@@ -1614,9 +1589,7 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .modal-overlay.active .modal {
-    transform: translateY(0) scale(1);
-  }
+  .modal-overlay.active .modal { transform: translateY(0) scale(1); }
 
   .modal-close {
     position: sticky;
@@ -1639,9 +1612,7 @@
     line-height: 1;
   }
 
-  .modal-close:hover {
-    background: var(--bg-secondary);
-  }
+  .modal-close:hover { background: var(--bg-secondary); }
 
   .modal-hero-image {
     width: 100%;
@@ -1657,15 +1628,9 @@
     text-transform: uppercase;
   }
 
-  .modal-hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .modal-hero-image img { width: 100%; height: 100%; object-fit: cover; }
 
-  .modal-body {
-    padding: 40px 48px 48px;
-  }
+  .modal-body { padding: 40px 48px 48px; }
 
   .modal-title {
     font-family: var(--font-display);
@@ -1692,12 +1657,7 @@
     max-width: 640px;
   }
 
-  .modal-detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
+  .modal-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
 
   .modal-detail-block h4 {
     font-family: var(--font-mono);
@@ -1709,18 +1669,9 @@
     font-weight: 500;
   }
 
-  .modal-detail-block p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
+  .modal-detail-block p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
-  .modal-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 32px;
-  }
+  .modal-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
 
   .modal-gallery-item {
     aspect-ratio: 4 / 3;
@@ -1738,32 +1689,12 @@
     padding: 16px;
   }
 
-  .modal-gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
-  .portfolio-item {
-    cursor: pointer;
-  }
+  .portfolio-item:hover .portfolio-thumb { opacity: 0.85; }
+  .portfolio-item:hover .portfolio-caption h3 { color: var(--accent); transition: color 0.2s ease; }
 
-  .portfolio-item:hover .portfolio-thumb {
-    opacity: 0.85;
-  }
-
-  .portfolio-item:hover .portfolio-caption h3 {
-    color: var(--accent);
-    transition: color 0.2s ease;
-  }
-
-  .carousel-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 24px;
-  }
+  .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
 
   .carousel-btn {
     width: 40px;
@@ -1779,22 +1710,10 @@
     transition: border-color 0.2s ease, background 0.2s ease;
   }
 
-  .carousel-btn:hover {
-    border-color: var(--accent);
-    background: var(--accent-light);
-  }
+  .carousel-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+  .carousel-btn:disabled { opacity: 0.3; cursor: default; border-color: var(--border-color); background: var(--bg-primary); }
 
-  .carousel-btn:disabled {
-    opacity: 0.3;
-    cursor: default;
-    border-color: var(--border-color);
-    background: var(--bg-primary);
-  }
-
-  .carousel-dots {
-    display: flex;
-    gap: 8px;
-  }
+  .carousel-dots { display: flex; gap: 8px; }
 
   .carousel-dot {
     width: 8px;
@@ -1807,24 +1726,13 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .carousel-dot.active {
-    background: var(--accent);
-    transform: scale(1.25);
-  }
+  .carousel-dot.active { background: var(--accent); transform: scale(1.25); }
 
   @media (max-width: 600px) {
-    .modal-overlay {
-      padding: 16px;
-    }
-    .modal-body {
-      padding: 24px;
-    }
-    .modal-detail-grid {
-      grid-template-columns: 1fr;
-    }
-    .modal-gallery {
-      grid-template-columns: 1fr;
-    }
+    .modal-overlay { padding: 16px; }
+    .modal-body { padding: 24px; }
+    .modal-detail-grid { grid-template-columns: 1fr; }
+    .modal-gallery { grid-template-columns: 1fr; }
   }
 
   /* ============================================
@@ -1844,10 +1752,7 @@
     padding: 40px;
   }
 
-  .lightbox-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .lightbox-overlay.active { opacity: 1; pointer-events: all; }
 
   .lightbox-image {
     max-width: 100%;
@@ -1860,14 +1765,8 @@
   }
 
   @keyframes lightbox-zoom {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
   }
 
   .lightbox-close {
@@ -1890,10 +1789,7 @@
     z-index: 301;
   }
 
-  .lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
+  .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
   .lightbox-nav {
     position: fixed;
@@ -1914,18 +1810,9 @@
     z-index: 301;
   }
 
-  .lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-
-  .lightbox-prev {
-    left: 24px;
-  }
-
-  .lightbox-next {
-    right: 24px;
-  }
+  .lightbox-nav:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
 
   .lightbox-counter {
     position: fixed;
@@ -1946,10 +1833,7 @@
   /* ============================================
      BRAND RUNNER GAME
      ============================================ */
-  .game-section {
-    padding: 80px 0;
-    background: var(--bg-primary);
-  }
+  .game-section { padding: 80px 0; background: var(--bg-primary); }
 
   .game-wrapper {
     position: relative;
@@ -1964,11 +1848,7 @@
     cursor: pointer;
   }
 
-  .game-wrapper canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
+  .game-wrapper canvas { width: 100%; height: 100%; display: block; }
 
   .game-intro,
   .game-over-overlay {
@@ -1982,30 +1862,14 @@
     transition: opacity 0.5s ease;
   }
 
-  .game-intro.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
+  .game-intro.hidden { opacity: 0; pointer-events: none; }
 
-  .game-over-overlay {
-    background: rgba(14, 14, 16, 0.85);
-  }
+  .game-over-overlay { background: rgba(14, 14, 16, 0.85); }
+  [data-theme="light"] .game-over-overlay { background: rgba(250, 250, 248, 0.88); }
 
-  [data-theme="light"] .game-over-overlay {
-    background: rgba(250, 250, 248, 0.88);
-  }
+  .game-intro-text { text-align: center; }
 
-  .game-intro-text {
-    text-align: center;
-  }
-
-  .game-hud {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    text-align: right;
-    z-index: 1;
-  }
+  .game-hud { position: absolute; top: 16px; right: 20px; text-align: right; z-index: 1; }
 
   .game-score {
     font-family: var(--font-display);
@@ -2028,17 +1892,9 @@
   /* ============================================
      SCROLL ANIMATIONS
      ============================================ */
-
-  /* Hero entrance — plays on load, not scroll */
   @keyframes heroEntrance {
-    from {
-      opacity: 0;
-      transform: translateY(32px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .hero-anim {
@@ -2057,12 +1913,8 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* stagger children */
   .stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
   .stagger > .fade-in:nth-child(2) { transition-delay: 80ms; }
   .stagger > .fade-in:nth-child(3) { transition-delay: 160ms; }
@@ -2074,87 +1926,29 @@
      RESPONSIVE
      ============================================ */
   @media (max-width: 900px) {
-    :root {
-      --section-gap: 96px;
-    }
-
-    .container {
-      padding: 0 24px;
-    }
-
-    .project-card {
-      grid-template-columns: 1fr;
-      padding: 32px 24px;
-    }
-
-    .project-card:nth-child(even) {
-      direction: ltr;
-    }
-
-    /* OAD mobile: title → demo → details */
-    .project-card-oad {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-    }
-
+    :root { --section-gap: 96px; }
+    .container { padding: 0 24px; }
+    .project-card { grid-template-columns: 1fr; padding: 32px 24px; }
+    .project-card:nth-child(even) { direction: ltr; }
+    .project-card-oad { grid-template-columns: 1fr; grid-template-rows: auto; }
     .oad-header { grid-column: 1; grid-row: auto; order: 1; }
     .oad-demo   { grid-column: 1; grid-row: auto; order: 2; }
     .oad-details { grid-column: 1; grid-row: auto; order: 3; }
-
-    .portfolio-item {
-      min-width: calc((100% - 16px) / 2);
-      max-width: calc((100% - 16px) / 2);
-    }
-
-    .hero-stats {
-      gap: 32px;
-    }
-
-    .timeline-item {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-
-    .footer-built {
-      text-align: left;
-    }
-
-    .nav-links {
-      gap: 20px;
-    }
+    .portfolio-item { min-width: calc((100% - 16px) / 2); max-width: calc((100% - 16px) / 2); }
+    .hero-stats { gap: 32px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-built { text-align: left; }
+    .nav-links { gap: 20px; }
   }
 
   @media (max-width: 600px) {
-    .portfolio-item {
-      min-width: 100%;
-      max-width: 100%;
-    }
-
-    .hero-stats {
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .nav-links {
-      display: none;
-    }
-
-    .nav-hamburger {
-      display: block;
-    }
-
-    .mobile-menu {
-      display: block;
-    }
-
-    .theme-toggle {
-      margin-left: 0;
-    }
+    .portfolio-item { min-width: 100%; max-width: 100%; }
+    .hero-stats { flex-wrap: wrap; gap: 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu { display: block; }
+    .theme-toggle { margin-left: 0; }
   }
 </style>
 </head>
@@ -2169,8 +1963,8 @@
     <ul class="nav-links">
       <li><a href="#about-me">About</a></li>
       <li><a href="#ai">AI Projects</a></li>
+      <li><a href="#vision">90-Day Vision</a></li>
       <li><a href="#portfolio">Design Work</a></li>
-      <li><a href="#fit">Role Fit</a></li>
       <li><a href="#career">Career</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
@@ -2205,8 +1999,8 @@
   <ul class="mobile-menu-links">
     <li><a href="#about-me" class="mobile-menu-link">About</a></li>
     <li><a href="#ai" class="mobile-menu-link">AI Projects</a></li>
+    <li><a href="#vision" class="mobile-menu-link">90-Day Vision</a></li>
     <li><a href="#portfolio" class="mobile-menu-link">Design Work</a></li>
-    <li><a href="#fit" class="mobile-menu-link">Role Fit</a></li>
     <li><a href="#career" class="mobile-menu-link">Career</a></li>
   </ul>
 </div>
@@ -2379,56 +2173,10 @@
         </div>
       </div>
 
-      <!-- PROJECT 2: AI Consulting & Strategy -->
+      <!-- PROJECT 2: GenAI in Creative -->
       <div class="project-card fade-in">
         <div>
           <span class="project-number">02</span>
-          <h3 class="project-title">AI Strategy Consulting for Product Experience</h3>
-          <div class="project-detail">
-            <div class="project-detail-label">Context</div>
-            <p>PX leadership needed a grounded perspective on AI — not hype, but a practical read on what's real and what's relevant for Consumer Health. No formal role existed; I stepped into the gap.</p>
-          </div>
-          <div class="project-detail">
-            <div class="project-detail-label">My Role</div>
-            <p>Informal AI advisor to PX leadership. Presenting strategy recommendations, demonstrating working prototypes, and helping the team separate signal from noise. Selected as PX's representative on the Consumer Health Science Home AI team.</p>
-          </div>
-          <div class="project-detail">
-            <div class="project-detail-label">Approach</div>
-            <p>Demos over decks. I coach peers through working sessions and informal knowledge shares — always grounded in what I've actually built and tested, not theoretical possibilities.</p>
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">AI Strategy</span>
-            <span class="tech-tag">Leadership Consulting</span>
-            <span class="tech-tag">Cross-functional</span>
-            <span class="tech-tag">Change Management</span>
-          </div>
-        </div>
-        <div class="image-carousel" id="sec2Carousel">
-          <div class="carousel-container">
-            <img src="./Img/Sec2/DPX-GenAI-030424-v211.jpg" alt="DPX GenAI v211" class="carousel-image" data-carousel-index="0" />
-            <img src="./Img/Sec2/DPX-GenAI-030424-v214.jpg" alt="DPX GenAI v214" class="carousel-image" data-carousel-index="1" />
-            <img src="./Img/Sec2/DPX-GenAI-030424-v216.jpg" alt="DPX GenAI v216" class="carousel-image" data-carousel-index="2" />
-            <img src="./Img/Sec2/DPX-GenAI-030424-v218.jpg" alt="DPX GenAI v218" class="carousel-image" data-carousel-index="3" />
-            <img src="./Img/Sec2/DPX-GenAI-030424-v23.jpg" alt="DPX GenAI v23" class="carousel-image" data-carousel-index="4" />
-            <img src="./Img/Sec2/DPX-GenAI-030424-v28.jpg" alt="DPX GenAI v28" class="carousel-image" data-carousel-index="5" />
-          </div>
-          <button class="carousel-nav carousel-prev" data-carousel-id="sec2Carousel">‹</button>
-          <button class="carousel-nav carousel-next" data-carousel-id="sec2Carousel">›</button>
-          <div class="carousel-indicators">
-            <span class="indicator active" data-carousel-id="sec2Carousel" data-index="0"></span>
-            <span class="indicator" data-carousel-id="sec2Carousel" data-index="1"></span>
-            <span class="indicator" data-carousel-id="sec2Carousel" data-index="2"></span>
-            <span class="indicator" data-carousel-id="sec2Carousel" data-index="3"></span>
-            <span class="indicator" data-carousel-id="sec2Carousel" data-index="4"></span>
-            <span class="indicator" data-carousel-id="sec2Carousel" data-index="5"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROJECT 3: GenAI in Creative -->
-      <div class="project-card fade-in">
-        <div>
-          <span class="project-number">03</span>
           <h3 class="project-title">GenAI in Creative Workflows</h3>
           <div class="project-detail">
             <div class="project-detail-label">Challenge</div>
@@ -2474,11 +2222,64 @@
 </section>
 
 <!-- ============================================
+     90-DAY VISION
+     ============================================ -->
+<section class="vision-section" id="vision">
+  <div class="container">
+    <span class="section-label fade-in">02 — 90-Day Vision</span>
+    <h2 class="section-title fade-in">How I'd approach<br>the first 90 days.</h2>
+    <p class="section-subtitle fade-in">
+      Not a wish list — a working plan. Here's how I'd build AI proficiency 
+      from baseline to momentum.
+    </p>
+
+    <div class="vision-grid stagger">
+
+      <div class="vision-phase fade-in">
+        <div class="vision-phase-number">01</div>
+        <div class="vision-phase-label">Days 1–30</div>
+        <div class="vision-phase-title">Listen, Map, Baseline</div>
+        <div class="vision-item">Structured interviews across priority functions — marketing, ecomm, supply, medical/PV — to understand where AI is already being used informally and where the biggest friction points are.</div>
+        <div class="vision-item">Partner with Focus Area Leads and Governance to map the current tool landscape and compliance boundaries (EU AI Act, GDPR, GxP).</div>
+        <div class="vision-item">Establish a proficiency baseline using Bayer group-level assessment assets — not to rank people, but to identify patterns: which teams are ahead, which are blocked, and why.</div>
+        <div class="vision-item">Identify 3–5 early adopters already doing interesting work. These become the first peer champions.</div>
+      </div>
+
+      <div class="vision-phase fade-in">
+        <div class="vision-phase-number">02</div>
+        <div class="vision-phase-label">Days 30–60</div>
+        <div class="vision-phase-title">Build the Foundation</div>
+        <div class="vision-item">Launch role-based learning paths for the two highest-impact functions, with hands-on practice built around real workflows — not generic AI courses.</div>
+        <div class="vision-item">Stand up the first recurring formats: office hours, a monthly clinic, and a simple "use-in-the-flow" guide library that lives where people already work.</div>
+        <div class="vision-item">Embed compliance into every learning asset from day one — practical guardrails framed as enablers, not blockers. People should leave every session knowing what they <em>can</em> do.</div>
+        <div class="vision-item">Ship a lightweight adoption dashboard — usage, time saved, content compliance rate. Simple enough that leadership can read it in 60 seconds.</div>
+      </div>
+
+      <div class="vision-phase fade-in">
+        <div class="vision-phase-number">03</div>
+        <div class="vision-phase-label">Days 60–90</div>
+        <div class="vision-phase-title">Scale What Works</div>
+        <div class="vision-item">Expand learning paths to additional functions based on baseline data and early demand signals.</div>
+        <div class="vision-item">Spotlight early wins — surface the teams using AI well and turn their practices into reusable playbooks that scale across markets.</div>
+        <div class="vision-item">Close the loop with BU leaders: here's where we started, here's what moved, here's what's next. Build the case for sustained investment.</div>
+        <div class="vision-item">Begin scoping the peer-to-peer network — not a committee, but a living community of practitioners who teach each other by sharing working examples.</div>
+      </div>
+
+    </div>
+
+    <div class="vision-principle fade-in">
+      <p>One principle runs through all 90 days: adoption spreads through demonstration, not mandates. Every asset, every session, every dashboard exists to make AI feel less like a corporate initiative and more like a better way to do the work people already care about.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
      PORTFOLIO
      ============================================ -->
 <section class="portfolio" id="portfolio">
   <div class="container">
-    <span class="section-label fade-in">02 — Design Portfolio</span>
+    <span class="section-label fade-in">03 — Design Portfolio</span>
     <h2 class="section-title fade-in">6 years of brand work<br>across Consumer Health</h2>
     <p class="section-subtitle fade-in">
       This is the domain expertise behind the AI vision — and the reason I can 
@@ -2501,7 +2302,6 @@
         <div class="mira-meta-item"><span class="mira-meta-label">Services</span> Brand Identity, Brand World, Packaging Innovation, Graphic Innovation</div>
       </div>
 
-      <!-- Product performance tabs -->
       <div class="mira-product-tabs">
         <div class="mira-tab">
           <div class="mira-tab-label fiber">MiraFIBER</div>
@@ -2520,7 +2320,6 @@
         </div>
       </div>
 
-      <!-- Growth chart -->
       <div class="growth-chart-wrap">
         <div class="growth-chart-header">
           <div class="growth-chart-title">Dollar Sales — 4-Week Periods (2023–2026 Projected)</div>
@@ -2552,20 +2351,6 @@
         </div>
       </div>
 
-      <div class="mirafast-highlights">
-        <div class="mirafast-highlight">
-          <strong>#1</strong> Laxative Soft Chew SKU (30 Count)
-        </div>
-        <div class="mirafast-highlight">
-          <strong>#2</strong> Overnight Laxative SKU (30 Count)
-        </div>
-        <div class="mirafast-highlight">
-          <strong>Above</strong> category benchmark repeat rates
-        </div>
-        <div class="mirafast-highlight">
-          <strong>2026</strong> expanded distribution — Kids, Club, count sizes
-        </div>
-      </div>
     </div>
 
     <!-- PX PLATFORM FEATURE -->
@@ -2605,9 +2390,6 @@
       </div>
     </div>
 
-    <div style="text-align: center; margin-top: 48px;">
-      <a href="https://www.michaelscrivana.com" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: border-color 0.2s ease, background 0.2s ease;" onmouseover="this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='transparent'">View All Projects ↗</a>
-    </div>
 
 <!-- LIGHTBOX MODAL -->
 <div class="lightbox-overlay" id="lightbox">
@@ -2635,54 +2417,6 @@
   </div>
 </section>
 
-<!-- ============================================
-     ROLE FIT
-     ============================================ -->
-<section class="role-fit" id="fit">
-  <div class="container">
-    <span class="section-label fade-in">03 — Role Fit</span>
-    <h2 class="section-title fade-in">What the role needs.<br>What I bring.</h2>
-
-    <div class="fit-grid stagger">
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Build AI proficiency program</div>
-        <div class="fit-card-have">Helped build a Design Training Module for Consumer Health — translating a complex discipline into practical guidance for non-design teams. Same approach this role requires, applied to AI.</div>
-      </div>
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Enable peer learning at scale</div>
-        <div class="fit-card-have">Grew from informal coaching to PX's go-to AI resource — through demos and working tools, not slide decks.</div>
-      </div>
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Embed compliance as guardrails</div>
-        <div class="fit-card-have">Compliance isn't a gate — it's architecture. Brand guardrails are coded directly into the One A Day agent, turning 6 years of standards expertise into automated, scalable enforcement.</div>
-      </div>
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Partner cross-functionally</div>
-        <div class="fit-card-have">Selected to represent Product Experience on Bayer's Science Home 5-person AI team — bridging Design, Product Development, Regulatory, and Medical to shape the division's AI roadmap.</div>
-      </div>
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Track adoption & impact</div>
-        <div class="fit-card-have">The One A Day agent generates quantifiable compliance scores per submission. Measuring impact isn't an afterthought — it's built into the tool.</div>
-      </div>
-
-      <div class="fit-card fade-in">
-        <div class="fit-card-need">Share wins that inspire</div>
-        <div class="fit-card-have">This website — Claude, VS Code, shipped. Introduced GenAI creative tools across PX. Adoption starts when people see something working, not when they read about it.
-          <a href="https://github.com/MichaelScrivana/ms-porfolio-1/tree/main" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; color: #000; background: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border: none; border-radius: 4px; transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.background='#f0f0f0';this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.background='#fff';this.style.transform='translateY(0)';this.style.boxShadow='none'">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            View Repo
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 
 <!-- ============================================
@@ -2699,10 +2433,19 @@
         <div class="timeline-content">
           <h3>Bayer Consumer Health</h3>
           <div class="role">Brand Designer & AI Strategy Lead — Whippany, NJ</div>
-          <p><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">AI Leadership & Enablement</strong></p>
-          <p style="margin-top: 8px;">PX representative on Bayer's Consumer Health Science Home AI team. Consulting leadership on AI strategy, prototyping production tools on Azure with Claude, and coaching peers on practical adoption. Building compliance directly into AI-powered workflows.</p>
+          <p style="margin-top: 4px;"><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">AI Leadership & Enablement</strong></p>
+          <ul style="margin-top: 8px; padding-left: 16px; list-style: none;">
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>1 of 5 reps on BCH's Science Home AI team — consulting PX leadership on strategy</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Prototyping production AI tools on Azure with Claude</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Coaching peers on adoption; embedding compliance into AI workflows</li>
+          </ul>
           <p style="margin-top: 16px;"><strong style="font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">Brand Design & Creative Leadership</strong></p>
-          <p style="margin-top: 8px;">Led brand identity and package design across a dozen+ consumer health brands. Designed MiraFAST in a 3-week sprint and built the MiraFIBER system it scaled from — $37M combined in 2025, $67M projected for 2026. Produced 700+ product renders for GS1 syndication. Directed photoshoots, managed agency partners, and led design thinking workshops across the organization.</p>
+          <ul style="margin-top: 8px; padding-left: 16px; list-style: none;">
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Brand identity and packaging across 12+ consumer health brands</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>MiraFAST: 3-week sprint, inception to design lock — $67M projected combined with MiraFIBER</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>1,000+ creative assets delivered across packaging, ecomm, web, social, and motion</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Directed photoshoots and managed agency partners</li>
+          </ul>
         </div>
       </div>
       <div class="timeline-item fade-in">
@@ -2710,7 +2453,11 @@
         <div class="timeline-content">
           <h3>William Paterson University — Research Technology</h3>
           <div class="role">Design Lab Manager — Wayne, NJ</div>
-          <p>Managed lab technology stack including 3D printers, scanners, and VR/AR systems — calibrating hardware, troubleshooting firmware, and training faculty and students on emerging tools. Developed interdisciplinary research prototypes with the Psychology department, managing the full digital-to-physical fabrication pipeline.</p>
+          <ul style="margin-top: 4px; padding-left: 16px; list-style: none;">
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Managed 3D printers, scanners, and VR/AR systems — hardware calibration, firmware troubleshooting</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Trained faculty and students on emerging tools</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Built interdisciplinary research prototypes with Psychology department</li>
+          </ul>
         </div>
       </div>
       <div class="timeline-item fade-in">
@@ -2718,7 +2465,11 @@
         <div class="timeline-content">
           <h3>Siemens Healthcare</h3>
           <div class="role">Electromechanical Technician — Flanders, NJ</div>
-          <p>Assembled and tested electronic and mechanical subsystems for healthcare diagnostic equipment. Performed circuit calibration and troubleshooting to meet strict quality control standards. Beta tested new software and hardware solutions, documenting defects and providing structured feedback that drove product improvements.</p>
+          <ul style="margin-top: 4px; padding-left: 16px; list-style: none;">
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Assembled and tested subsystems for healthcare diagnostic equipment</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Circuit calibration and QC troubleshooting to strict standards</li>
+            <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 6px; padding-left: 12px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">·</span>Beta tested new software/hardware; documented defects that drove product improvements</li>
+          </ul>
         </div>
       </div>
       <div class="timeline-item fade-in">
@@ -2819,39 +2570,29 @@
      SCROLL ANIMATION SCRIPT
      ============================================ -->
 <script>
-  // ==========================================
   // THEME TOGGLE
-  // ==========================================
   const toggle = document.getElementById('themeToggle');
-
   toggle.addEventListener('click', () => {
     const html = document.documentElement;
     const isLight = html.getAttribute('data-theme') === 'light';
     const newTheme = isLight ? 'dark' : 'light';
     html.setAttribute('data-theme', newTheme);
-    // Sync browser color-scheme for iOS Safari
     var csMeta = document.querySelector('meta[name="color-scheme"]');
     if (csMeta) csMeta.setAttribute('content', newTheme);
     var tcMeta = document.querySelector('meta[name="theme-color"]');
     if (tcMeta) tcMeta.setAttribute('content', newTheme === 'dark' ? '#0E0E10' : '#FAFAF8');
   });
 
-  // ==========================================
   // HAMBURGER MENU
-  // ==========================================
   (function() {
     var hamburger = document.getElementById('navHamburger');
     var mobileMenu = document.getElementById('mobileMenu');
     if (!hamburger || !mobileMenu) return;
-
     hamburger.addEventListener('click', function() {
       hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('open');
-      // Prevent body scroll when menu is open
       document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     });
-
-    // Close menu when a link is tapped
     var menuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
     menuLinks.forEach(function(link) {
       link.addEventListener('click', function() {
@@ -2862,116 +2603,71 @@
     });
   })();
 
-  // ==========================================
   // SCROLL ANIMATIONS
-  // ==========================================
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
+    (entries) => { entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); },
     { threshold: 0.08 }
   );
+  document.querySelectorAll('.fade-in').forEach((el) => { observer.observe(el); });
 
-  document.querySelectorAll('.fade-in').forEach((el) => {
-    observer.observe(el);
-  });
-
-  // ==========================================
   // AGENT DEMO ANIMATION
-  // ==========================================
   function runAgentDemo() {
     var body = document.getElementById('agentBody');
     var replay = document.getElementById('agentReplay');
     if (!body) return;
     replay.classList.remove('show');
-
-    // Reset all elements
     var lines = body.querySelectorAll('.agent-line');
     var checks = body.querySelectorAll('.agent-check');
     var score = body.querySelector('.agent-score');
     lines.forEach(function(l) { l.classList.remove('visible'); });
     checks.forEach(function(c) { c.classList.remove('visible'); });
     if (score) score.classList.remove('visible');
-
-    // Hide cursor initially, show on step 3
     var cursor = body.querySelector('.agent-cursor');
     if (cursor) cursor.style.display = '';
-
     var timeline = [
       { delay: 400, fn: function() { lines[0].classList.add('visible'); } },
       { delay: 1200, fn: function() { lines[1].classList.add('visible'); } },
       { delay: 2200, fn: function() { lines[2].classList.add('visible'); } },
-      // Checks appear one by one
       { delay: 3000, fn: function() { checks[0].classList.add('visible'); } },
       { delay: 3250, fn: function() { checks[1].classList.add('visible'); } },
       { delay: 3500, fn: function() { checks[2].classList.add('visible'); } },
       { delay: 3750, fn: function() { checks[3].classList.add('visible'); } },
       { delay: 4000, fn: function() { checks[4].classList.add('visible'); } },
       { delay: 4400, fn: function() { checks[5].classList.add('visible'); } },
-      // Hide cursor, show flag
       { delay: 4800, fn: function() { if (cursor) cursor.style.display = 'none'; lines[3].classList.add('visible'); } },
-      // Complete
       { delay: 5800, fn: function() { lines[4].classList.add('visible'); } },
-      // Score
       { delay: 6500, fn: function() { score.classList.add('visible'); } },
-      // Show replay
       { delay: 7500, fn: function() { replay.classList.add('show'); } }
     ];
-
-    timeline.forEach(function(step) {
-      setTimeout(step.fn, step.delay);
-    });
+    timeline.forEach(function(step) { setTimeout(step.fn, step.delay); });
   }
 
-  // Auto-play when scrolled into view
   (function() {
     var demo = document.getElementById('agentDemo');
     if (!demo) return;
     var played = false;
-
     var demoObserver = new IntersectionObserver(
-      function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !played) {
-            played = true;
-            setTimeout(runAgentDemo, 300);
-          }
-        });
-      },
+      function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting && !played) { played = true; setTimeout(runAgentDemo, 300); } }); },
       { threshold: 0.4 }
     );
-
     demoObserver.observe(demo);
   })();
 
-  // ==========================================
-  // STAT COUNT-UP ANIMATION (universal)
-  // ==========================================
+  // STAT COUNT-UP ANIMATION
   (function() {
     var allCountEls = document.querySelectorAll('[data-count]');
     if (!allCountEls.length) return;
-
-    function easeOutExpo(t) {
-      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-    }
-
+    function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
     function animateCount(el) {
       if (el._counted) return;
       el._counted = true;
-
       var target = parseInt(el.getAttribute('data-count'));
       var suffix = el.getAttribute('data-suffix') || '';
       var prefix = el.getAttribute('data-prefix');
-      // Default prefix: '$' if suffix contains 'M', '' otherwise
       var pre = prefix !== null ? prefix : (suffix.indexOf('M') !== -1 ? '$' : '');
       var duration = 1800;
       var start = performance.now();
       var useCommas = target >= 1000;
-
       function update(now) {
         var elapsed = now - start;
         var progress = Math.min(elapsed / duration, 1);
@@ -2981,44 +2677,21 @@
         el.textContent = pre + formatted + suffix;
         if (progress < 1) requestAnimationFrame(update);
       }
-
       requestAnimationFrame(update);
     }
-
-    // Group countable elements by their nearest section-level parent
-    // and observe each group independently
     var containers = [];
     allCountEls.forEach(function(el) {
-      // Walk up to find a suitable container
       var parent = el.closest('.hero-stats, .mira-product-tabs, .mirafast-stats-grid');
-      if (parent && containers.indexOf(parent) === -1) {
-        containers.push(parent);
-      }
+      if (parent && containers.indexOf(parent) === -1) containers.push(parent);
     });
-
     var countObserver = new IntersectionObserver(
-      function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var els = entry.target.querySelectorAll('[data-count]');
-            els.forEach(function(el, i) {
-              setTimeout(function() { animateCount(el); }, i * 150);
-            });
-            countObserver.unobserve(entry.target);
-          }
-        });
-      },
+      function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) { var els = entry.target.querySelectorAll('[data-count]'); els.forEach(function(el, i) { setTimeout(function() { animateCount(el); }, i * 150); }); countObserver.unobserve(entry.target); } }); },
       { threshold: 0.3 }
     );
-
     containers.forEach(function(c) { countObserver.observe(c); });
   })();
 
-  // ==========================================
-
-  // ==========================================
-  // GROWTH CHART (animated)
-  // ==========================================
+  // GROWTH CHART
   (function() {
     const fiberData = [
       { date: '05-21-23', val: 15320 }, { date: '06-18-23', val: 135267 },
@@ -3048,21 +2721,11 @@
       { date: '11-02-25', val: 2252483 }, { date: '11-30-25', val: 2199846 },
       { date: '12-28-25', val: 2215333 }, { date: '01-25-26', val: 2649231 }
     ];
-
-    // 2026 projections (brand team: FIBER $25M, FAST $42M)
     var projDates = ['04-26', '07-26', '10-26', '12-26'];
-    var fiberProj = [
-      { date: '04-26', val: 1850000 }, { date: '07-26', val: 1950000 },
-      { date: '10-26', val: 1950000 }, { date: '12-26', val: 2000000 }
-    ];
-    var fastProj = [
-      { date: '04-26', val: 2900000 }, { date: '07-26', val: 3300000 },
-      { date: '10-26', val: 3500000 }, { date: '12-26', val: 3600000 }
-    ];
-
+    var fiberProj = [{ date: '04-26', val: 1850000 }, { date: '07-26', val: 1950000 }, { date: '10-26', val: 1950000 }, { date: '12-26', val: 2000000 }];
+    var fastProj = [{ date: '04-26', val: 2900000 }, { date: '07-26', val: 3300000 }, { date: '10-26', val: 3500000 }, { date: '12-26', val: 3600000 }];
     const allDates = fiberData.map(function(d) { return d.date; }).concat(projDates);
     const projStartIdx = allDates.indexOf('04-26');
-
     const gc = document.getElementById('growthChart');
     if (!gc) return;
     const gctx = gc.getContext('2d');
@@ -3070,409 +2733,30 @@
     const maxVal = 3500000;
     const gpad = { top: 20, right: 16, bottom: 44, left: 58 };
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-    // Animation state
-    var animProgress = 0;   // 0 to 1 for actuals
-    var projProgress = 0;   // 0 to 1 for projections
-    var animStarted = false;
-    var animDone = false;
-    var animFrame = null;
-
-    function resizeGC() {
-      var rect = gc.parentElement.getBoundingClientRect();
-      var w = rect.width - 56;
-      var h = 300;
-      gc.style.width = w + 'px';
-      gc.style.height = h + 'px';
-      gc.width = w * gdpr;
-      gc.height = h * gdpr;
-      gc._w = w;
-      gc._h = h;
-      gctx.setTransform(gdpr, 0, 0, gdpr, 0, 0);
-    }
-
+    var animProgress = 0, projProgress = 0, animStarted = false, animDone = false, animFrame = null;
+    function resizeGC() { var rect = gc.parentElement.getBoundingClientRect(); var w = rect.width - 56; var h = 300; gc.style.width = w + 'px'; gc.style.height = h + 'px'; gc.width = w * gdpr; gc.height = h * gdpr; gc._w = w; gc._h = h; gctx.setTransform(gdpr, 0, 0, gdpr, 0, 0); }
     function gX(i) { return gpad.left + (i / (allDates.length - 1)) * (gc._w - gpad.left - gpad.right); }
     function gY(v) { return gpad.top + (1 - v / maxVal) * (gc._h - gpad.top - gpad.bottom); }
-
-    // Easing
     function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-    // Get points array with pixel coords for a dataset
-    function getPoints(data) {
-      var pts = [];
-      for (var i = 0; i < data.length; i++) {
-        var idx = allDates.indexOf(data[i].date);
-        if (idx === -1) continue;
-        pts.push({ x: gX(idx), y: gY(data[i].val), val: data[i].val, date: data[i].date });
-      }
-      return pts;
-    }
-
-    // Get total path length for a set of points
-    function pathLength(pts) {
-      var len = 0;
-      for (var i = 1; i < pts.length; i++) {
-        var dx = pts[i].x - pts[i-1].x;
-        var dy = pts[i].y - pts[i-1].y;
-        len += Math.sqrt(dx*dx + dy*dy);
-      }
-      return len;
-    }
-
-    // Get point along path at distance d
-    function pointAtDistance(pts, d) {
-      var traveled = 0;
-      for (var i = 1; i < pts.length; i++) {
-        var dx = pts[i].x - pts[i-1].x;
-        var dy = pts[i].y - pts[i-1].y;
-        var segLen = Math.sqrt(dx*dx + dy*dy);
-        if (traveled + segLen >= d) {
-          var t = (d - traveled) / segLen;
-          return { x: pts[i-1].x + dx * t, y: pts[i-1].y + dy * t, seg: i };
-        }
-        traveled += segLen;
-      }
-      return pts[pts.length - 1];
-    }
-
-    // Draw a partial line + area up to a given fraction of total path
-    function drawAnimatedLine(data, color, frac) {
-      if (frac <= 0) return;
-      var pts = getPoints(data);
-      if (pts.length < 2) return;
-      var total = pathLength(pts);
-      var drawLen = total * Math.min(frac, 1);
-      var endPt = pointAtDistance(pts, drawLen);
-
-      // Determine how many full segments + partial
-      var traveled = 0;
-      var drawPts = [pts[0]];
-      for (var i = 1; i < pts.length; i++) {
-        var dx = pts[i].x - pts[i-1].x;
-        var dy = pts[i].y - pts[i-1].y;
-        var segLen = Math.sqrt(dx*dx + dy*dy);
-        if (traveled + segLen <= drawLen) {
-          drawPts.push(pts[i]);
-          traveled += segLen;
-        } else {
-          drawPts.push(endPt);
-          break;
-        }
-      }
-
-      // Area fill
-      gctx.save();
-      gctx.globalAlpha = 0.08 * Math.min(frac * 2, 1); // fade in
-      gctx.fillStyle = color;
-      gctx.beginPath();
-      gctx.moveTo(drawPts[0].x, drawPts[0].y);
-      for (var i = 1; i < drawPts.length; i++) {
-        gctx.lineTo(drawPts[i].x, drawPts[i].y);
-      }
-      gctx.lineTo(drawPts[drawPts.length-1].x, gY(0));
-      gctx.lineTo(drawPts[0].x, gY(0));
-      gctx.closePath();
-      gctx.fill();
-      gctx.restore();
-
-      // Line
-      gctx.beginPath();
-      gctx.strokeStyle = color;
-      gctx.lineWidth = 2.5;
-      gctx.lineJoin = 'round';
-      gctx.lineCap = 'round';
-      gctx.moveTo(drawPts[0].x, drawPts[0].y);
-      for (var i = 1; i < drawPts.length; i++) {
-        gctx.lineTo(drawPts[i].x, drawPts[i].y);
-      }
-      gctx.stroke();
-
-      // Moving head dot
-      var last = drawPts[drawPts.length - 1];
-      gctx.beginPath();
-      gctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
-      gctx.fillStyle = color;
-      gctx.fill();
-
-      // Glow ring on head (pulses when drawing, static when done)
-      gctx.save();
-      gctx.beginPath();
-      var glowR = frac >= 1 ? 7 : 5 + Math.sin(performance.now() / 200) * 2;
-      gctx.arc(last.x, last.y, glowR, 0, Math.PI * 2);
-      gctx.strokeStyle = color;
-      gctx.globalAlpha = frac >= 1 ? 0.3 : 0.4;
-      gctx.lineWidth = 2;
-      gctx.stroke();
-      gctx.restore();
-    }
-
-    // Draw projection with animation
-    function drawAnimatedProjection(actualData, projData, color, frac) {
-      if (frac <= 0) return;
-      var lastActual = actualData[actualData.length - 1];
-      var allProjPts = [lastActual].concat(projData);
-      var pts = getPoints(allProjPts);
-      if (pts.length < 2) return;
-
-      var total = pathLength(pts);
-      var drawLen = total * Math.min(frac, 1);
-
-      var traveled = 0;
-      var drawPts = [pts[0]];
-      for (var i = 1; i < pts.length; i++) {
-        var dx = pts[i].x - pts[i-1].x;
-        var dy = pts[i].y - pts[i-1].y;
-        var segLen = Math.sqrt(dx*dx + dy*dy);
-        if (traveled + segLen <= drawLen) {
-          drawPts.push(pts[i]);
-          traveled += segLen;
-        } else {
-          var endPt = pointAtDistance(pts, drawLen);
-          drawPts.push(endPt);
-          break;
-        }
-      }
-
-      gctx.save();
-      // Dashed line
-      gctx.setLineDash([6, 4]);
-      gctx.strokeStyle = color;
-      gctx.globalAlpha = 0.5 * Math.min(frac * 2, 1);
-      gctx.lineWidth = 2;
-      gctx.lineJoin = 'round';
-      gctx.beginPath();
-      gctx.moveTo(drawPts[0].x, drawPts[0].y);
-      for (var i = 1; i < drawPts.length; i++) {
-        gctx.lineTo(drawPts[i].x, drawPts[i].y);
-      }
-      gctx.stroke();
-      gctx.setLineDash([]);
-
-      // Area
-      gctx.globalAlpha = 0.04 * Math.min(frac * 2, 1);
-      gctx.fillStyle = color;
-      gctx.beginPath();
-      gctx.moveTo(drawPts[0].x, drawPts[0].y);
-      for (var i = 1; i < drawPts.length; i++) {
-        gctx.lineTo(drawPts[i].x, drawPts[i].y);
-      }
-      gctx.lineTo(drawPts[drawPts.length-1].x, gY(0));
-      gctx.lineTo(drawPts[0].x, gY(0));
-      gctx.closePath();
-      gctx.fill();
-
-      // End dot (hollow) only when fully drawn
-      if (frac >= 1) {
-        var last = pts[pts.length - 1];
-        gctx.globalAlpha = 0.5;
-        gctx.beginPath();
-        gctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
-        gctx.strokeStyle = color;
-        gctx.lineWidth = 2;
-        gctx.stroke();
-      }
-      gctx.restore();
-    }
-
-    // Static elements (grid, labels, annotations)
-    function drawStatic(showProjZone) {
-      gctx.clearRect(0, 0, gc._w, gc._h);
-
-      // Projection zone (fades in)
-      if (projStartIdx !== -1 && showProjZone) {
-        var px = gX(projStartIdx) - 20;
-        gctx.fillStyle = 'rgba(255,255,255,0.015)';
-        gctx.fillRect(px, gpad.top, gc._w - gpad.right - px, gc._h - gpad.top - gpad.bottom);
-        gctx.fillStyle = 'rgba(255,255,255,' + (0.2 * showProjZone) + ')';
-        gctx.font = '600 8px "IBM Plex Mono", monospace';
-        gctx.textAlign = 'left';
-        gctx.fillText('2026 PROJECTION', px + 8, gpad.top + 14);
-        gctx.save();
-        gctx.setLineDash([3, 3]);
-        gctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * showProjZone) + ')';
-        gctx.lineWidth = 1;
-        gctx.beginPath();
-        gctx.moveTo(px, gpad.top);
-        gctx.lineTo(px, gc._h - gpad.bottom);
-        gctx.stroke();
-        gctx.setLineDash([]);
-        gctx.restore();
-      }
-
-      // Grid
-      var gridVals = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000];
-      for (var g = 0; g < gridVals.length; g++) {
-        var y = gY(gridVals[g]);
-        gctx.strokeStyle = 'rgba(255,255,255,0.05)';
-        gctx.lineWidth = 1;
-        gctx.beginPath();
-        gctx.moveTo(gpad.left, y);
-        gctx.lineTo(gc._w - gpad.right, y);
-        gctx.stroke();
-        gctx.fillStyle = 'rgba(255,255,255,0.25)';
-        gctx.font = '9px "IBM Plex Mono", monospace';
-        gctx.textAlign = 'right';
-        gctx.fillText('$' + (gridVals[g] / 1000000).toFixed(1) + 'M', gpad.left - 6, y + 3);
-      }
-
-      // X labels
-      gctx.fillStyle = 'rgba(255,255,255,0.25)';
-      gctx.font = '8px "IBM Plex Mono", monospace';
-      gctx.textAlign = 'center';
-      for (var i = 0; i < allDates.length; i++) {
-        if (i % 5 === 0 || i === allDates.length - 1 || projDates.indexOf(allDates[i]) !== -1) {
-          var parts = allDates[i].split('-');
-          var m = parseInt(parts[0]) - 1;
-          gctx.fillText(months[m] + " '" + parts[1], gX(i), gc._h - gpad.bottom + 16);
-        }
-      }
-
-      // MiraFAST launch line (appears when animation reaches that point)
-      var fli = allDates.indexOf('03-23-25');
-      var fliNorm = fli / (fiberData.length - 1); // normalized position within actuals
-      if (fli !== -1 && animProgress >= fliNorm) {
-        var ax = gX(fli);
-        var fadeIn = Math.min((animProgress - fliNorm) / 0.05, 1);
-        gctx.save();
-        gctx.setLineDash([3, 3]);
-        gctx.strokeStyle = 'rgba(232, 93, 77,' + (0.35 * fadeIn) + ')';
-        gctx.lineWidth = 1;
-        gctx.beginPath();
-        gctx.moveTo(ax, gpad.top);
-        gctx.lineTo(ax, gc._h - gpad.bottom);
-        gctx.stroke();
-        gctx.setLineDash([]);
-        gctx.fillStyle = 'rgba(232, 93, 77,' + (0.6 * fadeIn) + ')';
-        gctx.font = '600 8px "IBM Plex Mono", monospace';
-        gctx.textAlign = 'center';
-        gctx.fillText('MIRAFAST LAUNCH', ax, gpad.top - 3);
-        gctx.restore();
-      }
-    }
-
-    // Main animation loop
-    var animStart = null;
-    var ACTUAL_DUR = 2500;  // ms for actual lines
-    var PROJ_DUR = 1000;    // ms for projections
-    var PROJ_DELAY = 400;   // pause between actuals finishing and projections starting
-
-    function animate(timestamp) {
-      if (!animStart) animStart = timestamp;
-      var elapsed = timestamp - animStart;
-
-      // Phase 1: draw actual lines
-      animProgress = easeOutCubic(Math.min(elapsed / ACTUAL_DUR, 1));
-
-      // Phase 2: draw projections (starts after actuals + delay)
-      var projElapsed = elapsed - ACTUAL_DUR - PROJ_DELAY;
-      projProgress = projElapsed > 0 ? easeOutCubic(Math.min(projElapsed / PROJ_DUR, 1)) : 0;
-
-      var projZoneOpacity = projElapsed > 0 ? Math.min(projElapsed / 300, 1) : 0;
-
-      // Draw frame
-      drawStatic(projZoneOpacity);
-      drawAnimatedLine(fiberData, '#4D8FE8', animProgress);
-      drawAnimatedLine(fastData, '#E85D4D', animProgress);
-
-      if (projProgress > 0) {
-        drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', projProgress);
-        drawAnimatedProjection(fastData, fastProj, '#E85D4D', projProgress);
-      }
-
-      if (elapsed < ACTUAL_DUR + PROJ_DELAY + PROJ_DUR) {
-        animFrame = requestAnimationFrame(animate);
-      } else {
-        animDone = true;
-      }
-    }
-
-    function startAnimation() {
-      if (animStarted) return;
-      animStarted = true;
-      animStart = null;
-      animProgress = 0;
-      projProgress = 0;
-      animDone = false;
-      animFrame = requestAnimationFrame(animate);
-    }
-
-    // Draw static grid immediately (so it's not blank before scroll)
-    function drawInitial() {
-      drawStatic(0);
-    }
-
-    // Tooltip
-    var tip = document.createElement('div');
-    tip.style.cssText = 'position:absolute;pointer-events:none;background:var(--bg-primary);border:1px solid var(--border-color);padding:8px 12px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;color:var(--text-primary);opacity:0;transition:opacity 0.15s;z-index:10;white-space:nowrap;';
-    gc.parentElement.style.position = 'relative';
-    gc.parentElement.appendChild(tip);
-
-    gc.addEventListener('mousemove', function(e) {
-      if (!animDone) return; // no tooltip during animation
-      var rect = gc.getBoundingClientRect();
-      var mx = e.clientX - rect.left;
-      var ci = 0, cd = Infinity;
-      for (var i = 0; i < allDates.length; i++) {
-        var d = Math.abs(mx - gX(i));
-        if (d < cd) { cd = d; ci = i; }
-      }
-      if (cd > 30) { tip.style.opacity = '0'; return; }
-      var date = allDates[ci];
-      var isProj = projDates.indexOf(date) !== -1;
-      var fp = null, sp = null;
-      for (var i = 0; i < fiberData.length; i++) { if (fiberData[i].date === date) fp = fiberData[i]; }
-      if (!fp) { for (var i = 0; i < fiberProj.length; i++) { if (fiberProj[i].date === date) fp = fiberProj[i]; } }
-      for (var i = 0; i < fastData.length; i++) { if (fastData[i].date === date) sp = fastData[i]; }
-      if (!sp) { for (var i = 0; i < fastProj.length; i++) { if (fastProj[i].date === date) sp = fastProj[i]; } }
-      var parts = date.split('-');
-      var m = parseInt(parts[0]) - 1;
-      var label = months[m] + " '" + parts[1] + (isProj ? ' (projected)' : '');
-      var html = '<div style="color:var(--text-muted);margin-bottom:4px;">' + label + '</div>';
-      if (fp) html += '<div style="color:#4D8FE8;">MiraFIBER: ' + (isProj ? '~' : '') + '$' + fp.val.toLocaleString() + '</div>';
-      if (sp) html += '<div style="color:#E85D4D;">MiraFAST: ' + (isProj ? '~' : '') + '$' + sp.val.toLocaleString() + '</div>';
-      if (fp && sp) html += '<div style="color:var(--text-primary);margin-top:4px;border-top:1px solid var(--border-color);padding-top:4px;">Combined: ' + (isProj ? '~' : '') + '$' + (fp.val + sp.val).toLocaleString() + '</div>';
-      tip.innerHTML = html;
-      tip.style.opacity = '1';
-      tip.style.left = Math.min(mx + 12, gc._w - 200) + 'px';
-      tip.style.top = (e.clientY - rect.top - 20) + 'px';
-    });
-
+    function getPoints(data) { var pts = []; for (var i = 0; i < data.length; i++) { var idx = allDates.indexOf(data[i].date); if (idx === -1) continue; pts.push({ x: gX(idx), y: gY(data[i].val), val: data[i].val, date: data[i].date }); } return pts; }
+    function pathLength(pts) { var len = 0; for (var i = 1; i < pts.length; i++) { var dx = pts[i].x - pts[i-1].x; var dy = pts[i].y - pts[i-1].y; len += Math.sqrt(dx*dx + dy*dy); } return len; }
+    function pointAtDistance(pts, d) { var traveled = 0; for (var i = 1; i < pts.length; i++) { var dx = pts[i].x - pts[i-1].x; var dy = pts[i].y - pts[i-1].y; var segLen = Math.sqrt(dx*dx + dy*dy); if (traveled + segLen >= d) { var t = (d - traveled) / segLen; return { x: pts[i-1].x + dx * t, y: pts[i-1].y + dy * t, seg: i }; } traveled += segLen; } return pts[pts.length - 1]; }
+    function drawAnimatedLine(data, color, frac) { if (frac <= 0) return; var pts = getPoints(data); if (pts.length < 2) return; var total = pathLength(pts); var drawLen = total * Math.min(frac, 1); var endPt = pointAtDistance(pts, drawLen); var traveled = 0; var drawPts = [pts[0]]; for (var i = 1; i < pts.length; i++) { var dx = pts[i].x - pts[i-1].x; var dy = pts[i].y - pts[i-1].y; var segLen = Math.sqrt(dx*dx + dy*dy); if (traveled + segLen <= drawLen) { drawPts.push(pts[i]); traveled += segLen; } else { drawPts.push(endPt); break; } } gctx.save(); gctx.globalAlpha = 0.08 * Math.min(frac * 2, 1); gctx.fillStyle = color; gctx.beginPath(); gctx.moveTo(drawPts[0].x, drawPts[0].y); for (var i = 1; i < drawPts.length; i++) gctx.lineTo(drawPts[i].x, drawPts[i].y); gctx.lineTo(drawPts[drawPts.length-1].x, gY(0)); gctx.lineTo(drawPts[0].x, gY(0)); gctx.closePath(); gctx.fill(); gctx.restore(); gctx.beginPath(); gctx.strokeStyle = color; gctx.lineWidth = 2.5; gctx.lineJoin = 'round'; gctx.lineCap = 'round'; gctx.moveTo(drawPts[0].x, drawPts[0].y); for (var i = 1; i < drawPts.length; i++) gctx.lineTo(drawPts[i].x, drawPts[i].y); gctx.stroke(); var last = drawPts[drawPts.length - 1]; gctx.beginPath(); gctx.arc(last.x, last.y, 4, 0, Math.PI * 2); gctx.fillStyle = color; gctx.fill(); gctx.save(); gctx.beginPath(); var glowR = frac >= 1 ? 7 : 5 + Math.sin(performance.now() / 200) * 2; gctx.arc(last.x, last.y, glowR, 0, Math.PI * 2); gctx.strokeStyle = color; gctx.globalAlpha = frac >= 1 ? 0.3 : 0.4; gctx.lineWidth = 2; gctx.stroke(); gctx.restore(); }
+    function drawAnimatedProjection(actualData, projData, color, frac) { if (frac <= 0) return; var lastActual = actualData[actualData.length - 1]; var allProjPts = [lastActual].concat(projData); var pts = getPoints(allProjPts); if (pts.length < 2) return; var total = pathLength(pts); var drawLen = total * Math.min(frac, 1); var traveled = 0; var drawPts = [pts[0]]; for (var i = 1; i < pts.length; i++) { var dx = pts[i].x - pts[i-1].x; var dy = pts[i].y - pts[i-1].y; var segLen = Math.sqrt(dx*dx + dy*dy); if (traveled + segLen <= drawLen) { drawPts.push(pts[i]); traveled += segLen; } else { var endPt = pointAtDistance(pts, drawLen); drawPts.push(endPt); break; } } gctx.save(); gctx.setLineDash([6, 4]); gctx.strokeStyle = color; gctx.globalAlpha = 0.5 * Math.min(frac * 2, 1); gctx.lineWidth = 2; gctx.lineJoin = 'round'; gctx.beginPath(); gctx.moveTo(drawPts[0].x, drawPts[0].y); for (var i = 1; i < drawPts.length; i++) gctx.lineTo(drawPts[i].x, drawPts[i].y); gctx.stroke(); gctx.setLineDash([]); gctx.globalAlpha = 0.04 * Math.min(frac * 2, 1); gctx.fillStyle = color; gctx.beginPath(); gctx.moveTo(drawPts[0].x, drawPts[0].y); for (var i = 1; i < drawPts.length; i++) gctx.lineTo(drawPts[i].x, drawPts[i].y); gctx.lineTo(drawPts[drawPts.length-1].x, gY(0)); gctx.lineTo(drawPts[0].x, gY(0)); gctx.closePath(); gctx.fill(); if (frac >= 1) { var last = pts[pts.length - 1]; gctx.globalAlpha = 0.5; gctx.beginPath(); gctx.arc(last.x, last.y, 4, 0, Math.PI * 2); gctx.strokeStyle = color; gctx.lineWidth = 2; gctx.stroke(); } gctx.restore(); }
+    function drawStatic(showProjZone) { gctx.clearRect(0, 0, gc._w, gc._h); if (projStartIdx !== -1 && showProjZone) { var px = gX(projStartIdx) - 20; gctx.fillStyle = 'rgba(255,255,255,0.015)'; gctx.fillRect(px, gpad.top, gc._w - gpad.right - px, gc._h - gpad.top - gpad.bottom); gctx.fillStyle = 'rgba(255,255,255,' + (0.2 * showProjZone) + ')'; gctx.font = '600 8px "IBM Plex Mono", monospace'; gctx.textAlign = 'left'; gctx.fillText('2026 PROJECTION', px + 8, gpad.top + 14); gctx.save(); gctx.setLineDash([3, 3]); gctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * showProjZone) + ')'; gctx.lineWidth = 1; gctx.beginPath(); gctx.moveTo(px, gpad.top); gctx.lineTo(px, gc._h - gpad.bottom); gctx.stroke(); gctx.setLineDash([]); gctx.restore(); } var gridVals = [0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000]; for (var g = 0; g < gridVals.length; g++) { var y = gY(gridVals[g]); gctx.strokeStyle = 'rgba(255,255,255,0.05)'; gctx.lineWidth = 1; gctx.beginPath(); gctx.moveTo(gpad.left, y); gctx.lineTo(gc._w - gpad.right, y); gctx.stroke(); gctx.fillStyle = 'rgba(255,255,255,0.25)'; gctx.font = '9px "IBM Plex Mono", monospace'; gctx.textAlign = 'right'; gctx.fillText('$' + (gridVals[g] / 1000000).toFixed(1) + 'M', gpad.left - 6, y + 3); } gctx.fillStyle = 'rgba(255,255,255,0.25)'; gctx.font = '8px "IBM Plex Mono", monospace'; gctx.textAlign = 'center'; for (var i = 0; i < allDates.length; i++) { if (i % 5 === 0 || i === allDates.length - 1 || projDates.indexOf(allDates[i]) !== -1) { var parts = allDates[i].split('-'); var m = parseInt(parts[0]) - 1; gctx.fillText(months[m] + " '" + parts[1], gX(i), gc._h - gpad.bottom + 16); } } var fli = allDates.indexOf('03-23-25'); var fliNorm = fli / (fiberData.length - 1); if (fli !== -1 && animProgress >= fliNorm) { var ax = gX(fli); var fadeIn = Math.min((animProgress - fliNorm) / 0.05, 1); gctx.save(); gctx.setLineDash([3, 3]); gctx.strokeStyle = 'rgba(232, 93, 77,' + (0.35 * fadeIn) + ')'; gctx.lineWidth = 1; gctx.beginPath(); gctx.moveTo(ax, gpad.top); gctx.lineTo(ax, gc._h - gpad.bottom); gctx.stroke(); gctx.setLineDash([]); gctx.fillStyle = 'rgba(232, 93, 77,' + (0.6 * fadeIn) + ')'; gctx.font = '600 8px "IBM Plex Mono", monospace'; gctx.textAlign = 'center'; gctx.fillText('MIRAFAST LAUNCH', ax, gpad.top - 3); gctx.restore(); } }
+    var animStart = null; var ACTUAL_DUR = 2500; var PROJ_DUR = 1000; var PROJ_DELAY = 400;
+    function animate(timestamp) { if (!animStart) animStart = timestamp; var elapsed = timestamp - animStart; animProgress = easeOutCubic(Math.min(elapsed / ACTUAL_DUR, 1)); var projElapsed = elapsed - ACTUAL_DUR - PROJ_DELAY; projProgress = projElapsed > 0 ? easeOutCubic(Math.min(projElapsed / PROJ_DUR, 1)) : 0; var projZoneOpacity = projElapsed > 0 ? Math.min(projElapsed / 300, 1) : 0; drawStatic(projZoneOpacity); drawAnimatedLine(fiberData, '#4D8FE8', animProgress); drawAnimatedLine(fastData, '#E85D4D', animProgress); if (projProgress > 0) { drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', projProgress); drawAnimatedProjection(fastData, fastProj, '#E85D4D', projProgress); } if (elapsed < ACTUAL_DUR + PROJ_DELAY + PROJ_DUR) { animFrame = requestAnimationFrame(animate); } else { animDone = true; } }
+    function startAnimation() { if (animStarted) return; animStarted = true; animStart = null; animProgress = 0; projProgress = 0; animDone = false; animFrame = requestAnimationFrame(animate); }
+    function drawInitial() { drawStatic(0); }
+    var tip = document.createElement('div'); tip.style.cssText = 'position:absolute;pointer-events:none;background:var(--bg-primary);border:1px solid var(--border-color);padding:8px 12px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;color:var(--text-primary);opacity:0;transition:opacity 0.15s;z-index:10;white-space:nowrap;'; gc.parentElement.style.position = 'relative'; gc.parentElement.appendChild(tip);
+    gc.addEventListener('mousemove', function(e) { if (!animDone) return; var rect = gc.getBoundingClientRect(); var mx = e.clientX - rect.left; var ci = 0, cd = Infinity; for (var i = 0; i < allDates.length; i++) { var d = Math.abs(mx - gX(i)); if (d < cd) { cd = d; ci = i; } } if (cd > 30) { tip.style.opacity = '0'; return; } var date = allDates[ci]; var isProj = projDates.indexOf(date) !== -1; var fp = null, sp = null; for (var i = 0; i < fiberData.length; i++) { if (fiberData[i].date === date) fp = fiberData[i]; } if (!fp) { for (var i = 0; i < fiberProj.length; i++) { if (fiberProj[i].date === date) fp = fiberProj[i]; } } for (var i = 0; i < fastData.length; i++) { if (fastData[i].date === date) sp = fastData[i]; } if (!sp) { for (var i = 0; i < fastProj.length; i++) { if (fastProj[i].date === date) sp = fastProj[i]; } } var parts = date.split('-'); var m = parseInt(parts[0]) - 1; var label = months[m] + " '" + parts[1] + (isProj ? ' (projected)' : ''); var html = '<div style="color:var(--text-muted);margin-bottom:4px;">' + label + '</div>'; if (fp) html += '<div style="color:#4D8FE8;">MiraFIBER: ' + (isProj ? '~' : '') + '$' + fp.val.toLocaleString() + '</div>'; if (sp) html += '<div style="color:#E85D4D;">MiraFAST: ' + (isProj ? '~' : '') + '$' + sp.val.toLocaleString() + '</div>'; if (fp && sp) html += '<div style="color:var(--text-primary);margin-top:4px;border-top:1px solid var(--border-color);padding-top:4px;">Combined: ' + (isProj ? '~' : '') + '$' + (fp.val + sp.val).toLocaleString() + '</div>'; tip.innerHTML = html; tip.style.opacity = '1'; tip.style.left = Math.min(mx + 12, gc._w - 200) + 'px'; tip.style.top = (e.clientY - rect.top - 20) + 'px'; });
     gc.addEventListener('mouseleave', function() { tip.style.opacity = '0'; });
-
-    // Init + trigger on scroll
-    resizeGC();
-    drawInitial();
-
-    var chartObserver = new IntersectionObserver(
-      function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            startAnimation();
-            chartObserver.unobserve(gc);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    chartObserver.observe(gc);
-
-    // On resize, redraw final state if animation done
-    window.addEventListener('resize', function() {
-      resizeGC();
-      if (animDone) {
-        drawStatic(1);
-        drawAnimatedLine(fiberData, '#4D8FE8', 1);
-        drawAnimatedLine(fastData, '#E85D4D', 1);
-        drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', 1);
-        drawAnimatedProjection(fastData, fastProj, '#E85D4D', 1);
-      } else {
-        drawInitial();
-      }
-    });
+    resizeGC(); drawInitial();
+    var chartObserver = new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting) { startAnimation(); chartObserver.unobserve(gc); } }); }, { threshold: 0.3 }); chartObserver.observe(gc);
+    window.addEventListener('resize', function() { resizeGC(); if (animDone) { drawStatic(1); drawAnimatedLine(fiberData, '#4D8FE8', 1); drawAnimatedLine(fastData, '#E85D4D', 1); drawAnimatedProjection(fiberData, fiberProj, '#4D8FE8', 1); drawAnimatedProjection(fastData, fastProj, '#E85D4D', 1); } else { drawInitial(); } });
   })();
 
   // BRAND RUNNER GAME
-  // ==========================================
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
   const introEl = document.getElementById('gameIntro');
@@ -3480,627 +2764,75 @@
   const scoreEl = document.getElementById('gameScore');
   const finalScoreEl = document.getElementById('finalScore');
   const gameOverTitle = document.getElementById('gameOverTitle');
-
-  // Load player image (Bayer logo)
   const playerImg = new Image();
   playerImg.src = './Img/corp-logo_bg_bayer-cross_rev_150dpi_on-screen_rgb (1).png';
-
-  // Bayer brands as obstacles
-  const brandNames = [
-    'OAD', 'MiraLAX', 'Claritin', 'Aleve', 'Afrin',
-    'Citracal', 'Flintstones', 'Phillips\'', 'Midol', 'Coricidin',
-    'Astepro', 'Iberogast', 'Berocca', 'MiraFAST', 'MiraFiber',
-    'Age Factor', 'Aspirin', 'Prenatal', 'Bayer'
-  ];
-
-  let gameState = 'intro'; // intro, playing, over
-  let gameStarted = false;
-  let score = 0;
-  let groundY, playerSize, gravity, jumpForce;
-  let player = {};
-  let obstacles = [];
-  let particles = [];
-  let frameCount = 0;
-  let speed = 4;
-  let groundDashes = [];
-
-  function initGame() {
-    const w = canvas._displayWidth || canvas.width;
-    const h = canvas._displayHeight || canvas.height;
-    groundY = h - 50;
-    playerSize = Math.max(24, Math.min(36, h * 0.1));
-    gravity = 0.5;
-    jumpForce = -12.5;
-    speed = Math.max(6, w * 0.009);
-
-    player = {
-      x: w * 0.12,
-      y: groundY - playerSize,
-      w: playerSize,
-      h: playerSize,
-      vy: 0,
-      grounded: true,
-      squash: 1
-    };
-
-    obstacles = [];
-    particles = [];
-    score = 0;
-    frameCount = 0;
-    scoreEl.textContent = '0';
-
-    // Init ground dashes
-    groundDashes = [];
-    for (let i = 0; i < w + 40; i += 20) {
-      groundDashes.push(i);
-    }
-  }
-
-  function resizeCanvas() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    // Cap pixel ratio to prevent retina canvas from being too large on mobile
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const isMobile = window.innerWidth < 600;
-    const ratio = isMobile ? 1 : dpr;
-    canvas.width = rect.width * ratio;
-    canvas.height = rect.height * ratio;
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = rect.height + 'px';
-    ctx.scale(ratio, ratio);
-    // Store display size for game logic
-    canvas._displayWidth = rect.width;
-    canvas._displayHeight = rect.height;
-    if (gameState !== 'playing') initGame();
-  }
-
-  function getColors() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    return {
-      bg: isLight ? '#F0F0EC' : '#18181B',
-      ground: isLight ? '#E0E0DC' : '#2A2A2E',
-      groundLine: isLight ? '#C8C8C4' : '#3A3A3E',
-      player: isLight ? '#0047AB' : '#4D8FE8',
-      playerGlow: isLight ? 'rgba(0,71,171,0.1)' : 'rgba(77,143,232,0.15)',
-      obstacle: isLight ? '#0A0A0A' : '#ECECEC',
-      obstacleBg: isLight ? '#E0E0DC' : '#2A2A2E',
-      text: isLight ? '#888884' : '#707070',
-      particle: isLight ? '#0047AB' : '#4D8FE8',
-      accent: isLight ? '#0047AB' : '#4D8FE8'
-    };
-  }
-
-  function spawnObstacle() {
-    const w = canvas._displayWidth || canvas.width;
-    const h = canvas._displayHeight || canvas.height;
-    const brand = brandNames[Math.floor(Math.random() * brandNames.length)];
-    const boxW = Math.max(50, ctx.measureText(brand).width + 24);
-    const boxH = 30 + Math.random() * 20;
-
-    obstacles.push({
-      x: w + 20,
-      y: groundY - boxH,
-      w: boxW,
-      h: boxH,
-      brand: brand,
-      passed: false
-    });
-  }
-
-  function spawnParticles(x, y, color) {
-    const count = window.innerWidth < 600 ? 3 : 6;
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x, y,
-        vx: (Math.random() - 0.5) * 4,
-        vy: -Math.random() * 3 - 1,
-        life: 1,
-        size: 2 + Math.random() * 3,
-        color
-      });
-    }
-  }
-
-  function jump() {
-    if (player.grounded) {
-      player.vy = jumpForce;
-      player.grounded = false;
-      player.squash = 0.7;
-    }
-  }
-
-  function update() {
-    const w = canvas._displayWidth || canvas.width;
-    const h = canvas._displayHeight || canvas.height;
-    frameCount++;
-
-    // Speed up over time
-    speed = Math.max(6, w * 0.009) + Math.floor(score / 5) * 0.5;
-
-    // Player physics
-    player.vy += gravity;
-    player.y += player.vy;
-    player.squash += (1 - player.squash) * 0.15;
-
-    if (player.y >= groundY - player.h) {
-      player.y = groundY - player.h;
-      player.vy = 0;
-      if (!player.grounded) player.squash = 1.2;
-      player.grounded = true;
-    }
-
-    // Ground dashes
-    for (let i = 0; i < groundDashes.length; i++) {
-      groundDashes[i] -= speed;
-      if (groundDashes[i] < -20) groundDashes[i] = w + 20;
-    }
-
-    // Spawn obstacles
-    const spawnRate = Math.max(50, 90 - score * 2);
-    if (frameCount % spawnRate === 0) spawnObstacle();
-
-    // Update obstacles
-    for (let i = obstacles.length - 1; i >= 0; i--) {
-      const o = obstacles[i];
-      o.x -= speed;
-
-      // Score
-      if (!o.passed && o.x + o.w < player.x) {
-        o.passed = true;
-        score++;
-        scoreEl.textContent = score;
-        const colors = getColors();
-        spawnParticles(player.x + player.w / 2, player.y, colors.particle);
-      }
-
-      // Collision
-      const px = player.x + 3;
-      const py = player.y + 3;
-      const pw = player.w - 6;
-      const ph = player.h - 6;
-      if (px < o.x + o.w && px + pw > o.x && py < o.y + o.h && py + ph > o.y) {
-        gameState = 'over';
-        finalScoreEl.textContent = score;
-        if (score >= 15) gameOverTitle.textContent = 'BRAND MASTER';
-        else if (score >= 10) gameOverTitle.textContent = 'IMPRESSIVE';
-        else if (score >= 5) gameOverTitle.textContent = 'NICE RUN';
-        else gameOverTitle.textContent = 'TRY AGAIN';
-        gameOverEl.style.display = 'flex';
-        return;
-      }
-
-      // Cleanup
-      if (o.x + o.w < -20) obstacles.splice(i, 1);
-    }
-
-    // Update particles
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.1;
-      p.life -= 0.025;
-      if (p.life <= 0) particles.splice(i, 1);
-    }
-  }
-
-  function draw() {
-    const w = canvas._displayWidth || canvas.width;
-    const h = canvas._displayHeight || canvas.height;
-    const c = getColors();
-
-    // Clear
-    ctx.fillStyle = c.bg;
-    ctx.fillRect(0, 0, w, h);
-
-    // Ground
-    ctx.fillStyle = c.ground;
-    ctx.fillRect(0, groundY, w, h - groundY);
-    ctx.strokeStyle = c.groundLine;
-    ctx.lineWidth = 1;
-    ctx.setLineDash([8, 12]);
-    ctx.beginPath();
-    ctx.moveTo(0, groundY);
-    ctx.lineTo(w, groundY);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Obstacles
-    ctx.font = `500 ${Math.max(9, playerSize * 0.32)}px 'IBM Plex Mono', monospace`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    for (const o of obstacles) {
-      // Box
-      ctx.fillStyle = c.obstacleBg;
-      ctx.fillRect(o.x, o.y, o.w, o.h);
-      ctx.strokeStyle = c.obstacle;
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(o.x, o.y, o.w, o.h);
-      // Brand name
-      ctx.fillStyle = c.obstacle;
-      ctx.fillText(o.brand, o.x + o.w / 2, o.y + o.h / 2);
-    }
-
-    // Player (Bayer logo image)
-    ctx.save();
-    ctx.translate(player.x + player.w / 2, player.y + player.h / 2);
-    ctx.scale(1, player.squash);
-
-    // Glow (skip on mobile for performance)
-    if (window.innerWidth >= 600) {
-      ctx.fillStyle = c.playerGlow;
-      ctx.beginPath();
-      ctx.arc(0, 0, player.w * 0.7, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Draw player image
-    if (playerImg.complete) {
-      ctx.drawImage(playerImg, -player.w / 2, -player.h / 2, player.w, player.h);
-    } else {
-      // Fallback to cross if image not loaded
-      const s = player.w * 0.4;
-      const t = player.w * 0.16;
-      ctx.fillStyle = c.player;
-      ctx.beginPath();
-      ctx.rect(-t, -s, t * 2, s * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.rect(-s, -t, s * 2, t * 2);
-      ctx.fill();
-      ctx.fillStyle = c.bg;
-      ctx.beginPath();
-      ctx.arc(0, 0, t * 0.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    ctx.restore();
-
-    // Particles
-    for (const p of particles) {
-      ctx.globalAlpha = p.life;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
-
-  function gameLoop() {
-    if (gameState === 'playing') {
-      update();
-      draw();
-    }
-    requestAnimationFrame(gameLoop);
-  }
-
-  function startGame() {
-    if (gameState === 'intro') {
-      introEl.classList.add('hidden');
-      gameState = 'playing';
-      initGame();
-      gameLoop();
-    }
-  }
-
-  function restartGame() {
-    gameOverEl.style.display = 'none';
-    gameState = 'playing';
-    initGame();
-  }
-
-  // Input handlers
-  function handleGameInput(e) {
-    if (gameState === 'intro') {
-      startGame();
-    } else if (gameState === 'playing') {
-      jump();
-    } else if (gameState === 'over') {
-      restartGame();
-    }
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' || e.code === 'ArrowUp') {
-      // Only handle if game section is in view
-      const gameSection = document.getElementById('game');
-      const rect = gameSection.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        e.preventDefault();
-        handleGameInput(e);
-      }
-    }
-  });
-
+  const brandNames = ['OAD', 'MiraLAX', 'Claritin', 'Aleve', 'Afrin', 'Citracal', 'Flintstones', "Phillips'", 'Midol', 'Coricidin', 'Astepro', 'Iberogast', 'Berocca', 'MiraFAST', 'MiraFiber', 'Age Factor', 'Aspirin', 'Prenatal', 'Bayer'];
+  let gameState = 'intro', gameStarted = false, score = 0, groundY, playerSize, gravity, jumpForce;
+  let player = {}, obstacles = [], particles = [], frameCount = 0, speed = 4, groundDashes = [];
+  function initGame() { const w = canvas._displayWidth || canvas.width; const h = canvas._displayHeight || canvas.height; groundY = h - 50; playerSize = Math.max(24, Math.min(36, h * 0.1)); gravity = 0.5; jumpForce = -12.5; speed = Math.max(6, w * 0.009); player = { x: w * 0.12, y: groundY - playerSize, w: playerSize, h: playerSize, vy: 0, grounded: true, squash: 1 }; obstacles = []; particles = []; score = 0; frameCount = 0; scoreEl.textContent = '0'; groundDashes = []; for (let i = 0; i < w + 40; i += 20) groundDashes.push(i); }
+  function resizeCanvas() { const rect = canvas.parentElement.getBoundingClientRect(); if (rect.width === 0 || rect.height === 0) return; const dpr = Math.min(window.devicePixelRatio || 1, 2); const isMobile = window.innerWidth < 600; const ratio = isMobile ? 1 : dpr; canvas.width = rect.width * ratio; canvas.height = rect.height * ratio; canvas.style.width = rect.width + 'px'; canvas.style.height = rect.height + 'px'; ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.scale(ratio, ratio); canvas._displayWidth = rect.width; canvas._displayHeight = rect.height; if (gameState !== 'playing') initGame(); }
+  function getColors() { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; return { bg: isLight ? '#F0F0EC' : '#18181B', ground: isLight ? '#E0E0DC' : '#2A2A2E', groundLine: isLight ? '#C8C8C4' : '#3A3A3E', player: isLight ? '#0047AB' : '#4D8FE8', playerGlow: isLight ? 'rgba(0,71,171,0.1)' : 'rgba(77,143,232,0.15)', obstacle: isLight ? '#0A0A0A' : '#ECECEC', obstacleBg: isLight ? '#E0E0DC' : '#2A2A2E', text: isLight ? '#888884' : '#707070', particle: isLight ? '#0047AB' : '#4D8FE8', accent: isLight ? '#0047AB' : '#4D8FE8' }; }
+  function spawnObstacle() { const w = canvas._displayWidth || canvas.width; const brand = brandNames[Math.floor(Math.random() * brandNames.length)]; ctx.font = `500 ${Math.max(9, playerSize * 0.32)}px 'IBM Plex Mono', monospace`; const boxW = Math.max(50, ctx.measureText(brand).width + 24); const boxH = 30 + Math.random() * 20; obstacles.push({ x: w + 20, y: groundY - boxH, w: boxW, h: boxH, brand: brand, passed: false }); }
+  function spawnParticles(x, y, color) { const count = window.innerWidth < 600 ? 3 : 6; for (let i = 0; i < count; i++) particles.push({ x, y, vx: (Math.random() - 0.5) * 4, vy: -Math.random() * 3 - 1, life: 1, size: 2 + Math.random() * 3, color }); }
+  function jump() { if (player.grounded) { player.vy = jumpForce; player.grounded = false; player.squash = 0.7; } }
+  function update() { const w = canvas._displayWidth || canvas.width; frameCount++; speed = Math.max(6, w * 0.009) + Math.floor(score / 5) * 0.5; player.vy += gravity; player.y += player.vy; player.squash += (1 - player.squash) * 0.15; if (player.y >= groundY - player.h) { player.y = groundY - player.h; player.vy = 0; if (!player.grounded) player.squash = 1.2; player.grounded = true; } for (let i = 0; i < groundDashes.length; i++) { groundDashes[i] -= speed; if (groundDashes[i] < -20) groundDashes[i] = w + 20; } const spawnRate = Math.max(50, 90 - score * 2); if (frameCount % spawnRate === 0) spawnObstacle(); for (let i = obstacles.length - 1; i >= 0; i--) { const o = obstacles[i]; o.x -= speed; if (!o.passed && o.x + o.w < player.x) { o.passed = true; score++; scoreEl.textContent = score; spawnParticles(player.x + player.w / 2, player.y, getColors().particle); } const px = player.x + 3, py = player.y + 3, pw = player.w - 6, ph = player.h - 6; if (px < o.x + o.w && px + pw > o.x && py < o.y + o.h && py + ph > o.y) { gameState = 'over'; finalScoreEl.textContent = score; if (score >= 15) gameOverTitle.textContent = 'BRAND MASTER'; else if (score >= 10) gameOverTitle.textContent = 'IMPRESSIVE'; else if (score >= 5) gameOverTitle.textContent = 'NICE RUN'; else gameOverTitle.textContent = 'TRY AGAIN'; gameOverEl.style.display = 'flex'; return; } if (o.x + o.w < -20) obstacles.splice(i, 1); } for (let i = particles.length - 1; i >= 0; i--) { const p = particles[i]; p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.life -= 0.025; if (p.life <= 0) particles.splice(i, 1); } }
+  function draw() { const w = canvas._displayWidth || canvas.width; const h = canvas._displayHeight || canvas.height; const c = getColors(); ctx.fillStyle = c.bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = c.ground; ctx.fillRect(0, groundY, w, h - groundY); ctx.strokeStyle = c.groundLine; ctx.lineWidth = 1; ctx.setLineDash([8, 12]); ctx.beginPath(); ctx.moveTo(0, groundY); ctx.lineTo(w, groundY); ctx.stroke(); ctx.setLineDash([]); ctx.font = `500 ${Math.max(9, playerSize * 0.32)}px 'IBM Plex Mono', monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; for (const o of obstacles) { ctx.fillStyle = c.obstacleBg; ctx.fillRect(o.x, o.y, o.w, o.h); ctx.strokeStyle = c.obstacle; ctx.lineWidth = 1.5; ctx.strokeRect(o.x, o.y, o.w, o.h); ctx.fillStyle = c.obstacle; ctx.fillText(o.brand, o.x + o.w / 2, o.y + o.h / 2); } ctx.save(); ctx.translate(player.x + player.w / 2, player.y + player.h / 2); ctx.scale(1, player.squash); if (window.innerWidth >= 600) { ctx.fillStyle = c.playerGlow; ctx.beginPath(); ctx.arc(0, 0, player.w * 0.7, 0, Math.PI * 2); ctx.fill(); } if (playerImg.complete) { ctx.drawImage(playerImg, -player.w / 2, -player.h / 2, player.w, player.h); } else { const s = player.w * 0.4, t = player.w * 0.16; ctx.fillStyle = c.player; ctx.beginPath(); ctx.rect(-t, -s, t * 2, s * 2); ctx.fill(); ctx.beginPath(); ctx.rect(-s, -t, s * 2, t * 2); ctx.fill(); ctx.fillStyle = c.bg; ctx.beginPath(); ctx.arc(0, 0, t * 0.5, 0, Math.PI * 2); ctx.fill(); } ctx.restore(); for (const p of particles) { ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); } ctx.globalAlpha = 1; }
+  let gameLoopRunning = false;
+  function gameLoop() { try { if (gameState === 'playing') { update(); draw(); } } catch(e) { console.warn('Game error:', e); gameState = 'over'; gameOverEl.style.display = 'flex'; } if (!gameLoopRunning) return; requestAnimationFrame(gameLoop); }
+  function startGameLoop() { if (gameLoopRunning) return; gameLoopRunning = true; requestAnimationFrame(gameLoop); }
+  function startGame() { if (gameState === 'intro') { introEl.classList.add('hidden'); gameState = 'playing'; initGame(); startGameLoop(); } }
+  function restartGame() { gameOverEl.style.display = 'none'; gameState = 'playing'; initGame(); startGameLoop(); }
+  function handleGameInput(e) { if (gameState === 'intro') startGame(); else if (gameState === 'playing') jump(); else if (gameState === 'over') restartGame(); }
+  document.addEventListener('keydown', (e) => { if (e.code === 'Space' || e.code === 'ArrowUp') { const gameSection = document.getElementById('game'); const rect = gameSection.getBoundingClientRect(); if (rect.top < window.innerHeight && rect.bottom > 0) { e.preventDefault(); handleGameInput(e); } } });
   canvas.addEventListener('click', handleGameInput);
-  canvas.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    handleGameInput(e);
-  }, { passive: false });
-
-  // Auto-start when scrolled into view
-  const gameObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !gameStarted) {
-          gameStarted = true;
-          resizeCanvas();
-          // Brief pause then auto-start
-          setTimeout(() => {
-            startGame();
-          }, 1200);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
+  canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleGameInput(e); }, { passive: false });
+  const gameObserver = new IntersectionObserver((entries) => { entries.forEach((entry) => { if (entry.isIntersecting && !gameStarted) { gameStarted = true; resizeCanvas(); setTimeout(() => { startGame(); }, 1200); } }); }, { threshold: 0.5 });
   gameObserver.observe(document.getElementById('game'));
-
-  // Handle resize
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  // ==========================================
   // PORTFOLIO MODALS
-  // ==========================================
   const projectData = {
-    oad: {
-      title: 'OAD Brand Platform',
-      role: 'Design Manager & Lead Designer',
-      desc: 'Led the interim One A Day brand platform rollout across all channels, creating a cohesive visual system for the entire OAD portfolio. This initiative unified the look across Men\'s, Women\'s, 50+, Non-Gender, and specialty lines before the full OAD mission work launched. Managed the production of 700+ product renders for GS1 syndication, directed animations, and led the digital brandbook launch with agency partner Assembly.',
-      details: [
-        { label: 'Scope', text: '50+ SKUs across all OAD product lines. Digital brandbook, animations, GS1-ready renders, ecommerce assets.' },
-        { label: 'Channels', text: 'Amazon, Walmart, Target, retail, digital, social. Full omnichannel activation.' },
-        { label: 'Team', text: 'Directed Mertz and Assembly agency partners. Collaborated with Amy Miller and brand team.' },
-        { label: 'Timeline', text: '2023–2025. Phased rollout starting with renders, expanding to animations and digital brandbook.' }
-      ],
-      gallery: ['[ OAD Brandbook Spread ]', '[ OAD Render Lineup ]', '[ OAD Animation Still ]', '[ OAD Ecommerce Tiles ]']
-    },
-    agefactor: {
-      title: 'Age Factor',
-      role: 'Design Manager — End-to-End Launch',
-      desc: 'Managed the complete design lifecycle for Age Factor, a new brand entering the consumer health space. From initial concept development through social assets, ecommerce content, photoshoot direction, and app asset creation — led both hands-on design and agency direction to bring this brand to market.',
-      details: [
-        { label: 'Scope', text: 'Full brand launch — social assets, ecommerce content, product photography, app design, product comp creation.' },
-        { label: 'Channels', text: 'Social, ecommerce (Amazon, Walmart, Target), app, retail.' },
-        { label: 'My Role', text: 'Design management and hands-on creative. Directed photoshoots and managed agency execution.' },
-        { label: 'Key Deliverables', text: 'Social playbook, ecommerce tiles, product comp creation for qualitative testing, creative development of app assets.' }
-      ],
-      gallery: ['[ Age Factor Social Assets ]', '[ Age Factor Ecommerce ]', '[ Age Factor Product Comps ]', '[ Age Factor App Screens ]']
-    },
-    iberogast: {
-      title: 'Iberogast',
-      role: 'Design Manager — U.S. Market Launch',
-      desc: 'Played a key role in bringing Iberogast to the U.S. market, directing the design strategy across web, social, ecommerce, and motion. Created the MOA (Mechanism of Action) animation, developed the social playbook, and managed ecommerce design execution — establishing the visual language for this established European brand\'s entry into North America.',
-      details: [
-        { label: 'Scope', text: 'Web design direction, MOA animation, social playbook, ecommerce management, lifestyle photography selection.' },
-        { label: 'Channels', text: 'Brand website, social, ecommerce, retail.' },
-        { label: 'My Role', text: 'Design direction and management. Led creative vision while managing agency partners on execution.' },
-        { label: 'Key Deliverables', text: 'Website design direction, animated MOA explainer, social content playbook, product renders, ecommerce assets.' }
-      ],
-      gallery: ['[ Iberogast Web Design ]', '[ Iberogast MOA Animation ]', '[ Iberogast Social Playbook ]', '[ Iberogast Ecommerce ]']
-    },
-    bold: {
-      title: 'Bold Breakthrough Tour',
-      role: 'Creative Lead — Campaign Identity',
-      desc: 'Developed the complete visual identity for the Bold Breakthrough Tour — a multi-year internal keynote and workshop series designed to engage colleagues and drive a culture of innovation across Consumer Health. Created the branding system, animated sizzlers, printed collateral, and directed venue setup. This work directly parallels the AI Proficiency Lead role: designing engaging experiences that shift how teams think and work.',
-      details: [
-        { label: 'Scope', text: 'Full campaign identity — logos, PPT templates, animated sizzlers, pop-up banners, decals, agenda design, nametags, sponsor posters, manifesto design.' },
-        { label: 'Events', text: 'Bold Activation Tour, Bold Breakthrough Tour (first in-person), Be Curious sessions. Three annual conferences.' },
-        { label: 'My Role', text: 'Creative lead. Designed identity system, directed 3 animated sizzlers, coordinated with printers, scoped venue and directed event setup.' },
-        { label: 'Why It Matters', text: 'Proved I can design programs that excite and engage diverse internal audiences — the exact skill set the AI Learning Lead role requires.' }
-      ],
-      gallery: ['[ Bold Tour Logo System ]', '[ Bold Event Photography ]', '[ Bold Venue Setup ]', '[ Bold Animated Sizzler ]'],
-      externalLink: 'https://www.michaelscrivana.com/marketingexcellence'
-    }
+    oad: { title: 'OAD Brand Platform', role: 'Design Manager & Lead Designer', desc: 'Led the interim One A Day brand platform rollout across all channels, creating a cohesive visual system for the entire OAD portfolio.', details: [{ label: 'Scope', text: '50+ SKUs across all OAD product lines.' }, { label: 'Channels', text: 'Amazon, Walmart, Target, retail, digital, social.' }, { label: 'Team', text: 'Directed Mertz and Assembly agency partners.' }, { label: 'Timeline', text: '2023–2025.' }], gallery: ['[ OAD Brandbook ]', '[ OAD Renders ]', '[ OAD Animation ]', '[ OAD Ecomm ]'] },
+    agefactor: { title: 'Age Factor', role: 'Design Manager', desc: 'Managed the complete design lifecycle for Age Factor.', details: [{ label: 'Scope', text: 'Full brand launch.' }, { label: 'Channels', text: 'Social, ecommerce, app, retail.' }, { label: 'My Role', text: 'Design management and hands-on creative.' }, { label: 'Deliverables', text: 'Social playbook, ecommerce, product comps, app assets.' }], gallery: ['[ AF Social ]', '[ AF Ecomm ]', '[ AF Comps ]', '[ AF App ]'] },
+    iberogast: { title: 'Iberogast', role: 'Design Manager', desc: 'Directed design strategy for Iberogast U.S. market launch.', details: [{ label: 'Scope', text: 'Web, MOA animation, social playbook, ecommerce.' }, { label: 'Channels', text: 'Website, social, ecommerce, retail.' }, { label: 'My Role', text: 'Design direction and agency management.' }, { label: 'Deliverables', text: 'Website direction, MOA animation, social playbook, renders.' }], gallery: ['[ IB Web ]', '[ IB MOA ]', '[ IB Social ]', '[ IB Ecomm ]'] },
+    bold: { title: 'Bold Breakthrough Tour', role: 'Creative Lead', desc: 'Developed the complete visual identity for the Bold Breakthrough Tour.', details: [{ label: 'Scope', text: 'Full campaign identity.' }, { label: 'Events', text: 'Bold Activation Tour, Bold Breakthrough Tour, Be Curious.' }, { label: 'My Role', text: 'Creative lead.' }, { label: 'Why It Matters', text: 'Proved I can design programs that engage diverse internal audiences.' }], gallery: ['[ Bold Logo ]', '[ Bold Event ]', '[ Bold Venue ]', '[ Bold Sizzler ]'], externalLink: 'https://www.michaelscrivana.com/marketingexcellence' }
   };
-
   const modal = document.getElementById('projectModal');
   const modalClose = document.getElementById('modalClose');
-
-  function openModal(projectKey) {
-    const data = projectData[projectKey];
-    if (!data) return;
-
-    document.getElementById('modalTitle').textContent = data.title;
-    document.getElementById('modalRole').textContent = data.role;
-    document.getElementById('modalDesc').textContent = data.desc;
-    document.getElementById('modalHero').textContent = '[ ' + data.title + ' — Hero Image ]';
-
-    // Details
-    const detailsEl = document.getElementById('modalDetails');
-    detailsEl.innerHTML = data.details.map(d =>
-      '<div class="modal-detail-block"><h4>' + d.label + '</h4><p>' + d.text + '</p></div>'
-    ).join('');
-
-    // External link
-    if (data.externalLink) {
-      detailsEl.innerHTML += '<div class="modal-detail-block" style="grid-column: span 2;"><a href="' + data.externalLink + '" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none;">View Full Project ↗</a></div>';
-    }
-
-    // Gallery
-    const galleryEl = document.getElementById('modalGallery');
-    galleryEl.innerHTML = data.gallery.map(g =>
-      '<div class="modal-gallery-item">' + g + '</div>'
-    ).join('');
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  // Click handlers
-  document.querySelectorAll('.portfolio-item[data-project]').forEach(item => {
-    item.addEventListener('click', (e) => {
-      // Don't open modal if clicking external link
-      if (e.target.closest('a')) return;
-      openModal(item.dataset.project);
-    });
-  });
-
+  function openModal(projectKey) { const data = projectData[projectKey]; if (!data) return; document.getElementById('modalTitle').textContent = data.title; document.getElementById('modalRole').textContent = data.role; document.getElementById('modalDesc').textContent = data.desc; document.getElementById('modalHero').textContent = '[ ' + data.title + ' ]'; const detailsEl = document.getElementById('modalDetails'); detailsEl.innerHTML = data.details.map(d => '<div class="modal-detail-block"><h4>' + d.label + '</h4><p>' + d.text + '</p></div>').join(''); if (data.externalLink) detailsEl.innerHTML += '<div class="modal-detail-block" style="grid-column: span 2;"><a href="' + data.externalLink + '" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none;">View Full Project ↗</a></div>'; const galleryEl = document.getElementById('modalGallery'); galleryEl.innerHTML = data.gallery.map(g => '<div class="modal-gallery-item">' + g + '</div>').join(''); modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.portfolio-item[data-project]').forEach(item => { item.addEventListener('click', (e) => { if (e.target.closest('a')) return; openModal(item.dataset.project); }); });
   modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
-  // ==========================================
   // LIGHTBOX WITH CAROUSEL
-  // ==========================================
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightboxImage');
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
   const lightboxCounter = document.getElementById('lightboxCounter');
-
-  let currentCarouselImages = [];
-  let currentImageIndex = 0;
-
-  function openLightbox(src, carouselId) {
-    lightboxImage.src = src;
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    // Check if this image is part of a carousel
-    if (carouselId) {
-      const carousel = document.getElementById(carouselId);
-      const images = carousel.querySelectorAll('.carousel-image');
-      currentCarouselImages = Array.from(images).map(img => img.src);
-      currentImageIndex = currentCarouselImages.indexOf(src);
-      
-      // Show/hide carousel controls
-      lightboxPrev.style.display = 'flex';
-      lightboxNext.style.display = 'flex';
-      lightboxCounter.style.display = 'block';
-      updateLightboxCounter();
-    } else {
-      lightboxPrev.style.display = 'none';
-      lightboxNext.style.display = 'none';
-      lightboxCounter.style.display = 'none';
-      currentCarouselImages = [];
-    }
-  }
-
-  function updateLightboxCounter() {
-    if (currentCarouselImages.length > 0) {
-      lightboxCounter.textContent = (currentImageIndex + 1) + ' / ' + currentCarouselImages.length;
-    }
-  }
-
-  function nextLightboxImage() {
-    if (currentCarouselImages.length > 0) {
-      currentImageIndex = (currentImageIndex + 1) % currentCarouselImages.length;
-      lightboxImage.src = currentCarouselImages[currentImageIndex];
-      updateLightboxCounter();
-    }
-  }
-
-  function prevLightboxImage() {
-    if (currentCarouselImages.length > 0) {
-      currentImageIndex = (currentImageIndex - 1 + currentCarouselImages.length) % currentCarouselImages.length;
-      lightboxImage.src = currentCarouselImages[currentImageIndex];
-      updateLightboxCounter();
-    }
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-    currentCarouselImages = [];
-  }
-
-  // Add click handlers to all carousel images
-  const carouselImages = document.querySelectorAll('.carousel-image');
-  carouselImages.forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => {
-      const carousel = img.closest('.image-carousel');
-      openLightbox(img.src, carousel.id);
-    });
-  });
-
-  // Add click handlers to other images
-  const clickableImages = document.querySelectorAll('img.agent-screenshot, img.photo-placeholder, img.project-image-placeholder, img.portfolio-thumb');
-  clickableImages.forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => {
-      openLightbox(img.src);
-    });
-  });
-
+  let currentCarouselImages = [], currentImageIndex = 0;
+  function openLightbox(src, carouselId) { lightboxImage.src = src; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; if (carouselId) { const carousel = document.getElementById(carouselId); const images = carousel.querySelectorAll('.carousel-image'); currentCarouselImages = Array.from(images).map(img => img.src); currentImageIndex = currentCarouselImages.indexOf(src); lightboxPrev.style.display = 'flex'; lightboxNext.style.display = 'flex'; lightboxCounter.style.display = 'block'; updateLightboxCounter(); } else { lightboxPrev.style.display = 'none'; lightboxNext.style.display = 'none'; lightboxCounter.style.display = 'none'; currentCarouselImages = []; } }
+  function updateLightboxCounter() { if (currentCarouselImages.length > 0) lightboxCounter.textContent = (currentImageIndex + 1) + ' / ' + currentCarouselImages.length; }
+  function nextLightboxImage() { if (currentCarouselImages.length > 0) { currentImageIndex = (currentImageIndex + 1) % currentCarouselImages.length; lightboxImage.src = currentCarouselImages[currentImageIndex]; updateLightboxCounter(); } }
+  function prevLightboxImage() { if (currentCarouselImages.length > 0) { currentImageIndex = (currentImageIndex - 1 + currentCarouselImages.length) % currentCarouselImages.length; lightboxImage.src = currentCarouselImages[currentImageIndex]; updateLightboxCounter(); } }
+  function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; currentCarouselImages = []; }
+  document.querySelectorAll('.carousel-image').forEach(img => { img.style.cursor = 'pointer'; img.addEventListener('click', () => { const carousel = img.closest('.image-carousel'); openLightbox(img.src, carousel.id); }); });
+  document.querySelectorAll('img.agent-screenshot, img.photo-placeholder, img.project-image-placeholder, img.portfolio-thumb').forEach(img => { img.style.cursor = 'pointer'; img.addEventListener('click', () => { openLightbox(img.src); }); });
   lightboxClose.addEventListener('click', closeLightbox);
   lightboxPrev.addEventListener('click', prevLightboxImage);
   lightboxNext.addEventListener('click', nextLightboxImage);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (lightbox.classList.contains('active')) { if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowLeft') prevLightboxImage(); if (e.key === 'ArrowRight') nextLightboxImage(); } });
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.classList.contains('active')) {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') prevLightboxImage();
-      if (e.key === 'ArrowRight') nextLightboxImage();
-    }
-  });
-
-  // ==========================================
   // CAROUSEL NAVIGATION
-  // ==========================================
-  document.querySelectorAll('.carousel-nav').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const carouselId = btn.dataset.carouselId;
-      const carousel = document.getElementById(carouselId);
-      const images = carousel.querySelectorAll('.carousel-image');
-      const indicators = carousel.parentElement.querySelectorAll('.indicator');
-      
-      let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
-      if (currentIndex === -1) currentIndex = 0;
-
-      if (btn.classList.contains('carousel-next')) {
-        currentIndex = (currentIndex + 1) % images.length;
-      } else {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-      }
-
-      updateCarousel(carouselId, currentIndex);
-    });
-  });
-
-  document.querySelectorAll('.indicator').forEach(dot => {
-    dot.addEventListener('click', () => {
-      const carouselId = dot.dataset.carouselId;
-      const index = parseInt(dot.dataset.index);
-      updateCarousel(carouselId, index);
-    });
-  });
-
-  function updateCarousel(carouselId, index) {
-    const carousel = document.getElementById(carouselId);
-    const images = carousel.querySelectorAll('.carousel-image');
-    const indicators = document.querySelectorAll('.indicator[data-carousel-id="' + carouselId + '"]');
-    
-    images.forEach(img => img.classList.remove('active'));
-    indicators.forEach(dot => dot.classList.remove('active'));
-    
-    images[index].classList.add('active');
-    indicators[index].classList.add('active');
-  }
-
-  // Initialize first carousel image as active
-  document.querySelectorAll('.image-carousel').forEach(carousel => {
-    const firstImage = carousel.querySelector('.carousel-image');
-    const firstIndicator = carousel.querySelector('.indicator');
-    if (firstImage) firstImage.classList.add('active');
-    if (firstIndicator) firstIndicator.classList.add('active');
-  });
+  document.querySelectorAll('.carousel-nav').forEach(btn => { btn.addEventListener('click', () => { const carouselId = btn.dataset.carouselId; const carousel = document.getElementById(carouselId); if (!carousel) return; const images = carousel.querySelectorAll('.carousel-image'); let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active')); if (currentIndex === -1) currentIndex = 0; if (btn.classList.contains('carousel-next')) currentIndex = (currentIndex + 1) % images.length; else currentIndex = (currentIndex - 1 + images.length) % images.length; updateCarousel(carouselId, currentIndex); }); });
+  document.querySelectorAll('.indicator').forEach(dot => { dot.addEventListener('click', () => { updateCarousel(dot.dataset.carouselId, parseInt(dot.dataset.index)); }); });
+  function updateCarousel(carouselId, index) { const carousel = document.getElementById(carouselId); if (!carousel) return; const images = carousel.querySelectorAll('.carousel-image'); const indicators = document.querySelectorAll('.indicator[data-carousel-id="' + carouselId + '"]'); if (!images[index]) return; images.forEach(img => img.classList.remove('active')); indicators.forEach(dot => dot.classList.remove('active')); images[index].classList.add('active'); indicators[index].classList.add('active'); }
+  document.querySelectorAll('.image-carousel').forEach(carousel => { const firstImage = carousel.querySelector('.carousel-image'); const firstIndicator = carousel.querySelector('.indicator'); if (firstImage) firstImage.classList.add('active'); if (firstIndicator) firstIndicator.classList.add('active'); });
 </script>
 
 </body>

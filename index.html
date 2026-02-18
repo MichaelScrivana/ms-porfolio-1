@@ -2842,7 +2842,9 @@
   const finalScoreEl = document.getElementById('finalScore');
   const gameOverTitle = document.getElementById('gameOverTitle');
   const playerImg = new Image();
-  playerImg.src = './Img/corp-logo_bg_bayer-cross_rev_150dpi_on-screen_rgb (1).png';
+  function setPlayerImage() { const isLight = document.documentElement.getAttribute('data-theme') === 'light'; playerImg.src = isLight ? './Img/Cross-blue.png' : './Img/corp-logo_bg_bayer-cross_rev_150dpi_on-screen_rgb (1).png'; }
+  setPlayerImage();
+  document.getElementById('themeToggle').addEventListener('click', setPlayerImage);
   const brandNames = ['OAD', 'MiraLAX', 'Claritin', 'Aleve', 'Afrin', 'Citracal', 'Flintstones', "Phillips'", 'Midol', 'Coricidin', 'Astepro', 'Iberogast', 'Berocca', 'MiraFAST', 'MiraFiber', 'Age Factor', 'Aspirin', 'Prenatal', 'Bayer'];
   let gameState = 'intro', gameStarted = false, score = 0, groundY, playerSize, gravity, jumpForce;
   let player = {}, obstacles = [], particles = [], frameCount = 0, speed = 4, groundDashes = [];

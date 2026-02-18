@@ -177,6 +177,43 @@
     letter-spacing: -0.01em;
   }
 
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+
+  .nav-logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-logo .logo-dark {
+    opacity: 1;
+  }
+
+  .nav-logo .logo-light {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  [data-theme="light"] .nav-logo .logo-dark {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  [data-theme="light"] .nav-logo .logo-light {
+    opacity: 1;
+    position: static;
+    pointer-events: all;
+  }
+
   .nav-links {
     display: flex;
     gap: 32px;
@@ -1959,7 +1996,13 @@
      ============================================ -->
 <nav>
   <div class="container">
-    <a href="#" class="nav-name" style="text-decoration: none; color: inherit;">Michael Scrivana</a>
+    <div style="display: flex; align-items: center;">
+      <a href="#" class="nav-logo" style="text-decoration: none;">
+        <img src="./Img/corp-logo_bg_bayer-cross_rev_150dpi_on-screen_rgb (1).png" alt="Bayer" class="logo-dark" />
+        <img src="./Img/Cross-blue.png" alt="Bayer" class="logo-light" />
+      </a>
+      <a href="#" class="nav-name" style="text-decoration: none; color: inherit;">Michael Scrivana</a>
+    </div>
     <ul class="nav-links">
       <li><a href="#about-me">About</a></li>
       <li><a href="#ai">AI Projects</a></li>
